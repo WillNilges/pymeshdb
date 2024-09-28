@@ -1,18 +1,21 @@
 # Member
 
+A  ModelSerializer MixIn which sets `NestedKeyObjectRelatedField` as the default field class to use for the foreign key fields
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**id** | **int** |  | [readonly] 
+**id** | **str** |  | [readonly] 
 **all_email_addresses** | **List[str]** |  | [readonly] 
-**installs** | **List[int]** |  | [readonly] 
+**all_phone_numbers** | **List[str]** |  | [readonly] 
+**installs** | [**List[BuildingInstallsInner]**](BuildingInstallsInner.md) |  | [readonly] 
 **name** | **str** | Member full name in the format: \&quot;First Last\&quot; | 
 **primary_email_address** | **str** | Primary email address used to contact the member | [optional] 
 **stripe_email_address** | **str** | Email address used by the member to donate via Stripe, if different to their primary email | [optional] 
 **additional_email_addresses** | **List[str]** | Any additional email addresses associated with this member | [optional] 
-**phone_number** | **str** | A contact phone number for this member | [optional] 
+**phone_number** | **str** | A primary contact phone number for this member | [optional] 
+**additional_phone_numbers** | **List[str]** | Any additional phone numbers used by this member | [optional] 
 **slack_handle** | **str** | The member&#39;s slack handle | [optional] 
 **notes** | **str** | A free-form text description of how to contact this member, to track any additional information. For Members imported from the spreadsheet, this starts with a formatted block of information about the import process and original spreadsheet data. However this structure can be changed by admins at any time and should not be relied on by automated systems.  | [optional] 
 

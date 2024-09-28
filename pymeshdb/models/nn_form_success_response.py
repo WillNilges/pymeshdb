@@ -27,11 +27,12 @@ class NNFormSuccessResponse(BaseModel):
     NNFormSuccessResponse
     """ # noqa: E501
     detail: StrictStr
-    building_id: StrictInt
+    building_id: StrictStr
+    install_id: StrictStr
     install_number: StrictInt
     network_number: StrictInt
     created: StrictBool
-    __properties: ClassVar[List[str]] = ["detail", "building_id", "install_number", "network_number", "created"]
+    __properties: ClassVar[List[str]] = ["detail", "building_id", "install_id", "install_number", "network_number", "created"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -86,6 +87,7 @@ class NNFormSuccessResponse(BaseModel):
         _obj = cls.model_validate({
             "detail": obj.get("detail"),
             "building_id": obj.get("building_id"),
+            "install_id": obj.get("install_id"),
             "install_number": obj.get("install_number"),
             "network_number": obj.get("network_number"),
             "created": obj.get("created")

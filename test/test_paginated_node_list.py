@@ -40,13 +40,21 @@ class TestPaginatedNodeList(unittest.TestCase):
                 previous = 'http://api.example.org/accounts/?page=2',
                 results = [
                     pymeshdb.models.node.Node(
-                        network_number = 56, 
+                        id = '', 
                         buildings = [
-                            56
+                            pymeshdb.models.node_buildings_inner.Node_buildings_inner(
+                                id = '', )
                             ], 
                         devices = [
-                            56
+                            pymeshdb.models.node_devices_inner.Node_devices_inner(
+                                id = '', )
                             ], 
+                        installs = [
+                            pymeshdb.models.building_installs_inner.Building_installs_inner(
+                                id = '', 
+                                install_number = 56, )
+                            ], 
+                        network_number = -2147483648, 
                         name = '', 
                         status = null, 
                         type = null, 
@@ -63,13 +71,21 @@ class TestPaginatedNodeList(unittest.TestCase):
                 count = 123,
                 results = [
                     pymeshdb.models.node.Node(
-                        network_number = 56, 
+                        id = '', 
                         buildings = [
-                            56
+                            pymeshdb.models.node_buildings_inner.Node_buildings_inner(
+                                id = '', )
                             ], 
                         devices = [
-                            56
+                            pymeshdb.models.node_devices_inner.Node_devices_inner(
+                                id = '', )
                             ], 
+                        installs = [
+                            pymeshdb.models.building_installs_inner.Building_installs_inner(
+                                id = '', 
+                                install_number = 56, )
+                            ], 
+                        network_number = -2147483648, 
                         name = '', 
                         status = null, 
                         type = null, 

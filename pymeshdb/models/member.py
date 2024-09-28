@@ -17,27 +17,30 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, Field, StrictInt, StrictStr
+from pydantic import BaseModel, ConfigDict, Field, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
 from typing_extensions import Annotated
+from pymeshdb.models.building_installs_inner import BuildingInstallsInner
 from typing import Optional, Set
 from typing_extensions import Self
 
 class Member(BaseModel):
     """
-    Member
+    A  ModelSerializer MixIn which sets `NestedKeyObjectRelatedField` as the default field class to use for the foreign key fields
     """ # noqa: E501
-    id: StrictInt
+    id: StrictStr
     all_email_addresses: List[StrictStr]
-    installs: List[StrictInt]
+    all_phone_numbers: List[StrictStr]
+    installs: List[BuildingInstallsInner]
     name: StrictStr = Field(description="Member full name in the format: \"First Last\"")
     primary_email_address: Optional[Annotated[str, Field(strict=True, max_length=254)]] = Field(default=None, description="Primary email address used to contact the member")
     stripe_email_address: Optional[Annotated[str, Field(strict=True, max_length=254)]] = Field(default=None, description="Email address used by the member to donate via Stripe, if different to their primary email")
     additional_email_addresses: Optional[List[Annotated[str, Field(strict=True, max_length=254)]]] = Field(default=None, description="Any additional email addresses associated with this member")
-    phone_number: Optional[StrictStr] = Field(default=None, description="A contact phone number for this member")
+    phone_number: Optional[StrictStr] = Field(default=None, description="A primary contact phone number for this member")
+    additional_phone_numbers: Optional[List[StrictStr]] = Field(default=None, description="Any additional phone numbers used by this member")
     slack_handle: Optional[StrictStr] = Field(default=None, description="The member's slack handle")
     notes: Optional[StrictStr] = Field(default=None, description="A free-form text description of how to contact this member, to track any additional information. For Members imported from the spreadsheet, this starts with a formatted block of information about the import process and original spreadsheet data. However this structure can be changed by admins at any time and should not be relied on by automated systems. ")
-    __properties: ClassVar[List[str]] = ["id", "all_email_addresses", "installs", "name", "primary_email_address", "stripe_email_address", "additional_email_addresses", "phone_number", "slack_handle", "notes"]
+    __properties: ClassVar[List[str]] = ["id", "all_email_addresses", "all_phone_numbers", "installs", "name", "primary_email_address", "stripe_email_address", "additional_email_addresses", "phone_number", "additional_phone_numbers", "slack_handle", "notes"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -72,10 +75,12 @@ class Member(BaseModel):
         * OpenAPI `readOnly` fields are excluded.
         * OpenAPI `readOnly` fields are excluded.
         * OpenAPI `readOnly` fields are excluded.
+        * OpenAPI `readOnly` fields are excluded.
         """
         excluded_fields: Set[str] = set([
             "id",
             "all_email_addresses",
+            "all_phone_numbers",
             "installs",
         ])
 
@@ -84,6 +89,13 @@ class Member(BaseModel):
             exclude=excluded_fields,
             exclude_none=True,
         )
+        # override the default output from pydantic by calling `to_dict()` of each item in installs (list)
+        _items = []
+        if self.installs:
+            for _item in self.installs:
+                if _item:
+                    _items.append(_item.to_dict())
+            _dict['installs'] = _items
         # set to None if primary_email_address (nullable) is None
         # and model_fields_set contains the field
         if self.primary_email_address is None and "primary_email_address" in self.model_fields_set:
@@ -103,6 +115,11 @@ class Member(BaseModel):
         # and model_fields_set contains the field
         if self.phone_number is None and "phone_number" in self.model_fields_set:
             _dict['phone_number'] = None
+
+        # set to None if additional_phone_numbers (nullable) is None
+        # and model_fields_set contains the field
+        if self.additional_phone_numbers is None and "additional_phone_numbers" in self.model_fields_set:
+            _dict['additional_phone_numbers'] = None
 
         # set to None if slack_handle (nullable) is None
         # and model_fields_set contains the field
@@ -128,12 +145,14 @@ class Member(BaseModel):
         _obj = cls.model_validate({
             "id": obj.get("id"),
             "all_email_addresses": obj.get("all_email_addresses"),
-            "installs": obj.get("installs"),
+            "all_phone_numbers": obj.get("all_phone_numbers"),
+            "installs": [BuildingInstallsInner.from_dict(_item) for _item in obj["installs"]] if obj.get("installs") is not None else None,
             "name": obj.get("name"),
             "primary_email_address": obj.get("primary_email_address"),
             "stripe_email_address": obj.get("stripe_email_address"),
             "additional_email_addresses": obj.get("additional_email_addresses"),
             "phone_number": obj.get("phone_number"),
+            "additional_phone_numbers": obj.get("additional_phone_numbers"),
             "slack_handle": obj.get("slack_handle"),
             "notes": obj.get("notes")
         })

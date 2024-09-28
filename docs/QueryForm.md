@@ -14,6 +14,7 @@ Name | Type | Description | Notes
 **zip_code** | **str** |  | 
 **name** | **str** |  | 
 **phone_number** | **str** |  | 
+**additional_phone_numbers** | **List[str]** |  | 
 **primary_email_address** | **str** |  | 
 **stripe_email_address** | **str** |  | 
 **additional_email_addresses** | **List[str]** |  | 

@@ -18,7 +18,7 @@ import re  # noqa: F401
 import json
 
 from pydantic import BaseModel, ConfigDict, Field, StrictInt, StrictStr
-from typing import Any, ClassVar, Dict, List, Union
+from typing import Any, ClassVar, Dict, List, Optional, Union
 from typing_extensions import Annotated
 from typing import Optional, Set
 from typing_extensions import Self
@@ -27,14 +27,13 @@ class MapDataSector(BaseModel):
     """
     MapDataSector
     """ # noqa: E501
-    node_id: StrictInt = Field(alias="nodeId")
+    node_id: Optional[StrictInt] = Field(alias="nodeId")
     radius: Union[Annotated[float, Field(strict=True, ge=0)], Annotated[int, Field(strict=True, ge=0)]] = Field(description="The radius to display this sector on the map (in km)")
     azimuth: Annotated[int, Field(le=360, strict=True, ge=0)] = Field(description="The compass heading that this sector is pointed towards")
     width: Annotated[int, Field(le=360, strict=True, ge=0)] = Field(description="The approximate width of the beam this sector produces")
     status: StrictStr
-    device: StrictStr
     install_date: StrictInt = Field(alias="installDate")
-    __properties: ClassVar[List[str]] = ["nodeId", "radius", "azimuth", "width", "status", "device", "installDate"]
+    __properties: ClassVar[List[str]] = ["nodeId", "radius", "azimuth", "width", "status", "installDate"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -79,6 +78,11 @@ class MapDataSector(BaseModel):
             exclude=excluded_fields,
             exclude_none=True,
         )
+        # set to None if node_id (nullable) is None
+        # and model_fields_set contains the field
+        if self.node_id is None and "node_id" in self.model_fields_set:
+            _dict['nodeId'] = None
+
         return _dict
 
     @classmethod
@@ -96,7 +100,6 @@ class MapDataSector(BaseModel):
             "azimuth": obj.get("azimuth"),
             "width": obj.get("width"),
             "status": obj.get("status"),
-            "device": obj.get("device"),
             "installDate": obj.get("installDate")
         })
         return _obj

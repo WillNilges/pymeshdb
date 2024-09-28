@@ -35,12 +35,17 @@ class TestMember(unittest.TestCase):
         model = Member()
         if include_optional:
             return Member(
-                id = 56,
+                id = '',
                 all_email_addresses = [
                     ''
                     ],
+                all_phone_numbers = [
+                    ''
+                    ],
                 installs = [
-                    56
+                    pymeshdb.models.building_installs_inner.Building_installs_inner(
+                        id = '', 
+                        install_number = 56, )
                     ],
                 name = '',
                 primary_email_address = '',
@@ -49,17 +54,25 @@ class TestMember(unittest.TestCase):
                     ''
                     ],
                 phone_number = '',
+                additional_phone_numbers = [
+                    ''
+                    ],
                 slack_handle = '',
                 notes = ''
             )
         else:
             return Member(
-                id = 56,
+                id = '',
                 all_email_addresses = [
                     ''
                     ],
+                all_phone_numbers = [
+                    ''
+                    ],
                 installs = [
-                    56
+                    pymeshdb.models.building_installs_inner.Building_installs_inner(
+                        id = '', 
+                        install_number = 56, )
                     ],
                 name = '',
         )

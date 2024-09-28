@@ -35,14 +35,12 @@ class TestPatchedBuilding(unittest.TestCase):
         model = PatchedBuilding()
         if include_optional:
             return PatchedBuilding(
-                id = 56,
+                id = '',
                 installs = [
-                    56
+                    pymeshdb.models.building_installs_inner.Building_installs_inner(
+                        id = '', 
+                        install_number = 56, )
                     ],
-                network_numbers = [
-                    -2147483648
-                    ],
-                primary_network_number = -2147483648,
                 bin = 0,
                 street_address = '',
                 city = '',
@@ -57,6 +55,14 @@ class TestPatchedBuilding(unittest.TestCase):
                 notes = '',
                 panoramas = [
                     ''
+                    ],
+                primary_node = pymeshdb.models.building_primary_node.Building_primary_node(
+                    id = '', 
+                    network_number = -2147483648, ),
+                nodes = [
+                    pymeshdb.models.building_nodes_inner.Building_nodes_inner(
+                        id = '', 
+                        network_number = -2147483648, )
                     ]
             )
         else:

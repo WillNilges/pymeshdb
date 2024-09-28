@@ -40,7 +40,7 @@ class TestPaginatedLinkList(unittest.TestCase):
                 previous = 'http://api.example.org/accounts/?page=2',
                 results = [
                     pymeshdb.models.link.Link(
-                        id = 56, 
+                        id = '', 
                         status = null, 
                         type = null, 
                         install_date = datetime.datetime.strptime('1975-12-30', '%Y-%m-%d').date(), 
@@ -48,8 +48,10 @@ class TestPaginatedLinkList(unittest.TestCase):
                         description = '', 
                         notes = '', 
                         uisp_id = '', 
-                        from_device = 56, 
-                        to_device = 56, )
+                        from_device = pymeshdb.models.link_from_device.Link_from_device(
+                            id = '', ), 
+                        to_device = pymeshdb.models.link_from_device.Link_from_device(
+                            id = '', ), )
                     ]
             )
         else:
@@ -57,7 +59,7 @@ class TestPaginatedLinkList(unittest.TestCase):
                 count = 123,
                 results = [
                     pymeshdb.models.link.Link(
-                        id = 56, 
+                        id = '', 
                         status = null, 
                         type = null, 
                         install_date = datetime.datetime.strptime('1975-12-30', '%Y-%m-%d').date(), 
@@ -65,8 +67,10 @@ class TestPaginatedLinkList(unittest.TestCase):
                         description = '', 
                         notes = '', 
                         uisp_id = '', 
-                        from_device = 56, 
-                        to_device = 56, )
+                        from_device = pymeshdb.models.link_from_device.Link_from_device(
+                            id = '', ), 
+                        to_device = pymeshdb.models.link_from_device.Link_from_device(
+                            id = '', ), )
                     ],
         )
         """

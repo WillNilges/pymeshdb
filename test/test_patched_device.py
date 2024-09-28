@@ -35,27 +35,27 @@ class TestPatchedDevice(unittest.TestCase):
         model = PatchedDevice()
         if include_optional:
             return PatchedDevice(
-                id = 56,
-                network_number = -2147483648,
-                links_from = [
-                    56
-                    ],
-                links_to = [
-                    56
-                    ],
-                name = '',
-                model = '',
-                type = 'ap',
-                status = 'Inactive',
+                id = '',
                 latitude = 1.337,
                 longitude = 1.337,
                 altitude = 1.337,
+                links_from = [
+                    pymeshdb.models.access_point_links_from_inner.AccessPoint_links_from_inner(
+                        id = '', )
+                    ],
+                links_to = [
+                    pymeshdb.models.access_point_links_from_inner.AccessPoint_links_from_inner(
+                        id = '', )
+                    ],
+                name = '',
+                status = 'Inactive',
                 install_date = datetime.datetime.strptime('1975-12-30', '%Y-%m-%d').date(),
                 abandon_date = datetime.datetime.strptime('1975-12-30', '%Y-%m-%d').date(),
                 notes = '',
                 uisp_id = '',
-                ssid = '',
-                ip_address = ''
+                node = pymeshdb.models.access_point_node.AccessPoint_node(
+                    id = '', 
+                    network_number = -2147483648, )
             )
         else:
             return PatchedDevice(

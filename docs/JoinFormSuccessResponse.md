@@ -6,8 +6,9 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **detail** | **str** |  | 
-**building_id** | **int** |  | 
-**member_id** | **int** |  | 
+**building_id** | **str** |  | 
+**member_id** | **str** |  | 
+**install_id** | **str** |  | 
 **install_number** | **int** |  | 
 **member_exists** | **bool** |  | 
 

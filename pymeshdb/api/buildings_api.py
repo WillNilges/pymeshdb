@@ -315,7 +315,7 @@ class BuildingsApi:
     @validate_call
     def api_v1_buildings_destroy(
         self,
-        id: StrictInt,
+        id: StrictStr,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -333,7 +333,7 @@ class BuildingsApi:
 
 
         :param id: (required)
-        :type id: int
+        :type id: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -381,7 +381,7 @@ class BuildingsApi:
     @validate_call
     def api_v1_buildings_destroy_with_http_info(
         self,
-        id: StrictInt,
+        id: StrictStr,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -399,7 +399,7 @@ class BuildingsApi:
 
 
         :param id: (required)
-        :type id: int
+        :type id: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -447,7 +447,7 @@ class BuildingsApi:
     @validate_call
     def api_v1_buildings_destroy_without_preload_content(
         self,
-        id: StrictInt,
+        id: StrictStr,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -465,7 +465,7 @@ class BuildingsApi:
 
 
         :param id: (required)
-        :type id: int
+        :type id: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -566,6 +566,7 @@ class BuildingsApi:
     def api_v1_buildings_list(
         self,
         page: Annotated[Optional[StrictInt], Field(description="A page number within the paginated result set.")] = None,
+        page_size: Annotated[Optional[StrictInt], Field(description="Number of results to return per page.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -584,6 +585,8 @@ class BuildingsApi:
 
         :param page: A page number within the paginated result set.
         :type page: int
+        :param page_size: Number of results to return per page.
+        :type page_size: int
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -608,6 +611,7 @@ class BuildingsApi:
 
         _param = self._api_v1_buildings_list_serialize(
             page=page,
+            page_size=page_size,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -632,6 +636,7 @@ class BuildingsApi:
     def api_v1_buildings_list_with_http_info(
         self,
         page: Annotated[Optional[StrictInt], Field(description="A page number within the paginated result set.")] = None,
+        page_size: Annotated[Optional[StrictInt], Field(description="Number of results to return per page.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -650,6 +655,8 @@ class BuildingsApi:
 
         :param page: A page number within the paginated result set.
         :type page: int
+        :param page_size: Number of results to return per page.
+        :type page_size: int
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -674,6 +681,7 @@ class BuildingsApi:
 
         _param = self._api_v1_buildings_list_serialize(
             page=page,
+            page_size=page_size,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -698,6 +706,7 @@ class BuildingsApi:
     def api_v1_buildings_list_without_preload_content(
         self,
         page: Annotated[Optional[StrictInt], Field(description="A page number within the paginated result set.")] = None,
+        page_size: Annotated[Optional[StrictInt], Field(description="Number of results to return per page.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -716,6 +725,8 @@ class BuildingsApi:
 
         :param page: A page number within the paginated result set.
         :type page: int
+        :param page_size: Number of results to return per page.
+        :type page_size: int
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -740,6 +751,7 @@ class BuildingsApi:
 
         _param = self._api_v1_buildings_list_serialize(
             page=page,
+            page_size=page_size,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -759,6 +771,7 @@ class BuildingsApi:
     def _api_v1_buildings_list_serialize(
         self,
         page,
+        page_size,
         _request_auth,
         _content_type,
         _headers,
@@ -782,6 +795,10 @@ class BuildingsApi:
         if page is not None:
             
             _query_params.append(('page', page))
+            
+        if page_size is not None:
+            
+            _query_params.append(('page_size', page_size))
             
         # process the header parameters
         # process the form parameters
@@ -827,8 +844,11 @@ class BuildingsApi:
         city: Annotated[Optional[StrictStr], Field(description="Filter installs by the city field using case-insensitve equality")] = None,
         install_number: Annotated[Optional[StrictInt], Field(description="Filter Buildings by install_number using strict equality")] = None,
         network_number: Annotated[Optional[StrictInt], Field(description="Filter Buildings by the network number of their associated nodes using strict equality")] = None,
+        node: Optional[StrictStr] = None,
         page: Annotated[Optional[StrictInt], Field(description="A page number within the paginated result set.")] = None,
+        page_size: Annotated[Optional[StrictInt], Field(description="Number of results to return per page.")] = None,
         primary_network_number: Annotated[Optional[StrictInt], Field(description="Filter Buildings by the network number of their primary node using strict equality")] = None,
+        primary_node: Optional[StrictStr] = None,
         state: Annotated[Optional[StrictStr], Field(description="Filter installs by the state field using case-insensitve equality")] = None,
         street_address: Annotated[Optional[StrictStr], Field(description="Filter installs by the street_address field using case-insensitve substring matching")] = None,
         zip_code: Annotated[Optional[StrictStr], Field(description="Filter installs by the zip_code field using strict equality")] = None,
@@ -856,10 +876,16 @@ class BuildingsApi:
         :type install_number: int
         :param network_number: Filter Buildings by the network number of their associated nodes using strict equality
         :type network_number: int
+        :param node:
+        :type node: str
         :param page: A page number within the paginated result set.
         :type page: int
+        :param page_size: Number of results to return per page.
+        :type page_size: int
         :param primary_network_number: Filter Buildings by the network number of their primary node using strict equality
         :type primary_network_number: int
+        :param primary_node:
+        :type primary_node: str
         :param state: Filter installs by the state field using case-insensitve equality
         :type state: str
         :param street_address: Filter installs by the street_address field using case-insensitve substring matching
@@ -893,8 +919,11 @@ class BuildingsApi:
             city=city,
             install_number=install_number,
             network_number=network_number,
+            node=node,
             page=page,
+            page_size=page_size,
             primary_network_number=primary_network_number,
+            primary_node=primary_node,
             state=state,
             street_address=street_address,
             zip_code=zip_code,
@@ -925,8 +954,11 @@ class BuildingsApi:
         city: Annotated[Optional[StrictStr], Field(description="Filter installs by the city field using case-insensitve equality")] = None,
         install_number: Annotated[Optional[StrictInt], Field(description="Filter Buildings by install_number using strict equality")] = None,
         network_number: Annotated[Optional[StrictInt], Field(description="Filter Buildings by the network number of their associated nodes using strict equality")] = None,
+        node: Optional[StrictStr] = None,
         page: Annotated[Optional[StrictInt], Field(description="A page number within the paginated result set.")] = None,
+        page_size: Annotated[Optional[StrictInt], Field(description="Number of results to return per page.")] = None,
         primary_network_number: Annotated[Optional[StrictInt], Field(description="Filter Buildings by the network number of their primary node using strict equality")] = None,
+        primary_node: Optional[StrictStr] = None,
         state: Annotated[Optional[StrictStr], Field(description="Filter installs by the state field using case-insensitve equality")] = None,
         street_address: Annotated[Optional[StrictStr], Field(description="Filter installs by the street_address field using case-insensitve substring matching")] = None,
         zip_code: Annotated[Optional[StrictStr], Field(description="Filter installs by the zip_code field using strict equality")] = None,
@@ -954,10 +986,16 @@ class BuildingsApi:
         :type install_number: int
         :param network_number: Filter Buildings by the network number of their associated nodes using strict equality
         :type network_number: int
+        :param node:
+        :type node: str
         :param page: A page number within the paginated result set.
         :type page: int
+        :param page_size: Number of results to return per page.
+        :type page_size: int
         :param primary_network_number: Filter Buildings by the network number of their primary node using strict equality
         :type primary_network_number: int
+        :param primary_node:
+        :type primary_node: str
         :param state: Filter installs by the state field using case-insensitve equality
         :type state: str
         :param street_address: Filter installs by the street_address field using case-insensitve substring matching
@@ -991,8 +1029,11 @@ class BuildingsApi:
             city=city,
             install_number=install_number,
             network_number=network_number,
+            node=node,
             page=page,
+            page_size=page_size,
             primary_network_number=primary_network_number,
+            primary_node=primary_node,
             state=state,
             street_address=street_address,
             zip_code=zip_code,
@@ -1023,8 +1064,11 @@ class BuildingsApi:
         city: Annotated[Optional[StrictStr], Field(description="Filter installs by the city field using case-insensitve equality")] = None,
         install_number: Annotated[Optional[StrictInt], Field(description="Filter Buildings by install_number using strict equality")] = None,
         network_number: Annotated[Optional[StrictInt], Field(description="Filter Buildings by the network number of their associated nodes using strict equality")] = None,
+        node: Optional[StrictStr] = None,
         page: Annotated[Optional[StrictInt], Field(description="A page number within the paginated result set.")] = None,
+        page_size: Annotated[Optional[StrictInt], Field(description="Number of results to return per page.")] = None,
         primary_network_number: Annotated[Optional[StrictInt], Field(description="Filter Buildings by the network number of their primary node using strict equality")] = None,
+        primary_node: Optional[StrictStr] = None,
         state: Annotated[Optional[StrictStr], Field(description="Filter installs by the state field using case-insensitve equality")] = None,
         street_address: Annotated[Optional[StrictStr], Field(description="Filter installs by the street_address field using case-insensitve substring matching")] = None,
         zip_code: Annotated[Optional[StrictStr], Field(description="Filter installs by the zip_code field using strict equality")] = None,
@@ -1052,10 +1096,16 @@ class BuildingsApi:
         :type install_number: int
         :param network_number: Filter Buildings by the network number of their associated nodes using strict equality
         :type network_number: int
+        :param node:
+        :type node: str
         :param page: A page number within the paginated result set.
         :type page: int
+        :param page_size: Number of results to return per page.
+        :type page_size: int
         :param primary_network_number: Filter Buildings by the network number of their primary node using strict equality
         :type primary_network_number: int
+        :param primary_node:
+        :type primary_node: str
         :param state: Filter installs by the state field using case-insensitve equality
         :type state: str
         :param street_address: Filter installs by the street_address field using case-insensitve substring matching
@@ -1089,8 +1139,11 @@ class BuildingsApi:
             city=city,
             install_number=install_number,
             network_number=network_number,
+            node=node,
             page=page,
+            page_size=page_size,
             primary_network_number=primary_network_number,
+            primary_node=primary_node,
             state=state,
             street_address=street_address,
             zip_code=zip_code,
@@ -1116,8 +1169,11 @@ class BuildingsApi:
         city,
         install_number,
         network_number,
+        node,
         page,
+        page_size,
         primary_network_number,
+        primary_node,
         state,
         street_address,
         zip_code,
@@ -1157,13 +1213,25 @@ class BuildingsApi:
             
             _query_params.append(('network_number', network_number))
             
+        if node is not None:
+            
+            _query_params.append(('node', node))
+            
         if page is not None:
             
             _query_params.append(('page', page))
             
+        if page_size is not None:
+            
+            _query_params.append(('page_size', page_size))
+            
         if primary_network_number is not None:
             
             _query_params.append(('primary_network_number', primary_network_number))
+            
+        if primary_node is not None:
+            
+            _query_params.append(('primary_node', primary_node))
             
         if state is not None:
             
@@ -1217,7 +1285,7 @@ class BuildingsApi:
     @validate_call
     def api_v1_buildings_partial_update(
         self,
-        id: StrictInt,
+        id: StrictStr,
         patched_building: Optional[PatchedBuilding] = None,
         _request_timeout: Union[
             None,
@@ -1236,7 +1304,7 @@ class BuildingsApi:
 
 
         :param id: (required)
-        :type id: int
+        :type id: str
         :param patched_building:
         :type patched_building: PatchedBuilding
         :param _request_timeout: timeout setting for this request. If one
@@ -1287,7 +1355,7 @@ class BuildingsApi:
     @validate_call
     def api_v1_buildings_partial_update_with_http_info(
         self,
-        id: StrictInt,
+        id: StrictStr,
         patched_building: Optional[PatchedBuilding] = None,
         _request_timeout: Union[
             None,
@@ -1306,7 +1374,7 @@ class BuildingsApi:
 
 
         :param id: (required)
-        :type id: int
+        :type id: str
         :param patched_building:
         :type patched_building: PatchedBuilding
         :param _request_timeout: timeout setting for this request. If one
@@ -1357,7 +1425,7 @@ class BuildingsApi:
     @validate_call
     def api_v1_buildings_partial_update_without_preload_content(
         self,
-        id: StrictInt,
+        id: StrictStr,
         patched_building: Optional[PatchedBuilding] = None,
         _request_timeout: Union[
             None,
@@ -1376,7 +1444,7 @@ class BuildingsApi:
 
 
         :param id: (required)
-        :type id: int
+        :type id: str
         :param patched_building:
         :type patched_building: PatchedBuilding
         :param _request_timeout: timeout setting for this request. If one
@@ -1503,7 +1571,7 @@ class BuildingsApi:
     @validate_call
     def api_v1_buildings_retrieve(
         self,
-        id: StrictInt,
+        id: StrictStr,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1521,7 +1589,7 @@ class BuildingsApi:
 
 
         :param id: (required)
-        :type id: int
+        :type id: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -1569,7 +1637,7 @@ class BuildingsApi:
     @validate_call
     def api_v1_buildings_retrieve_with_http_info(
         self,
-        id: StrictInt,
+        id: StrictStr,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1587,7 +1655,7 @@ class BuildingsApi:
 
 
         :param id: (required)
-        :type id: int
+        :type id: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -1635,7 +1703,7 @@ class BuildingsApi:
     @validate_call
     def api_v1_buildings_retrieve_without_preload_content(
         self,
-        id: StrictInt,
+        id: StrictStr,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1653,7 +1721,7 @@ class BuildingsApi:
 
 
         :param id: (required)
-        :type id: int
+        :type id: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -1759,7 +1827,7 @@ class BuildingsApi:
     @validate_call
     def api_v1_buildings_update(
         self,
-        id: StrictInt,
+        id: StrictStr,
         building: Building,
         _request_timeout: Union[
             None,
@@ -1778,7 +1846,7 @@ class BuildingsApi:
 
 
         :param id: (required)
-        :type id: int
+        :type id: str
         :param building: (required)
         :type building: Building
         :param _request_timeout: timeout setting for this request. If one
@@ -1829,7 +1897,7 @@ class BuildingsApi:
     @validate_call
     def api_v1_buildings_update_with_http_info(
         self,
-        id: StrictInt,
+        id: StrictStr,
         building: Building,
         _request_timeout: Union[
             None,
@@ -1848,7 +1916,7 @@ class BuildingsApi:
 
 
         :param id: (required)
-        :type id: int
+        :type id: str
         :param building: (required)
         :type building: Building
         :param _request_timeout: timeout setting for this request. If one
@@ -1899,7 +1967,7 @@ class BuildingsApi:
     @validate_call
     def api_v1_buildings_update_without_preload_content(
         self,
-        id: StrictInt,
+        id: StrictStr,
         building: Building,
         _request_timeout: Union[
             None,
@@ -1918,7 +1986,7 @@ class BuildingsApi:
 
 
         :param id: (required)
-        :type id: int
+        :type id: str
         :param building: (required)
         :type building: Building
         :param _request_timeout: timeout setting for this request. If one

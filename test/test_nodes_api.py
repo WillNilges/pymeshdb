@@ -38,6 +38,12 @@ class TestNodesApi(unittest.TestCase):
         """
         pass
 
+    def test_api_v1_nodes_destroy2(self) -> None:
+        """Test case for api_v1_nodes_destroy2
+
+        """
+        pass
+
     def test_api_v1_nodes_list(self) -> None:
         """Test case for api_v1_nodes_list
 
@@ -56,14 +62,32 @@ class TestNodesApi(unittest.TestCase):
         """
         pass
 
+    def test_api_v1_nodes_partial_update2(self) -> None:
+        """Test case for api_v1_nodes_partial_update2
+
+        """
+        pass
+
     def test_api_v1_nodes_retrieve(self) -> None:
         """Test case for api_v1_nodes_retrieve
 
         """
         pass
 
+    def test_api_v1_nodes_retrieve2(self) -> None:
+        """Test case for api_v1_nodes_retrieve2
+
+        """
+        pass
+
     def test_api_v1_nodes_update(self) -> None:
         """Test case for api_v1_nodes_update
+
+        """
+        pass
+
+    def test_api_v1_nodes_update2(self) -> None:
+        """Test case for api_v1_nodes_update2
 
         """
         pass

@@ -18,7 +18,7 @@ import re  # noqa: F401
 import json
 
 from pydantic import BaseModel, ConfigDict, Field, StrictInt, StrictStr
-from typing import Any, ClassVar, Dict, List
+from typing import Any, ClassVar, Dict, List, Optional
 from typing import Optional, Set
 from typing_extensions import Self
 
@@ -26,8 +26,8 @@ class MapDataLink(BaseModel):
     """
     MapDataLink
     """ # noqa: E501
-    var_from: StrictInt = Field(alias="from")
-    to: StrictInt
+    var_from: Optional[StrictInt] = Field(alias="from")
+    to: Optional[StrictInt]
     status: StrictStr
     install_date: StrictInt = Field(alias="installDate")
     __properties: ClassVar[List[str]] = ["from", "to", "status", "installDate"]
@@ -77,6 +77,16 @@ class MapDataLink(BaseModel):
             exclude=excluded_fields,
             exclude_none=True,
         )
+        # set to None if var_from (nullable) is None
+        # and model_fields_set contains the field
+        if self.var_from is None and "var_from" in self.model_fields_set:
+            _dict['from'] = None
+
+        # set to None if to (nullable) is None
+        # and model_fields_set contains the field
+        if self.to is None and "to" in self.model_fields_set:
+            _dict['to'] = None
+
         return _dict
 
     @classmethod

@@ -20,16 +20,19 @@ from typing_extensions import Self
 
 class LinkTypeEnum(str, Enum):
     """
-    * `Standard` - Standard * `VPN` - Vpn * `MMWave` - Mmwave * `Fiber` - Fiber
+    * `5 GHz` - Five Ghz * `24 GHz` - Twentyfour Ghz * `60 GHz` - Sixty Ghz * `70-80 GHz` - Seventy Eighty Ghz * `VPN` - Vpn * `Fiber` - Fiber * `Ethernet` - Ethernet
     """
 
     """
     allowed enum values
     """
-    STANDARD = 'Standard'
+    ENUM_5_GHZ = '5 GHz'
+    ENUM_24_GHZ = '24 GHz'
+    ENUM_60_GHZ = '60 GHz'
+    ENUM_70_MINUS_80_GHZ = '70-80 GHz'
     VPN = 'VPN'
-    MMWAVE = 'MMWave'
     FIBER = 'Fiber'
+    ETHERNET = 'Ethernet'
 
     @classmethod
     def from_json(cls, json_str: str) -> Self:

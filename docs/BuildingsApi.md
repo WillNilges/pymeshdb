@@ -138,7 +138,7 @@ configuration.api_key['Session ID'] = os.environ["API_KEY"]
 with pymeshdb.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = pymeshdb.BuildingsApi(api_client)
-    id = 56 # int | 
+    id = 'id_example' # str | 
 
     try:
         api_instance.api_v1_buildings_destroy(id)
@@ -153,7 +153,7 @@ with pymeshdb.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **id** | **int**|  | 
+ **id** | **str**|  | 
 
 ### Return type
 
@@ -177,7 +177,7 @@ void (empty response body)
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **api_v1_buildings_list**
-> PaginatedBuildingList api_v1_buildings_list(page=page)
+> PaginatedBuildingList api_v1_buildings_list(page=page, page_size=page_size)
 
 
 
@@ -220,9 +220,10 @@ with pymeshdb.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = pymeshdb.BuildingsApi(api_client)
     page = 56 # int | A page number within the paginated result set. (optional)
+    page_size = 56 # int | Number of results to return per page. (optional)
 
     try:
-        api_response = api_instance.api_v1_buildings_list(page=page)
+        api_response = api_instance.api_v1_buildings_list(page=page, page_size=page_size)
         print("The response of BuildingsApi->api_v1_buildings_list:\n")
         pprint(api_response)
     except Exception as e:
@@ -237,6 +238,7 @@ with pymeshdb.ApiClient(configuration) as api_client:
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **page** | **int**| A page number within the paginated result set. | [optional] 
+ **page_size** | **int**| Number of results to return per page. | [optional] 
 
 ### Return type
 
@@ -260,7 +262,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **api_v1_buildings_lookup_list**
-> PaginatedBuildingList api_v1_buildings_lookup_list(bin=bin, city=city, install_number=install_number, network_number=network_number, page=page, primary_network_number=primary_network_number, state=state, street_address=street_address, zip_code=zip_code)
+> PaginatedBuildingList api_v1_buildings_lookup_list(bin=bin, city=city, install_number=install_number, network_number=network_number, node=node, page=page, page_size=page_size, primary_network_number=primary_network_number, primary_node=primary_node, state=state, street_address=street_address, zip_code=zip_code)
 
 
 
@@ -306,14 +308,17 @@ with pymeshdb.ApiClient(configuration) as api_client:
     city = 'city_example' # str | Filter installs by the city field using case-insensitve equality (optional)
     install_number = 56 # int | Filter Buildings by install_number using strict equality (optional)
     network_number = 56 # int | Filter Buildings by the network number of their associated nodes using strict equality (optional)
+    node = 'node_example' # str |  (optional)
     page = 56 # int | A page number within the paginated result set. (optional)
+    page_size = 56 # int | Number of results to return per page. (optional)
     primary_network_number = 56 # int | Filter Buildings by the network number of their primary node using strict equality (optional)
+    primary_node = 'primary_node_example' # str |  (optional)
     state = 'state_example' # str | Filter installs by the state field using case-insensitve equality (optional)
     street_address = 'street_address_example' # str | Filter installs by the street_address field using case-insensitve substring matching (optional)
     zip_code = 'zip_code_example' # str | Filter installs by the zip_code field using strict equality (optional)
 
     try:
-        api_response = api_instance.api_v1_buildings_lookup_list(bin=bin, city=city, install_number=install_number, network_number=network_number, page=page, primary_network_number=primary_network_number, state=state, street_address=street_address, zip_code=zip_code)
+        api_response = api_instance.api_v1_buildings_lookup_list(bin=bin, city=city, install_number=install_number, network_number=network_number, node=node, page=page, page_size=page_size, primary_network_number=primary_network_number, primary_node=primary_node, state=state, street_address=street_address, zip_code=zip_code)
         print("The response of BuildingsApi->api_v1_buildings_lookup_list:\n")
         pprint(api_response)
     except Exception as e:
@@ -331,8 +336,11 @@ Name | Type | Description  | Notes
  **city** | **str**| Filter installs by the city field using case-insensitve equality | [optional] 
  **install_number** | **int**| Filter Buildings by install_number using strict equality | [optional] 
  **network_number** | **int**| Filter Buildings by the network number of their associated nodes using strict equality | [optional] 
+ **node** | **str**|  | [optional] 
  **page** | **int**| A page number within the paginated result set. | [optional] 
+ **page_size** | **int**| Number of results to return per page. | [optional] 
  **primary_network_number** | **int**| Filter Buildings by the network number of their primary node using strict equality | [optional] 
+ **primary_node** | **str**|  | [optional] 
  **state** | **str**| Filter installs by the state field using case-insensitve equality | [optional] 
  **street_address** | **str**| Filter installs by the street_address field using case-insensitve substring matching | [optional] 
  **zip_code** | **str**| Filter installs by the zip_code field using strict equality | [optional] 
@@ -402,7 +410,7 @@ configuration.api_key['Session ID'] = os.environ["API_KEY"]
 with pymeshdb.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = pymeshdb.BuildingsApi(api_client)
-    id = 56 # int | 
+    id = 'id_example' # str | 
     patched_building = pymeshdb.PatchedBuilding() # PatchedBuilding |  (optional)
 
     try:
@@ -420,7 +428,7 @@ with pymeshdb.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **id** | **int**|  | 
+ **id** | **str**|  | 
  **patched_building** | [**PatchedBuilding**](PatchedBuilding.md)|  | [optional] 
 
 ### Return type
@@ -487,7 +495,7 @@ configuration.api_key['Session ID'] = os.environ["API_KEY"]
 with pymeshdb.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = pymeshdb.BuildingsApi(api_client)
-    id = 56 # int | 
+    id = 'id_example' # str | 
 
     try:
         api_response = api_instance.api_v1_buildings_retrieve(id)
@@ -504,7 +512,7 @@ with pymeshdb.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **id** | **int**|  | 
+ **id** | **str**|  | 
 
 ### Return type
 
@@ -570,7 +578,7 @@ configuration.api_key['Session ID'] = os.environ["API_KEY"]
 with pymeshdb.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = pymeshdb.BuildingsApi(api_client)
-    id = 56 # int | 
+    id = 'id_example' # str | 
     building = pymeshdb.Building() # Building | 
 
     try:
@@ -588,7 +596,7 @@ with pymeshdb.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **id** | **int**|  | 
+ **id** | **str**|  | 
  **building** | [**Building**](Building.md)|  | 
 
 ### Return type

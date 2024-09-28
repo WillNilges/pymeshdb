@@ -46,6 +46,7 @@ class LegacyQueryFormApi:
         bin: Optional[StrictStr] = None,
         city: Optional[StrictStr] = None,
         page: Annotated[Optional[StrictInt], Field(description="A page number within the paginated result set.")] = None,
+        page_size: Annotated[Optional[StrictInt], Field(description="Number of results to return per page.")] = None,
         state: Optional[StrictStr] = None,
         street_address: Optional[StrictStr] = None,
         zip_code: Optional[StrictStr] = None,
@@ -73,6 +74,8 @@ class LegacyQueryFormApi:
         :type city: str
         :param page: A page number within the paginated result set.
         :type page: int
+        :param page_size: Number of results to return per page.
+        :type page_size: int
         :param state:
         :type state: str
         :param street_address:
@@ -106,6 +109,7 @@ class LegacyQueryFormApi:
             bin=bin,
             city=city,
             page=page,
+            page_size=page_size,
             state=state,
             street_address=street_address,
             zip_code=zip_code,
@@ -136,6 +140,7 @@ class LegacyQueryFormApi:
         bin: Optional[StrictStr] = None,
         city: Optional[StrictStr] = None,
         page: Annotated[Optional[StrictInt], Field(description="A page number within the paginated result set.")] = None,
+        page_size: Annotated[Optional[StrictInt], Field(description="Number of results to return per page.")] = None,
         state: Optional[StrictStr] = None,
         street_address: Optional[StrictStr] = None,
         zip_code: Optional[StrictStr] = None,
@@ -163,6 +168,8 @@ class LegacyQueryFormApi:
         :type city: str
         :param page: A page number within the paginated result set.
         :type page: int
+        :param page_size: Number of results to return per page.
+        :type page_size: int
         :param state:
         :type state: str
         :param street_address:
@@ -196,6 +203,7 @@ class LegacyQueryFormApi:
             bin=bin,
             city=city,
             page=page,
+            page_size=page_size,
             state=state,
             street_address=street_address,
             zip_code=zip_code,
@@ -226,6 +234,7 @@ class LegacyQueryFormApi:
         bin: Optional[StrictStr] = None,
         city: Optional[StrictStr] = None,
         page: Annotated[Optional[StrictInt], Field(description="A page number within the paginated result set.")] = None,
+        page_size: Annotated[Optional[StrictInt], Field(description="Number of results to return per page.")] = None,
         state: Optional[StrictStr] = None,
         street_address: Optional[StrictStr] = None,
         zip_code: Optional[StrictStr] = None,
@@ -253,6 +262,8 @@ class LegacyQueryFormApi:
         :type city: str
         :param page: A page number within the paginated result set.
         :type page: int
+        :param page_size: Number of results to return per page.
+        :type page_size: int
         :param state:
         :type state: str
         :param street_address:
@@ -286,6 +297,7 @@ class LegacyQueryFormApi:
             bin=bin,
             city=city,
             page=page,
+            page_size=page_size,
             state=state,
             street_address=street_address,
             zip_code=zip_code,
@@ -311,6 +323,7 @@ class LegacyQueryFormApi:
         bin,
         city,
         page,
+        page_size,
         state,
         street_address,
         zip_code,
@@ -345,6 +358,10 @@ class LegacyQueryFormApi:
         if page is not None:
             
             _query_params.append(('page', page))
+            
+        if page_size is not None:
+            
+            _query_params.append(('page_size', page_size))
             
         if password is not None:
             
@@ -401,11 +418,12 @@ class LegacyQueryFormApi:
     def api_v1_query_installs_list(
         self,
         password: Annotated[StrictStr, Field(description="The password for the legacy query form")],
-        building: Optional[StrictInt] = None,
+        building: Optional[StrictStr] = None,
         install_number: Optional[StrictInt] = None,
-        member: Optional[StrictInt] = None,
+        member: Optional[StrictStr] = None,
         network_number: Optional[StrictInt] = None,
         page: Annotated[Optional[StrictInt], Field(description="A page number within the paginated result set.")] = None,
+        page_size: Annotated[Optional[StrictInt], Field(description="Number of results to return per page.")] = None,
         status: Annotated[Optional[StrictStr], Field(description="The current status of this install  * `Request Received` - Request Received * `Pending` - Pending * `Blocked` - Blocked * `Active` - Active * `Inactive` - Inactive * `Closed` - Closed * `NN Reassigned` - Nn Reassigned")] = None,
         _request_timeout: Union[
             None,
@@ -426,15 +444,17 @@ class LegacyQueryFormApi:
         :param password: The password for the legacy query form (required)
         :type password: str
         :param building:
-        :type building: int
+        :type building: str
         :param install_number:
         :type install_number: int
         :param member:
-        :type member: int
+        :type member: str
         :param network_number:
         :type network_number: int
         :param page: A page number within the paginated result set.
         :type page: int
+        :param page_size: Number of results to return per page.
+        :type page_size: int
         :param status: The current status of this install  * `Request Received` - Request Received * `Pending` - Pending * `Blocked` - Blocked * `Active` - Active * `Inactive` - Inactive * `Closed` - Closed * `NN Reassigned` - Nn Reassigned
         :type status: str
         :param _request_timeout: timeout setting for this request. If one
@@ -466,6 +486,7 @@ class LegacyQueryFormApi:
             member=member,
             network_number=network_number,
             page=page,
+            page_size=page_size,
             status=status,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -491,11 +512,12 @@ class LegacyQueryFormApi:
     def api_v1_query_installs_list_with_http_info(
         self,
         password: Annotated[StrictStr, Field(description="The password for the legacy query form")],
-        building: Optional[StrictInt] = None,
+        building: Optional[StrictStr] = None,
         install_number: Optional[StrictInt] = None,
-        member: Optional[StrictInt] = None,
+        member: Optional[StrictStr] = None,
         network_number: Optional[StrictInt] = None,
         page: Annotated[Optional[StrictInt], Field(description="A page number within the paginated result set.")] = None,
+        page_size: Annotated[Optional[StrictInt], Field(description="Number of results to return per page.")] = None,
         status: Annotated[Optional[StrictStr], Field(description="The current status of this install  * `Request Received` - Request Received * `Pending` - Pending * `Blocked` - Blocked * `Active` - Active * `Inactive` - Inactive * `Closed` - Closed * `NN Reassigned` - Nn Reassigned")] = None,
         _request_timeout: Union[
             None,
@@ -516,15 +538,17 @@ class LegacyQueryFormApi:
         :param password: The password for the legacy query form (required)
         :type password: str
         :param building:
-        :type building: int
+        :type building: str
         :param install_number:
         :type install_number: int
         :param member:
-        :type member: int
+        :type member: str
         :param network_number:
         :type network_number: int
         :param page: A page number within the paginated result set.
         :type page: int
+        :param page_size: Number of results to return per page.
+        :type page_size: int
         :param status: The current status of this install  * `Request Received` - Request Received * `Pending` - Pending * `Blocked` - Blocked * `Active` - Active * `Inactive` - Inactive * `Closed` - Closed * `NN Reassigned` - Nn Reassigned
         :type status: str
         :param _request_timeout: timeout setting for this request. If one
@@ -556,6 +580,7 @@ class LegacyQueryFormApi:
             member=member,
             network_number=network_number,
             page=page,
+            page_size=page_size,
             status=status,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -581,11 +606,12 @@ class LegacyQueryFormApi:
     def api_v1_query_installs_list_without_preload_content(
         self,
         password: Annotated[StrictStr, Field(description="The password for the legacy query form")],
-        building: Optional[StrictInt] = None,
+        building: Optional[StrictStr] = None,
         install_number: Optional[StrictInt] = None,
-        member: Optional[StrictInt] = None,
+        member: Optional[StrictStr] = None,
         network_number: Optional[StrictInt] = None,
         page: Annotated[Optional[StrictInt], Field(description="A page number within the paginated result set.")] = None,
+        page_size: Annotated[Optional[StrictInt], Field(description="Number of results to return per page.")] = None,
         status: Annotated[Optional[StrictStr], Field(description="The current status of this install  * `Request Received` - Request Received * `Pending` - Pending * `Blocked` - Blocked * `Active` - Active * `Inactive` - Inactive * `Closed` - Closed * `NN Reassigned` - Nn Reassigned")] = None,
         _request_timeout: Union[
             None,
@@ -606,15 +632,17 @@ class LegacyQueryFormApi:
         :param password: The password for the legacy query form (required)
         :type password: str
         :param building:
-        :type building: int
+        :type building: str
         :param install_number:
         :type install_number: int
         :param member:
-        :type member: int
+        :type member: str
         :param network_number:
         :type network_number: int
         :param page: A page number within the paginated result set.
         :type page: int
+        :param page_size: Number of results to return per page.
+        :type page_size: int
         :param status: The current status of this install  * `Request Received` - Request Received * `Pending` - Pending * `Blocked` - Blocked * `Active` - Active * `Inactive` - Inactive * `Closed` - Closed * `NN Reassigned` - Nn Reassigned
         :type status: str
         :param _request_timeout: timeout setting for this request. If one
@@ -646,6 +674,7 @@ class LegacyQueryFormApi:
             member=member,
             network_number=network_number,
             page=page,
+            page_size=page_size,
             status=status,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -671,6 +700,7 @@ class LegacyQueryFormApi:
         member,
         network_number,
         page,
+        page_size,
         status,
         _request_auth,
         _content_type,
@@ -711,6 +741,10 @@ class LegacyQueryFormApi:
         if page is not None:
             
             _query_params.append(('page', page))
+            
+        if page_size is not None:
+            
+            _query_params.append(('page_size', page_size))
             
         if password is not None:
             
@@ -762,6 +796,7 @@ class LegacyQueryFormApi:
         email_address: Optional[StrictStr] = None,
         name: Optional[StrictStr] = None,
         page: Annotated[Optional[StrictInt], Field(description="A page number within the paginated result set.")] = None,
+        page_size: Annotated[Optional[StrictInt], Field(description="Number of results to return per page.")] = None,
         phone_number: Optional[StrictStr] = None,
         _request_timeout: Union[
             None,
@@ -787,6 +822,8 @@ class LegacyQueryFormApi:
         :type name: str
         :param page: A page number within the paginated result set.
         :type page: int
+        :param page_size: Number of results to return per page.
+        :type page_size: int
         :param phone_number:
         :type phone_number: str
         :param _request_timeout: timeout setting for this request. If one
@@ -816,6 +853,7 @@ class LegacyQueryFormApi:
             email_address=email_address,
             name=name,
             page=page,
+            page_size=page_size,
             phone_number=phone_number,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -844,6 +882,7 @@ class LegacyQueryFormApi:
         email_address: Optional[StrictStr] = None,
         name: Optional[StrictStr] = None,
         page: Annotated[Optional[StrictInt], Field(description="A page number within the paginated result set.")] = None,
+        page_size: Annotated[Optional[StrictInt], Field(description="Number of results to return per page.")] = None,
         phone_number: Optional[StrictStr] = None,
         _request_timeout: Union[
             None,
@@ -869,6 +908,8 @@ class LegacyQueryFormApi:
         :type name: str
         :param page: A page number within the paginated result set.
         :type page: int
+        :param page_size: Number of results to return per page.
+        :type page_size: int
         :param phone_number:
         :type phone_number: str
         :param _request_timeout: timeout setting for this request. If one
@@ -898,6 +939,7 @@ class LegacyQueryFormApi:
             email_address=email_address,
             name=name,
             page=page,
+            page_size=page_size,
             phone_number=phone_number,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -926,6 +968,7 @@ class LegacyQueryFormApi:
         email_address: Optional[StrictStr] = None,
         name: Optional[StrictStr] = None,
         page: Annotated[Optional[StrictInt], Field(description="A page number within the paginated result set.")] = None,
+        page_size: Annotated[Optional[StrictInt], Field(description="Number of results to return per page.")] = None,
         phone_number: Optional[StrictStr] = None,
         _request_timeout: Union[
             None,
@@ -951,6 +994,8 @@ class LegacyQueryFormApi:
         :type name: str
         :param page: A page number within the paginated result set.
         :type page: int
+        :param page_size: Number of results to return per page.
+        :type page_size: int
         :param phone_number:
         :type phone_number: str
         :param _request_timeout: timeout setting for this request. If one
@@ -980,6 +1025,7 @@ class LegacyQueryFormApi:
             email_address=email_address,
             name=name,
             page=page,
+            page_size=page_size,
             phone_number=phone_number,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -1003,6 +1049,7 @@ class LegacyQueryFormApi:
         email_address,
         name,
         page,
+        page_size,
         phone_number,
         _request_auth,
         _content_type,
@@ -1035,6 +1082,10 @@ class LegacyQueryFormApi:
         if page is not None:
             
             _query_params.append(('page', page))
+            
+        if page_size is not None:
+            
+            _query_params.append(('page_size', page_size))
             
         if password is not None:
             

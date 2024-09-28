@@ -315,7 +315,7 @@ class InstallsApi:
     @validate_call
     def api_v1_installs_destroy(
         self,
-        install_number: Annotated[StrictInt, Field(description="A unique integer value identifying this install.")],
+        id: StrictStr,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -332,8 +332,8 @@ class InstallsApi:
         """api_v1_installs_destroy
 
 
-        :param install_number: A unique integer value identifying this install. (required)
-        :type install_number: int
+        :param id: (required)
+        :type id: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -357,7 +357,7 @@ class InstallsApi:
         """ # noqa: E501
 
         _param = self._api_v1_installs_destroy_serialize(
-            install_number=install_number,
+            id=id,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -381,7 +381,7 @@ class InstallsApi:
     @validate_call
     def api_v1_installs_destroy_with_http_info(
         self,
-        install_number: Annotated[StrictInt, Field(description="A unique integer value identifying this install.")],
+        id: StrictStr,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -398,8 +398,8 @@ class InstallsApi:
         """api_v1_installs_destroy
 
 
-        :param install_number: A unique integer value identifying this install. (required)
-        :type install_number: int
+        :param id: (required)
+        :type id: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -423,7 +423,7 @@ class InstallsApi:
         """ # noqa: E501
 
         _param = self._api_v1_installs_destroy_serialize(
-            install_number=install_number,
+            id=id,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -447,7 +447,7 @@ class InstallsApi:
     @validate_call
     def api_v1_installs_destroy_without_preload_content(
         self,
-        install_number: Annotated[StrictInt, Field(description="A unique integer value identifying this install.")],
+        id: StrictStr,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -464,8 +464,8 @@ class InstallsApi:
         """api_v1_installs_destroy
 
 
-        :param install_number: A unique integer value identifying this install. (required)
-        :type install_number: int
+        :param id: (required)
+        :type id: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -489,7 +489,7 @@ class InstallsApi:
         """ # noqa: E501
 
         _param = self._api_v1_installs_destroy_serialize(
-            install_number=install_number,
+            id=id,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -507,6 +507,256 @@ class InstallsApi:
 
 
     def _api_v1_installs_destroy_serialize(
+        self,
+        id,
+        _request_auth,
+        _content_type,
+        _headers,
+        _host_index,
+    ) -> RequestSerialized:
+
+        _host = None
+
+        _collection_formats: Dict[str, str] = {
+        }
+
+        _path_params: Dict[str, str] = {}
+        _query_params: List[Tuple[str, str]] = []
+        _header_params: Dict[str, Optional[str]] = _headers or {}
+        _form_params: List[Tuple[str, str]] = []
+        _files: Dict[str, Union[str, bytes]] = {}
+        _body_params: Optional[bytes] = None
+
+        # process the path parameters
+        if id is not None:
+            _path_params['id'] = id
+        # process the query parameters
+        # process the header parameters
+        # process the form parameters
+        # process the body parameter
+
+
+
+
+        # authentication setting
+        _auth_settings: List[str] = [
+            'tokenAuth', 
+            'Session ID'
+        ]
+
+        return self.api_client.param_serialize(
+            method='DELETE',
+            resource_path='/api/v1/installs/{id}/',
+            path_params=_path_params,
+            query_params=_query_params,
+            header_params=_header_params,
+            body=_body_params,
+            post_params=_form_params,
+            files=_files,
+            auth_settings=_auth_settings,
+            collection_formats=_collection_formats,
+            _host=_host,
+            _request_auth=_request_auth
+        )
+
+
+
+
+    @validate_call
+    def api_v1_installs_destroy2(
+        self,
+        install_number: StrictInt,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> None:
+        """api_v1_installs_destroy2
+
+
+        :param install_number: (required)
+        :type install_number: int
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._api_v1_installs_destroy2_serialize(
+            install_number=install_number,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '204': None,
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        response_data.read()
+        return self.api_client.response_deserialize(
+            response_data=response_data,
+            response_types_map=_response_types_map,
+        ).data
+
+
+    @validate_call
+    def api_v1_installs_destroy2_with_http_info(
+        self,
+        install_number: StrictInt,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> ApiResponse[None]:
+        """api_v1_installs_destroy2
+
+
+        :param install_number: (required)
+        :type install_number: int
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._api_v1_installs_destroy2_serialize(
+            install_number=install_number,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '204': None,
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        response_data.read()
+        return self.api_client.response_deserialize(
+            response_data=response_data,
+            response_types_map=_response_types_map,
+        )
+
+
+    @validate_call
+    def api_v1_installs_destroy2_without_preload_content(
+        self,
+        install_number: StrictInt,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> RESTResponseType:
+        """api_v1_installs_destroy2
+
+
+        :param install_number: (required)
+        :type install_number: int
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._api_v1_installs_destroy2_serialize(
+            install_number=install_number,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '204': None,
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        return response_data.response
+
+
+    def _api_v1_installs_destroy2_serialize(
         self,
         install_number,
         _request_auth,
@@ -566,6 +816,7 @@ class InstallsApi:
     def api_v1_installs_list(
         self,
         page: Annotated[Optional[StrictInt], Field(description="A page number within the paginated result set.")] = None,
+        page_size: Annotated[Optional[StrictInt], Field(description="Number of results to return per page.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -584,6 +835,8 @@ class InstallsApi:
 
         :param page: A page number within the paginated result set.
         :type page: int
+        :param page_size: Number of results to return per page.
+        :type page_size: int
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -608,6 +861,7 @@ class InstallsApi:
 
         _param = self._api_v1_installs_list_serialize(
             page=page,
+            page_size=page_size,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -632,6 +886,7 @@ class InstallsApi:
     def api_v1_installs_list_with_http_info(
         self,
         page: Annotated[Optional[StrictInt], Field(description="A page number within the paginated result set.")] = None,
+        page_size: Annotated[Optional[StrictInt], Field(description="Number of results to return per page.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -650,6 +905,8 @@ class InstallsApi:
 
         :param page: A page number within the paginated result set.
         :type page: int
+        :param page_size: Number of results to return per page.
+        :type page_size: int
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -674,6 +931,7 @@ class InstallsApi:
 
         _param = self._api_v1_installs_list_serialize(
             page=page,
+            page_size=page_size,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -698,6 +956,7 @@ class InstallsApi:
     def api_v1_installs_list_without_preload_content(
         self,
         page: Annotated[Optional[StrictInt], Field(description="A page number within the paginated result set.")] = None,
+        page_size: Annotated[Optional[StrictInt], Field(description="Number of results to return per page.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -716,6 +975,8 @@ class InstallsApi:
 
         :param page: A page number within the paginated result set.
         :type page: int
+        :param page_size: Number of results to return per page.
+        :type page_size: int
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -740,6 +1001,7 @@ class InstallsApi:
 
         _param = self._api_v1_installs_list_serialize(
             page=page,
+            page_size=page_size,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -759,6 +1021,7 @@ class InstallsApi:
     def _api_v1_installs_list_serialize(
         self,
         page,
+        page_size,
         _request_auth,
         _content_type,
         _headers,
@@ -782,6 +1045,10 @@ class InstallsApi:
         if page is not None:
             
             _query_params.append(('page', page))
+            
+        if page_size is not None:
+            
+            _query_params.append(('page_size', page_size))
             
         # process the header parameters
         # process the form parameters
@@ -826,7 +1093,9 @@ class InstallsApi:
         building: Annotated[Optional[StrictInt], Field(description="Filter installs by the Building id foreign key field using strict equality")] = None,
         member: Annotated[Optional[StrictInt], Field(description="Filter installs by the Member id foreign key field using strict equality")] = None,
         network_number: Annotated[Optional[StrictInt], Field(description="Filter installs by network_number using strict equality")] = None,
+        node: Optional[StrictStr] = None,
         page: Annotated[Optional[StrictInt], Field(description="A page number within the paginated result set.")] = None,
+        page_size: Annotated[Optional[StrictInt], Field(description="Number of results to return per page.")] = None,
         status: Annotated[Optional[StrictStr], Field(description="Filter installs by the status field using strict equality")] = None,
         _request_timeout: Union[
             None,
@@ -850,8 +1119,12 @@ class InstallsApi:
         :type member: int
         :param network_number: Filter installs by network_number using strict equality
         :type network_number: int
+        :param node:
+        :type node: str
         :param page: A page number within the paginated result set.
         :type page: int
+        :param page_size: Number of results to return per page.
+        :type page_size: int
         :param status: Filter installs by the status field using strict equality
         :type status: str
         :param _request_timeout: timeout setting for this request. If one
@@ -880,7 +1153,9 @@ class InstallsApi:
             building=building,
             member=member,
             network_number=network_number,
+            node=node,
             page=page,
+            page_size=page_size,
             status=status,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -908,7 +1183,9 @@ class InstallsApi:
         building: Annotated[Optional[StrictInt], Field(description="Filter installs by the Building id foreign key field using strict equality")] = None,
         member: Annotated[Optional[StrictInt], Field(description="Filter installs by the Member id foreign key field using strict equality")] = None,
         network_number: Annotated[Optional[StrictInt], Field(description="Filter installs by network_number using strict equality")] = None,
+        node: Optional[StrictStr] = None,
         page: Annotated[Optional[StrictInt], Field(description="A page number within the paginated result set.")] = None,
+        page_size: Annotated[Optional[StrictInt], Field(description="Number of results to return per page.")] = None,
         status: Annotated[Optional[StrictStr], Field(description="Filter installs by the status field using strict equality")] = None,
         _request_timeout: Union[
             None,
@@ -932,8 +1209,12 @@ class InstallsApi:
         :type member: int
         :param network_number: Filter installs by network_number using strict equality
         :type network_number: int
+        :param node:
+        :type node: str
         :param page: A page number within the paginated result set.
         :type page: int
+        :param page_size: Number of results to return per page.
+        :type page_size: int
         :param status: Filter installs by the status field using strict equality
         :type status: str
         :param _request_timeout: timeout setting for this request. If one
@@ -962,7 +1243,9 @@ class InstallsApi:
             building=building,
             member=member,
             network_number=network_number,
+            node=node,
             page=page,
+            page_size=page_size,
             status=status,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -990,7 +1273,9 @@ class InstallsApi:
         building: Annotated[Optional[StrictInt], Field(description="Filter installs by the Building id foreign key field using strict equality")] = None,
         member: Annotated[Optional[StrictInt], Field(description="Filter installs by the Member id foreign key field using strict equality")] = None,
         network_number: Annotated[Optional[StrictInt], Field(description="Filter installs by network_number using strict equality")] = None,
+        node: Optional[StrictStr] = None,
         page: Annotated[Optional[StrictInt], Field(description="A page number within the paginated result set.")] = None,
+        page_size: Annotated[Optional[StrictInt], Field(description="Number of results to return per page.")] = None,
         status: Annotated[Optional[StrictStr], Field(description="Filter installs by the status field using strict equality")] = None,
         _request_timeout: Union[
             None,
@@ -1014,8 +1299,12 @@ class InstallsApi:
         :type member: int
         :param network_number: Filter installs by network_number using strict equality
         :type network_number: int
+        :param node:
+        :type node: str
         :param page: A page number within the paginated result set.
         :type page: int
+        :param page_size: Number of results to return per page.
+        :type page_size: int
         :param status: Filter installs by the status field using strict equality
         :type status: str
         :param _request_timeout: timeout setting for this request. If one
@@ -1044,7 +1333,9 @@ class InstallsApi:
             building=building,
             member=member,
             network_number=network_number,
+            node=node,
             page=page,
+            page_size=page_size,
             status=status,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -1067,7 +1358,9 @@ class InstallsApi:
         building,
         member,
         network_number,
+        node,
         page,
+        page_size,
         status,
         _request_auth,
         _content_type,
@@ -1101,9 +1394,17 @@ class InstallsApi:
             
             _query_params.append(('network_number', network_number))
             
+        if node is not None:
+            
+            _query_params.append(('node', node))
+            
         if page is not None:
             
             _query_params.append(('page', page))
+            
+        if page_size is not None:
+            
+            _query_params.append(('page_size', page_size))
             
         if status is not None:
             
@@ -1149,7 +1450,7 @@ class InstallsApi:
     @validate_call
     def api_v1_installs_partial_update(
         self,
-        install_number: Annotated[StrictInt, Field(description="A unique integer value identifying this install.")],
+        id: StrictStr,
         patched_install: Optional[PatchedInstall] = None,
         _request_timeout: Union[
             None,
@@ -1167,8 +1468,8 @@ class InstallsApi:
         """api_v1_installs_partial_update
 
 
-        :param install_number: A unique integer value identifying this install. (required)
-        :type install_number: int
+        :param id: (required)
+        :type id: str
         :param patched_install:
         :type patched_install: PatchedInstall
         :param _request_timeout: timeout setting for this request. If one
@@ -1194,7 +1495,7 @@ class InstallsApi:
         """ # noqa: E501
 
         _param = self._api_v1_installs_partial_update_serialize(
-            install_number=install_number,
+            id=id,
             patched_install=patched_install,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -1219,7 +1520,7 @@ class InstallsApi:
     @validate_call
     def api_v1_installs_partial_update_with_http_info(
         self,
-        install_number: Annotated[StrictInt, Field(description="A unique integer value identifying this install.")],
+        id: StrictStr,
         patched_install: Optional[PatchedInstall] = None,
         _request_timeout: Union[
             None,
@@ -1237,8 +1538,8 @@ class InstallsApi:
         """api_v1_installs_partial_update
 
 
-        :param install_number: A unique integer value identifying this install. (required)
-        :type install_number: int
+        :param id: (required)
+        :type id: str
         :param patched_install:
         :type patched_install: PatchedInstall
         :param _request_timeout: timeout setting for this request. If one
@@ -1264,7 +1565,7 @@ class InstallsApi:
         """ # noqa: E501
 
         _param = self._api_v1_installs_partial_update_serialize(
-            install_number=install_number,
+            id=id,
             patched_install=patched_install,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -1289,7 +1590,7 @@ class InstallsApi:
     @validate_call
     def api_v1_installs_partial_update_without_preload_content(
         self,
-        install_number: Annotated[StrictInt, Field(description="A unique integer value identifying this install.")],
+        id: StrictStr,
         patched_install: Optional[PatchedInstall] = None,
         _request_timeout: Union[
             None,
@@ -1307,8 +1608,8 @@ class InstallsApi:
         """api_v1_installs_partial_update
 
 
-        :param install_number: A unique integer value identifying this install. (required)
-        :type install_number: int
+        :param id: (required)
+        :type id: str
         :param patched_install:
         :type patched_install: PatchedInstall
         :param _request_timeout: timeout setting for this request. If one
@@ -1334,7 +1635,7 @@ class InstallsApi:
         """ # noqa: E501
 
         _param = self._api_v1_installs_partial_update_serialize(
-            install_number=install_number,
+            id=id,
             patched_install=patched_install,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -1353,6 +1654,292 @@ class InstallsApi:
 
 
     def _api_v1_installs_partial_update_serialize(
+        self,
+        id,
+        patched_install,
+        _request_auth,
+        _content_type,
+        _headers,
+        _host_index,
+    ) -> RequestSerialized:
+
+        _host = None
+
+        _collection_formats: Dict[str, str] = {
+        }
+
+        _path_params: Dict[str, str] = {}
+        _query_params: List[Tuple[str, str]] = []
+        _header_params: Dict[str, Optional[str]] = _headers or {}
+        _form_params: List[Tuple[str, str]] = []
+        _files: Dict[str, Union[str, bytes]] = {}
+        _body_params: Optional[bytes] = None
+
+        # process the path parameters
+        if id is not None:
+            _path_params['id'] = id
+        # process the query parameters
+        # process the header parameters
+        # process the form parameters
+        # process the body parameter
+        if patched_install is not None:
+            _body_params = patched_install
+
+
+        # set the HTTP header `Accept`
+        _header_params['Accept'] = self.api_client.select_header_accept(
+            [
+                'application/json'
+            ]
+        )
+
+        # set the HTTP header `Content-Type`
+        if _content_type:
+            _header_params['Content-Type'] = _content_type
+        else:
+            _default_content_type = (
+                self.api_client.select_header_content_type(
+                    [
+                        'application/json', 
+                        'application/x-www-form-urlencoded', 
+                        'multipart/form-data'
+                    ]
+                )
+            )
+            if _default_content_type is not None:
+                _header_params['Content-Type'] = _default_content_type
+
+        # authentication setting
+        _auth_settings: List[str] = [
+            'tokenAuth', 
+            'Session ID'
+        ]
+
+        return self.api_client.param_serialize(
+            method='PATCH',
+            resource_path='/api/v1/installs/{id}/',
+            path_params=_path_params,
+            query_params=_query_params,
+            header_params=_header_params,
+            body=_body_params,
+            post_params=_form_params,
+            files=_files,
+            auth_settings=_auth_settings,
+            collection_formats=_collection_formats,
+            _host=_host,
+            _request_auth=_request_auth
+        )
+
+
+
+
+    @validate_call
+    def api_v1_installs_partial_update2(
+        self,
+        install_number: StrictInt,
+        patched_install: Optional[PatchedInstall] = None,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> Install:
+        """api_v1_installs_partial_update2
+
+
+        :param install_number: (required)
+        :type install_number: int
+        :param patched_install:
+        :type patched_install: PatchedInstall
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._api_v1_installs_partial_update2_serialize(
+            install_number=install_number,
+            patched_install=patched_install,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "Install",
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        response_data.read()
+        return self.api_client.response_deserialize(
+            response_data=response_data,
+            response_types_map=_response_types_map,
+        ).data
+
+
+    @validate_call
+    def api_v1_installs_partial_update2_with_http_info(
+        self,
+        install_number: StrictInt,
+        patched_install: Optional[PatchedInstall] = None,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> ApiResponse[Install]:
+        """api_v1_installs_partial_update2
+
+
+        :param install_number: (required)
+        :type install_number: int
+        :param patched_install:
+        :type patched_install: PatchedInstall
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._api_v1_installs_partial_update2_serialize(
+            install_number=install_number,
+            patched_install=patched_install,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "Install",
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        response_data.read()
+        return self.api_client.response_deserialize(
+            response_data=response_data,
+            response_types_map=_response_types_map,
+        )
+
+
+    @validate_call
+    def api_v1_installs_partial_update2_without_preload_content(
+        self,
+        install_number: StrictInt,
+        patched_install: Optional[PatchedInstall] = None,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> RESTResponseType:
+        """api_v1_installs_partial_update2
+
+
+        :param install_number: (required)
+        :type install_number: int
+        :param patched_install:
+        :type patched_install: PatchedInstall
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._api_v1_installs_partial_update2_serialize(
+            install_number=install_number,
+            patched_install=patched_install,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "Install",
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        return response_data.response
+
+
+    def _api_v1_installs_partial_update2_serialize(
         self,
         install_number,
         patched_install,
@@ -1435,7 +2022,7 @@ class InstallsApi:
     @validate_call
     def api_v1_installs_retrieve(
         self,
-        install_number: Annotated[StrictInt, Field(description="A unique integer value identifying this install.")],
+        id: StrictStr,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1452,8 +2039,8 @@ class InstallsApi:
         """api_v1_installs_retrieve
 
 
-        :param install_number: A unique integer value identifying this install. (required)
-        :type install_number: int
+        :param id: (required)
+        :type id: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -1477,7 +2064,7 @@ class InstallsApi:
         """ # noqa: E501
 
         _param = self._api_v1_installs_retrieve_serialize(
-            install_number=install_number,
+            id=id,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -1501,7 +2088,7 @@ class InstallsApi:
     @validate_call
     def api_v1_installs_retrieve_with_http_info(
         self,
-        install_number: Annotated[StrictInt, Field(description="A unique integer value identifying this install.")],
+        id: StrictStr,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1518,8 +2105,8 @@ class InstallsApi:
         """api_v1_installs_retrieve
 
 
-        :param install_number: A unique integer value identifying this install. (required)
-        :type install_number: int
+        :param id: (required)
+        :type id: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -1543,7 +2130,7 @@ class InstallsApi:
         """ # noqa: E501
 
         _param = self._api_v1_installs_retrieve_serialize(
-            install_number=install_number,
+            id=id,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -1567,7 +2154,7 @@ class InstallsApi:
     @validate_call
     def api_v1_installs_retrieve_without_preload_content(
         self,
-        install_number: Annotated[StrictInt, Field(description="A unique integer value identifying this install.")],
+        id: StrictStr,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1584,8 +2171,8 @@ class InstallsApi:
         """api_v1_installs_retrieve
 
 
-        :param install_number: A unique integer value identifying this install. (required)
-        :type install_number: int
+        :param id: (required)
+        :type id: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -1609,7 +2196,7 @@ class InstallsApi:
         """ # noqa: E501
 
         _param = self._api_v1_installs_retrieve_serialize(
-            install_number=install_number,
+            id=id,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -1627,6 +2214,262 @@ class InstallsApi:
 
 
     def _api_v1_installs_retrieve_serialize(
+        self,
+        id,
+        _request_auth,
+        _content_type,
+        _headers,
+        _host_index,
+    ) -> RequestSerialized:
+
+        _host = None
+
+        _collection_formats: Dict[str, str] = {
+        }
+
+        _path_params: Dict[str, str] = {}
+        _query_params: List[Tuple[str, str]] = []
+        _header_params: Dict[str, Optional[str]] = _headers or {}
+        _form_params: List[Tuple[str, str]] = []
+        _files: Dict[str, Union[str, bytes]] = {}
+        _body_params: Optional[bytes] = None
+
+        # process the path parameters
+        if id is not None:
+            _path_params['id'] = id
+        # process the query parameters
+        # process the header parameters
+        # process the form parameters
+        # process the body parameter
+
+
+        # set the HTTP header `Accept`
+        _header_params['Accept'] = self.api_client.select_header_accept(
+            [
+                'application/json'
+            ]
+        )
+
+
+        # authentication setting
+        _auth_settings: List[str] = [
+            'tokenAuth', 
+            'Session ID'
+        ]
+
+        return self.api_client.param_serialize(
+            method='GET',
+            resource_path='/api/v1/installs/{id}/',
+            path_params=_path_params,
+            query_params=_query_params,
+            header_params=_header_params,
+            body=_body_params,
+            post_params=_form_params,
+            files=_files,
+            auth_settings=_auth_settings,
+            collection_formats=_collection_formats,
+            _host=_host,
+            _request_auth=_request_auth
+        )
+
+
+
+
+    @validate_call
+    def api_v1_installs_retrieve2(
+        self,
+        install_number: StrictInt,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> Install:
+        """api_v1_installs_retrieve2
+
+
+        :param install_number: (required)
+        :type install_number: int
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._api_v1_installs_retrieve2_serialize(
+            install_number=install_number,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "Install",
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        response_data.read()
+        return self.api_client.response_deserialize(
+            response_data=response_data,
+            response_types_map=_response_types_map,
+        ).data
+
+
+    @validate_call
+    def api_v1_installs_retrieve2_with_http_info(
+        self,
+        install_number: StrictInt,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> ApiResponse[Install]:
+        """api_v1_installs_retrieve2
+
+
+        :param install_number: (required)
+        :type install_number: int
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._api_v1_installs_retrieve2_serialize(
+            install_number=install_number,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "Install",
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        response_data.read()
+        return self.api_client.response_deserialize(
+            response_data=response_data,
+            response_types_map=_response_types_map,
+        )
+
+
+    @validate_call
+    def api_v1_installs_retrieve2_without_preload_content(
+        self,
+        install_number: StrictInt,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> RESTResponseType:
+        """api_v1_installs_retrieve2
+
+
+        :param install_number: (required)
+        :type install_number: int
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._api_v1_installs_retrieve2_serialize(
+            install_number=install_number,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "Install",
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        return response_data.response
+
+
+    def _api_v1_installs_retrieve2_serialize(
         self,
         install_number,
         _request_auth,
@@ -1691,7 +2534,7 @@ class InstallsApi:
     @validate_call
     def api_v1_installs_update(
         self,
-        install_number: Annotated[StrictInt, Field(description="A unique integer value identifying this install.")],
+        id: StrictStr,
         install: Install,
         _request_timeout: Union[
             None,
@@ -1709,8 +2552,8 @@ class InstallsApi:
         """api_v1_installs_update
 
 
-        :param install_number: A unique integer value identifying this install. (required)
-        :type install_number: int
+        :param id: (required)
+        :type id: str
         :param install: (required)
         :type install: Install
         :param _request_timeout: timeout setting for this request. If one
@@ -1736,7 +2579,7 @@ class InstallsApi:
         """ # noqa: E501
 
         _param = self._api_v1_installs_update_serialize(
-            install_number=install_number,
+            id=id,
             install=install,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -1761,7 +2604,7 @@ class InstallsApi:
     @validate_call
     def api_v1_installs_update_with_http_info(
         self,
-        install_number: Annotated[StrictInt, Field(description="A unique integer value identifying this install.")],
+        id: StrictStr,
         install: Install,
         _request_timeout: Union[
             None,
@@ -1779,8 +2622,8 @@ class InstallsApi:
         """api_v1_installs_update
 
 
-        :param install_number: A unique integer value identifying this install. (required)
-        :type install_number: int
+        :param id: (required)
+        :type id: str
         :param install: (required)
         :type install: Install
         :param _request_timeout: timeout setting for this request. If one
@@ -1806,7 +2649,7 @@ class InstallsApi:
         """ # noqa: E501
 
         _param = self._api_v1_installs_update_serialize(
-            install_number=install_number,
+            id=id,
             install=install,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -1831,7 +2674,7 @@ class InstallsApi:
     @validate_call
     def api_v1_installs_update_without_preload_content(
         self,
-        install_number: Annotated[StrictInt, Field(description="A unique integer value identifying this install.")],
+        id: StrictStr,
         install: Install,
         _request_timeout: Union[
             None,
@@ -1849,8 +2692,8 @@ class InstallsApi:
         """api_v1_installs_update
 
 
-        :param install_number: A unique integer value identifying this install. (required)
-        :type install_number: int
+        :param id: (required)
+        :type id: str
         :param install: (required)
         :type install: Install
         :param _request_timeout: timeout setting for this request. If one
@@ -1876,7 +2719,7 @@ class InstallsApi:
         """ # noqa: E501
 
         _param = self._api_v1_installs_update_serialize(
-            install_number=install_number,
+            id=id,
             install=install,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -1895,6 +2738,292 @@ class InstallsApi:
 
 
     def _api_v1_installs_update_serialize(
+        self,
+        id,
+        install,
+        _request_auth,
+        _content_type,
+        _headers,
+        _host_index,
+    ) -> RequestSerialized:
+
+        _host = None
+
+        _collection_formats: Dict[str, str] = {
+        }
+
+        _path_params: Dict[str, str] = {}
+        _query_params: List[Tuple[str, str]] = []
+        _header_params: Dict[str, Optional[str]] = _headers or {}
+        _form_params: List[Tuple[str, str]] = []
+        _files: Dict[str, Union[str, bytes]] = {}
+        _body_params: Optional[bytes] = None
+
+        # process the path parameters
+        if id is not None:
+            _path_params['id'] = id
+        # process the query parameters
+        # process the header parameters
+        # process the form parameters
+        # process the body parameter
+        if install is not None:
+            _body_params = install
+
+
+        # set the HTTP header `Accept`
+        _header_params['Accept'] = self.api_client.select_header_accept(
+            [
+                'application/json'
+            ]
+        )
+
+        # set the HTTP header `Content-Type`
+        if _content_type:
+            _header_params['Content-Type'] = _content_type
+        else:
+            _default_content_type = (
+                self.api_client.select_header_content_type(
+                    [
+                        'application/json', 
+                        'application/x-www-form-urlencoded', 
+                        'multipart/form-data'
+                    ]
+                )
+            )
+            if _default_content_type is not None:
+                _header_params['Content-Type'] = _default_content_type
+
+        # authentication setting
+        _auth_settings: List[str] = [
+            'tokenAuth', 
+            'Session ID'
+        ]
+
+        return self.api_client.param_serialize(
+            method='PUT',
+            resource_path='/api/v1/installs/{id}/',
+            path_params=_path_params,
+            query_params=_query_params,
+            header_params=_header_params,
+            body=_body_params,
+            post_params=_form_params,
+            files=_files,
+            auth_settings=_auth_settings,
+            collection_formats=_collection_formats,
+            _host=_host,
+            _request_auth=_request_auth
+        )
+
+
+
+
+    @validate_call
+    def api_v1_installs_update2(
+        self,
+        install_number: StrictInt,
+        install: Install,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> Install:
+        """api_v1_installs_update2
+
+
+        :param install_number: (required)
+        :type install_number: int
+        :param install: (required)
+        :type install: Install
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._api_v1_installs_update2_serialize(
+            install_number=install_number,
+            install=install,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "Install",
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        response_data.read()
+        return self.api_client.response_deserialize(
+            response_data=response_data,
+            response_types_map=_response_types_map,
+        ).data
+
+
+    @validate_call
+    def api_v1_installs_update2_with_http_info(
+        self,
+        install_number: StrictInt,
+        install: Install,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> ApiResponse[Install]:
+        """api_v1_installs_update2
+
+
+        :param install_number: (required)
+        :type install_number: int
+        :param install: (required)
+        :type install: Install
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._api_v1_installs_update2_serialize(
+            install_number=install_number,
+            install=install,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "Install",
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        response_data.read()
+        return self.api_client.response_deserialize(
+            response_data=response_data,
+            response_types_map=_response_types_map,
+        )
+
+
+    @validate_call
+    def api_v1_installs_update2_without_preload_content(
+        self,
+        install_number: StrictInt,
+        install: Install,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> RESTResponseType:
+        """api_v1_installs_update2
+
+
+        :param install_number: (required)
+        :type install_number: int
+        :param install: (required)
+        :type install: Install
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._api_v1_installs_update2_serialize(
+            install_number=install_number,
+            install=install,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "Install",
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        return response_data.response
+
+
+    def _api_v1_installs_update2_serialize(
         self,
         install_number,
         install,

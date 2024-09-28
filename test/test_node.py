@@ -35,13 +35,21 @@ class TestNode(unittest.TestCase):
         model = Node()
         if include_optional:
             return Node(
-                network_number = 56,
+                id = '',
                 buildings = [
-                    56
+                    pymeshdb.models.node_buildings_inner.Node_buildings_inner(
+                        id = '', )
                     ],
                 devices = [
-                    56
+                    pymeshdb.models.node_devices_inner.Node_devices_inner(
+                        id = '', )
                     ],
+                installs = [
+                    pymeshdb.models.building_installs_inner.Building_installs_inner(
+                        id = '', 
+                        install_number = 56, )
+                    ],
+                network_number = -2147483648,
                 name = '',
                 status = 'Inactive',
                 type = 'Standard',
@@ -54,12 +62,18 @@ class TestNode(unittest.TestCase):
             )
         else:
             return Node(
-                network_number = 56,
                 buildings = [
-                    56
+                    pymeshdb.models.node_buildings_inner.Node_buildings_inner(
+                        id = '', )
                     ],
                 devices = [
-                    56
+                    pymeshdb.models.node_devices_inner.Node_devices_inner(
+                        id = '', )
+                    ],
+                installs = [
+                    pymeshdb.models.building_installs_inner.Building_installs_inner(
+                        id = '', 
+                        install_number = 56, )
                     ],
                 status = 'Inactive',
                 latitude = 1.337,

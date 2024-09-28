@@ -36,16 +36,18 @@ class TestJoinFormSuccessResponse(unittest.TestCase):
         if include_optional:
             return JoinFormSuccessResponse(
                 detail = '',
-                building_id = 56,
-                member_id = 56,
+                building_id = '',
+                member_id = '',
+                install_id = '',
                 install_number = 56,
                 member_exists = True
             )
         else:
             return JoinFormSuccessResponse(
                 detail = '',
-                building_id = 56,
-                member_id = 56,
+                building_id = '',
+                member_id = '',
+                install_id = '',
                 install_number = 56,
                 member_exists = True,
         )

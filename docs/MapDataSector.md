@@ -10,7 +10,6 @@ Name | Type | Description | Notes
 **azimuth** | **int** | The compass heading that this sector is pointed towards | 
 **width** | **int** | The approximate width of the beam this sector produces | 
 **status** | **str** |  | [readonly] 
-**device** | **str** |  | 
 **install_date** | **int** |  | 
 
 ## Example

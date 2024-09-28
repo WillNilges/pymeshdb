@@ -18,8 +18,9 @@ import re  # noqa: F401
 import json
 
 from datetime import date
-from pydantic import BaseModel, ConfigDict, Field, StrictInt, StrictStr
+from pydantic import BaseModel, ConfigDict, Field, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
+from pymeshdb.models.link_from_device import LinkFromDevice
 from pymeshdb.models.link_status_enum import LinkStatusEnum
 from pymeshdb.models.link_type import LinkType
 from typing import Optional, Set
@@ -27,9 +28,9 @@ from typing_extensions import Self
 
 class Link(BaseModel):
     """
-    Link
+    A  ModelSerializer MixIn which sets `NestedKeyObjectRelatedField` as the default field class to use for the foreign key fields
     """ # noqa: E501
-    id: StrictInt
+    id: StrictStr
     status: LinkStatusEnum = Field(description="The current status of this link  * `Inactive` - Inactive * `Planned` - Planned * `Active` - Active")
     type: Optional[LinkType] = None
     install_date: Optional[date] = Field(default=None, description="The date this link was created")
@@ -37,8 +38,8 @@ class Link(BaseModel):
     description: Optional[StrictStr] = Field(default=None, description="A short description of \"where to where\" this link connects in human readable language")
     notes: Optional[StrictStr] = Field(default=None, description="A free-form text description of this Link, to track any additional information.")
     uisp_id: Optional[StrictStr] = Field(default=None, description="The UUID used to indentify this link in UISP (if applicable)")
-    from_device: StrictInt = Field(description="The device on one side of this network link, from/to are not meaningful except to disambiguate")
-    to_device: StrictInt = Field(description="The device on one side of this network link, from/to are not meaningful except to disambiguate")
+    from_device: LinkFromDevice
+    to_device: LinkFromDevice
     __properties: ClassVar[List[str]] = ["id", "status", "type", "install_date", "abandon_date", "description", "notes", "uisp_id", "from_device", "to_device"]
 
     model_config = ConfigDict(
@@ -85,6 +86,12 @@ class Link(BaseModel):
         # override the default output from pydantic by calling `to_dict()` of type
         if self.type:
             _dict['type'] = self.type.to_dict()
+        # override the default output from pydantic by calling `to_dict()` of from_device
+        if self.from_device:
+            _dict['from_device'] = self.from_device.to_dict()
+        # override the default output from pydantic by calling `to_dict()` of to_device
+        if self.to_device:
+            _dict['to_device'] = self.to_device.to_dict()
         # set to None if type (nullable) is None
         # and model_fields_set contains the field
         if self.type is None and "type" in self.model_fields_set:
@@ -135,8 +142,8 @@ class Link(BaseModel):
             "description": obj.get("description"),
             "notes": obj.get("notes"),
             "uisp_id": obj.get("uisp_id"),
-            "from_device": obj.get("from_device"),
-            "to_device": obj.get("to_device")
+            "from_device": LinkFromDevice.from_dict(obj["from_device"]) if obj.get("from_device") is not None else None,
+            "to_device": LinkFromDevice.from_dict(obj["to_device"]) if obj.get("to_device") is not None else None
         })
         return _obj
 

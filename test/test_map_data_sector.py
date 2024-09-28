@@ -40,7 +40,6 @@ class TestMapDataSector(unittest.TestCase):
                 azimuth = 0,
                 width = 0,
                 status = '',
-                device = '',
                 install_date = 56
             )
         else:
@@ -50,7 +49,6 @@ class TestMapDataSector(unittest.TestCase):
                 azimuth = 0,
                 width = 0,
                 status = '',
-                device = '',
                 install_date = 56,
         )
         """

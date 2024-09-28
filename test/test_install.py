@@ -35,10 +35,10 @@ class TestInstall(unittest.TestCase):
         model = Install()
         if include_optional:
             return Install(
+                id = '',
                 install_number = 56,
-                network_number = -2147483648,
                 status = 'Request Received',
-                ticket_id = -2147483648,
+                ticket_number = '',
                 request_date = datetime.datetime.strptime('1975-12-30', '%Y-%m-%d').date(),
                 install_date = datetime.datetime.strptime('1975-12-30', '%Y-%m-%d').date(),
                 abandon_date = datetime.datetime.strptime('1975-12-30', '%Y-%m-%d').date(),
@@ -47,16 +47,24 @@ class TestInstall(unittest.TestCase):
                 referral = '',
                 notes = '',
                 diy = True,
-                building = 56,
-                member = 56
+                node = pymeshdb.models.install_node.Install_node(
+                    id = '', 
+                    network_number = -2147483648, ),
+                building = pymeshdb.models.install_building.Install_building(
+                    id = '', ),
+                member = pymeshdb.models.install_member.Install_member(
+                    id = '', )
             )
         else:
             return Install(
+                id = '',
                 install_number = 56,
                 status = 'Request Received',
                 request_date = datetime.datetime.strptime('1975-12-30', '%Y-%m-%d').date(),
-                building = 56,
-                member = 56,
+                building = pymeshdb.models.install_building.Install_building(
+                    id = '', ),
+                member = pymeshdb.models.install_member.Install_member(
+                    id = '', ),
         )
         """
 

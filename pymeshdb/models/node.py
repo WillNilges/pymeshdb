@@ -20,28 +20,34 @@ import json
 from datetime import date
 from pydantic import BaseModel, ConfigDict, Field, StrictFloat, StrictInt, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional, Union
-from pymeshdb.models.node_status_enum import NodeStatusEnum
-from pymeshdb.models.node_type_enum import NodeTypeEnum
+from typing_extensions import Annotated
+from pymeshdb.models.building_installs_inner import BuildingInstallsInner
+from pymeshdb.models.node_buildings_inner import NodeBuildingsInner
+from pymeshdb.models.node_devices_inner import NodeDevicesInner
+from pymeshdb.models.status2a6_enum import Status2a6Enum
+from pymeshdb.models.type_b10_enum import TypeB10Enum
 from typing import Optional, Set
 from typing_extensions import Self
 
 class Node(BaseModel):
     """
-    Node
+    A  ModelSerializer MixIn which sets `NestedKeyObjectRelatedField` as the default field class to use for the foreign key fields
     """ # noqa: E501
-    network_number: StrictInt
-    buildings: List[StrictInt]
-    devices: List[StrictInt]
+    id: Optional[StrictStr] = None
+    buildings: List[NodeBuildingsInner]
+    devices: List[NodeDevicesInner]
+    installs: List[BuildingInstallsInner]
+    network_number: Optional[Annotated[int, Field(le=8192, strict=True, ge=-2147483648)]] = None
     name: Optional[StrictStr] = Field(default=None, description="The colloquial name of this node used among mesh volunteers, if applicable")
-    status: NodeStatusEnum = Field(description="The current status of this Node  * `Inactive` - Inactive * `Active` - Active * `Planned` - Planned")
-    type: Optional[NodeTypeEnum] = Field(default=None, description="The type of node this is, controls the icon used on the network map  * `Standard` - Standard * `Hub` - Hub * `Supernode` - Supernode * `POP` - Pop * `AP` - Ap * `Remote` - Remote")
+    status: Status2a6Enum = Field(description="The current status of this Node  * `Inactive` - Inactive * `Active` - Active * `Planned` - Planned")
+    type: Optional[TypeB10Enum] = Field(default=None, description="The type of node this is, controls the icon used on the network map  * `Standard` - Standard * `Hub` - Hub * `Supernode` - Supernode * `POP` - Pop * `AP` - Ap * `Remote` - Remote")
     latitude: Union[StrictFloat, StrictInt] = Field(description="Approximate Node latitude in decimal degrees (this will match one of the attached Building objects in most cases, but has been manually moved around in some cases to more accurately reflect node location)")
     longitude: Union[StrictFloat, StrictInt] = Field(description="Approximate Node longitude in decimal degrees (this will match one of the attached Building objects in most cases, but has been manually moved around in some cases to more accurately reflect node location)")
     altitude: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="Approximate Node altitude in \"absolute\" meters above mean sea level (this will match one of the attached Building objects in most cases, but has been manually moved around in some cases to more accurately reflect node location)")
     install_date: Optional[date] = Field(default=None, description="The date the first Install or Device associated with this Node became active on the mesh")
     abandon_date: Optional[date] = Field(default=None, description="The date the last Install or Device associated with this Node was abandoned, unplugged, or removed from service")
     notes: Optional[StrictStr] = Field(default=None, description="A free-form text description of this Node, to track any additional information. For Nodes imported from the spreadsheet, this starts with a formatted block of information about the import process and original spreadsheet data. However this structure can be changed by admins at any time and should not be relied on by automated systems. ")
-    __properties: ClassVar[List[str]] = ["network_number", "buildings", "devices", "name", "status", "type", "latitude", "longitude", "altitude", "install_date", "abandon_date", "notes"]
+    __properties: ClassVar[List[str]] = ["id", "buildings", "devices", "installs", "network_number", "name", "status", "type", "latitude", "longitude", "altitude", "install_date", "abandon_date", "notes"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -78,9 +84,9 @@ class Node(BaseModel):
         * OpenAPI `readOnly` fields are excluded.
         """
         excluded_fields: Set[str] = set([
-            "network_number",
             "buildings",
             "devices",
+            "installs",
         ])
 
         _dict = self.model_dump(
@@ -88,6 +94,32 @@ class Node(BaseModel):
             exclude=excluded_fields,
             exclude_none=True,
         )
+        # override the default output from pydantic by calling `to_dict()` of each item in buildings (list)
+        _items = []
+        if self.buildings:
+            for _item in self.buildings:
+                if _item:
+                    _items.append(_item.to_dict())
+            _dict['buildings'] = _items
+        # override the default output from pydantic by calling `to_dict()` of each item in devices (list)
+        _items = []
+        if self.devices:
+            for _item in self.devices:
+                if _item:
+                    _items.append(_item.to_dict())
+            _dict['devices'] = _items
+        # override the default output from pydantic by calling `to_dict()` of each item in installs (list)
+        _items = []
+        if self.installs:
+            for _item in self.installs:
+                if _item:
+                    _items.append(_item.to_dict())
+            _dict['installs'] = _items
+        # set to None if network_number (nullable) is None
+        # and model_fields_set contains the field
+        if self.network_number is None and "network_number" in self.model_fields_set:
+            _dict['network_number'] = None
+
         # set to None if name (nullable) is None
         # and model_fields_set contains the field
         if self.name is None and "name" in self.model_fields_set:
@@ -125,9 +157,11 @@ class Node(BaseModel):
             return cls.model_validate(obj)
 
         _obj = cls.model_validate({
+            "id": obj.get("id"),
+            "buildings": [NodeBuildingsInner.from_dict(_item) for _item in obj["buildings"]] if obj.get("buildings") is not None else None,
+            "devices": [NodeDevicesInner.from_dict(_item) for _item in obj["devices"]] if obj.get("devices") is not None else None,
+            "installs": [BuildingInstallsInner.from_dict(_item) for _item in obj["installs"]] if obj.get("installs") is not None else None,
             "network_number": obj.get("network_number"),
-            "buildings": obj.get("buildings"),
-            "devices": obj.get("devices"),
             "name": obj.get("name"),
             "status": obj.get("status"),
             "type": obj.get("type"),

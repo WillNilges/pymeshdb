@@ -21,36 +21,33 @@ from datetime import date
 from pydantic import BaseModel, ConfigDict, Field, StrictFloat, StrictInt, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional, Union
 from typing_extensions import Annotated
+from pymeshdb.models.access_point_links_from_inner import AccessPointLinksFromInner
+from pymeshdb.models.access_point_node import AccessPointNode
 from pymeshdb.models.status432_enum import Status432Enum
-from pymeshdb.models.type75b_enum import Type75bEnum
 from typing import Optional, Set
 from typing_extensions import Self
 
 class PatchedSector(BaseModel):
     """
-    PatchedSector
+    A  ModelSerializer MixIn which sets `NestedKeyObjectRelatedField` as the default field class to use for the foreign key fields
     """ # noqa: E501
-    id: Optional[StrictInt] = None
-    network_number: Optional[Annotated[int, Field(le=8192, strict=True, ge=-2147483648)]] = None
-    links_from: Optional[List[StrictInt]] = None
-    links_to: Optional[List[StrictInt]] = None
-    name: Optional[StrictStr] = Field(default=None, description="The colloquial name of this node used among mesh volunteers, if applicable")
-    model: Optional[StrictStr] = Field(default=None, description="The manufacturer model name of this device, e.g. OmniTik or LBEGen2")
-    type: Optional[Type75bEnum] = Field(default=None, description="The general type of device that this is, the role it fills on the mesh. e.g. ap, ptp, station, etc. This lines up with the UISP 'role' property  * `ap` - Ap * `gateway` - Gateway * `gpon` - Gpon * `convertor` - Convertor * `other` - Other * `ptp` - Ptp * `router` - Router * `server` - Server * `station` - Station * `switch` - Switch * `ups` - Ups * `wireless` - Wireless * `homeWiFi` - Homewifi * `wirelessDevice` - Wirelessdevice")
+    id: Optional[StrictStr] = None
+    latitude: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="Approximate Device latitude in decimal degrees (this is read through from the attached Node object, not stored separately)")
+    longitude: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="Approximate Device longitude in decimal degrees (this is read through from the attached Node object, not stored separately)")
+    altitude: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="Approximate Device altitude in \"absolute\" meters above mean sea level (this is read through from the attached Node object, not stored separately)")
+    links_from: Optional[List[AccessPointLinksFromInner]] = None
+    links_to: Optional[List[AccessPointLinksFromInner]] = None
+    name: Optional[StrictStr] = Field(default=None, description="The name of this device, usually configured as the hostname in the device firmware, usually in the format nycmesh-xxxx-yyyy-zzzz, where xxxx is the network number for the node this device is located at, yyyy is the type of the device, and zzzz is the network number of the other side of the link this device creates (if applicable)")
     status: Optional[Status432Enum] = Field(default=None, description="The current status of this device  * `Inactive` - Inactive * `Active` - Active * `Potential` - Potential")
-    latitude: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="Approximate Device latitude in decimal degrees (this will match the attached Node object in most cases, but has been manually moved around in some cases to more accurately reflect the device location)")
-    longitude: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="Approximate Device longitude in decimal degrees (this will match the attached Node object in most cases, but has been manually moved around in some cases to more accurately reflect the device location)")
-    altitude: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="Approximate Device altitude in \"absolute\" meters above mean sea level (this will match the attached Node object in most cases, but has been manually moved around in some cases to more accurately reflect the device location)")
     install_date: Optional[date] = Field(default=None, description="The date this device first became active on the mesh")
     abandon_date: Optional[date] = Field(default=None, description="The this device was abandoned, unplugged, or removed from service")
     notes: Optional[StrictStr] = Field(default=None, description="A free-form text description of this Device, to track any additional information. For imported Devices, this starts with a formatted block of information about the import processand original data. However this structure can be changed by admins at any time and should not be relied onby automated systems. ")
     uisp_id: Optional[StrictStr] = Field(default=None, description="The UUID used to indentify this device in UISP (if applicable)")
-    ssid: Optional[StrictStr] = Field(default=None, description="The SSID being broadcast by this device")
-    ip_address: Optional[StrictStr] = Field(default=None, description="The IP address of this device within the 10.x network")
     radius: Optional[Union[Annotated[float, Field(strict=True, ge=0)], Annotated[int, Field(strict=True, ge=0)]]] = Field(default=None, description="The radius to display this sector on the map (in km)")
     azimuth: Optional[Annotated[int, Field(le=360, strict=True, ge=0)]] = Field(default=None, description="The compass heading that this sector is pointed towards")
     width: Optional[Annotated[int, Field(le=360, strict=True, ge=0)]] = Field(default=None, description="The approximate width of the beam this sector produces")
-    __properties: ClassVar[List[str]] = ["id", "network_number", "links_from", "links_to", "name", "model", "type", "status", "latitude", "longitude", "altitude", "install_date", "abandon_date", "notes", "uisp_id", "ssid", "ip_address", "radius", "azimuth", "width"]
+    node: Optional[AccessPointNode] = None
+    __properties: ClassVar[List[str]] = ["id", "latitude", "longitude", "altitude", "links_from", "links_to", "name", "status", "install_date", "abandon_date", "notes", "uisp_id", "radius", "azimuth", "width", "node"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -85,9 +82,15 @@ class PatchedSector(BaseModel):
         * OpenAPI `readOnly` fields are excluded.
         * OpenAPI `readOnly` fields are excluded.
         * OpenAPI `readOnly` fields are excluded.
+        * OpenAPI `readOnly` fields are excluded.
+        * OpenAPI `readOnly` fields are excluded.
+        * OpenAPI `readOnly` fields are excluded.
         """
         excluded_fields: Set[str] = set([
             "id",
+            "latitude",
+            "longitude",
+            "altitude",
             "links_from",
             "links_to",
         ])
@@ -97,15 +100,27 @@ class PatchedSector(BaseModel):
             exclude=excluded_fields,
             exclude_none=True,
         )
+        # override the default output from pydantic by calling `to_dict()` of each item in links_from (list)
+        _items = []
+        if self.links_from:
+            for _item in self.links_from:
+                if _item:
+                    _items.append(_item.to_dict())
+            _dict['links_from'] = _items
+        # override the default output from pydantic by calling `to_dict()` of each item in links_to (list)
+        _items = []
+        if self.links_to:
+            for _item in self.links_to:
+                if _item:
+                    _items.append(_item.to_dict())
+            _dict['links_to'] = _items
+        # override the default output from pydantic by calling `to_dict()` of node
+        if self.node:
+            _dict['node'] = self.node.to_dict()
         # set to None if name (nullable) is None
         # and model_fields_set contains the field
         if self.name is None and "name" in self.model_fields_set:
             _dict['name'] = None
-
-        # set to None if altitude (nullable) is None
-        # and model_fields_set contains the field
-        if self.altitude is None and "altitude" in self.model_fields_set:
-            _dict['altitude'] = None
 
         # set to None if install_date (nullable) is None
         # and model_fields_set contains the field
@@ -127,16 +142,6 @@ class PatchedSector(BaseModel):
         if self.uisp_id is None and "uisp_id" in self.model_fields_set:
             _dict['uisp_id'] = None
 
-        # set to None if ssid (nullable) is None
-        # and model_fields_set contains the field
-        if self.ssid is None and "ssid" in self.model_fields_set:
-            _dict['ssid'] = None
-
-        # set to None if ip_address (nullable) is None
-        # and model_fields_set contains the field
-        if self.ip_address is None and "ip_address" in self.model_fields_set:
-            _dict['ip_address'] = None
-
         return _dict
 
     @classmethod
@@ -150,25 +155,21 @@ class PatchedSector(BaseModel):
 
         _obj = cls.model_validate({
             "id": obj.get("id"),
-            "network_number": obj.get("network_number"),
-            "links_from": obj.get("links_from"),
-            "links_to": obj.get("links_to"),
-            "name": obj.get("name"),
-            "model": obj.get("model"),
-            "type": obj.get("type"),
-            "status": obj.get("status"),
             "latitude": obj.get("latitude"),
             "longitude": obj.get("longitude"),
             "altitude": obj.get("altitude"),
+            "links_from": [AccessPointLinksFromInner.from_dict(_item) for _item in obj["links_from"]] if obj.get("links_from") is not None else None,
+            "links_to": [AccessPointLinksFromInner.from_dict(_item) for _item in obj["links_to"]] if obj.get("links_to") is not None else None,
+            "name": obj.get("name"),
+            "status": obj.get("status"),
             "install_date": obj.get("install_date"),
             "abandon_date": obj.get("abandon_date"),
             "notes": obj.get("notes"),
             "uisp_id": obj.get("uisp_id"),
-            "ssid": obj.get("ssid"),
-            "ip_address": obj.get("ip_address"),
             "radius": obj.get("radius"),
             "azimuth": obj.get("azimuth"),
-            "width": obj.get("width")
+            "width": obj.get("width"),
+            "node": AccessPointNode.from_dict(obj["node"]) if obj.get("node") is not None else None
         })
         return _obj
 

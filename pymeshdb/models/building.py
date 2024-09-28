@@ -21,29 +21,32 @@ from pydantic import BaseModel, ConfigDict, Field, StrictFloat, StrictInt, Stric
 from typing import Any, ClassVar, Dict, List, Optional, Union
 from typing_extensions import Annotated
 from pymeshdb.models.address_truth_sources_enum import AddressTruthSourcesEnum
+from pymeshdb.models.building_installs_inner import BuildingInstallsInner
+from pymeshdb.models.building_nodes_inner import BuildingNodesInner
+from pymeshdb.models.building_primary_node import BuildingPrimaryNode
 from typing import Optional, Set
 from typing_extensions import Self
 
 class Building(BaseModel):
     """
-    Building
+    A  ModelSerializer MixIn which sets `NestedKeyObjectRelatedField` as the default field class to use for the foreign key fields
     """ # noqa: E501
-    id: StrictInt
-    installs: List[StrictInt]
-    network_numbers: List[Annotated[int, Field(le=8192, strict=True, ge=-2147483648)]]
-    primary_network_number: Optional[Annotated[int, Field(le=8192, strict=True, ge=-2147483648)]] = None
+    id: StrictStr
+    installs: List[BuildingInstallsInner]
     bin: Optional[Annotated[int, Field(le=2147483647, strict=True, ge=0)]] = Field(default=None, description="NYC DOB Identifier for the structure containing this building")
     street_address: Optional[StrictStr] = Field(default=None, description="Line 1 only of the address of this building: i.e. <house num> <street>")
     city: Optional[StrictStr] = Field(default=None, description="The name of the borough this building is in for buildings within NYC, \"New York\" for Manhattan to match street addresses. The actual city name for anything outside NYC")
     state: Optional[StrictStr] = Field(default=None, description="The 2 letter abreviation of the US State this building is contained within, e.g. \"NY\" or \"NJ\"")
     zip_code: Optional[StrictStr] = Field(default=None, description="The five digit ZIP code this building is contained within")
-    address_truth_sources: List[AddressTruthSourcesEnum] = Field(description="A list of strings that answers the question: How was the content ofthe street address, city, state, and ZIP fields determined? This is useful in understanding the level of validation applied to spreadsheet imported data. Possible values are: OSMNominatim, OSMNominatimZIPOnly, NYCPlanningLabs, PeliasStringParsing, ReverseGeocodeFromCoordinates. Check the import script for details")
+    address_truth_sources: List[AddressTruthSourcesEnum] = Field(description="A list of strings that answers the question: How was the content of the street address, city, state, and ZIP fields determined? This is useful in understanding the level of validation applied to spreadsheet imported data. Possible values are: OSMNominatim, OSMNominatimZIPOnly, NYCPlanningLabs, PeliasStringParsing, ReverseGeocodeFromCoordinates, HumanEntry. Check the import script for details")
     latitude: Union[StrictFloat, StrictInt] = Field(description="Building latitude in decimal degrees")
     longitude: Union[StrictFloat, StrictInt] = Field(description="Building longitude in decimal degrees")
     altitude: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="Building rooftop altitude in \"absolute\" meters above mean sea level")
     notes: Optional[StrictStr] = Field(default=None, description="A free-form text description of this building, to track any additional information. For Buidings imported from the spreadsheet, this starts with a formatted block of information about the import process and original spreadsheet data. However this structure can be changed by admins at any time and should not be relied on by automated systems. ")
     panoramas: Optional[List[Annotated[str, Field(strict=True, max_length=200)]]] = Field(default=None, description="Panoramas taken from the roof of this Building")
-    __properties: ClassVar[List[str]] = ["id", "installs", "network_numbers", "primary_network_number", "bin", "street_address", "city", "state", "zip_code", "address_truth_sources", "latitude", "longitude", "altitude", "notes", "panoramas"]
+    primary_node: Optional[BuildingPrimaryNode] = None
+    nodes: Optional[List[BuildingNodesInner]] = Field(default=None, description="All nodes located on the same structure (i.e. a discrete man-made place identified by the same BIN) that this Building is located within.")
+    __properties: ClassVar[List[str]] = ["id", "installs", "bin", "street_address", "city", "state", "zip_code", "address_truth_sources", "latitude", "longitude", "altitude", "notes", "panoramas", "primary_node", "nodes"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -77,12 +80,10 @@ class Building(BaseModel):
           are ignored.
         * OpenAPI `readOnly` fields are excluded.
         * OpenAPI `readOnly` fields are excluded.
-        * OpenAPI `readOnly` fields are excluded.
         """
         excluded_fields: Set[str] = set([
             "id",
             "installs",
-            "network_numbers",
         ])
 
         _dict = self.model_dump(
@@ -90,11 +91,23 @@ class Building(BaseModel):
             exclude=excluded_fields,
             exclude_none=True,
         )
-        # set to None if primary_network_number (nullable) is None
-        # and model_fields_set contains the field
-        if self.primary_network_number is None and "primary_network_number" in self.model_fields_set:
-            _dict['primary_network_number'] = None
-
+        # override the default output from pydantic by calling `to_dict()` of each item in installs (list)
+        _items = []
+        if self.installs:
+            for _item in self.installs:
+                if _item:
+                    _items.append(_item.to_dict())
+            _dict['installs'] = _items
+        # override the default output from pydantic by calling `to_dict()` of primary_node
+        if self.primary_node:
+            _dict['primary_node'] = self.primary_node.to_dict()
+        # override the default output from pydantic by calling `to_dict()` of each item in nodes (list)
+        _items = []
+        if self.nodes:
+            for _item in self.nodes:
+                if _item:
+                    _items.append(_item.to_dict())
+            _dict['nodes'] = _items
         # set to None if bin (nullable) is None
         # and model_fields_set contains the field
         if self.bin is None and "bin" in self.model_fields_set:
@@ -135,6 +148,11 @@ class Building(BaseModel):
         if self.panoramas is None and "panoramas" in self.model_fields_set:
             _dict['panoramas'] = None
 
+        # set to None if primary_node (nullable) is None
+        # and model_fields_set contains the field
+        if self.primary_node is None and "primary_node" in self.model_fields_set:
+            _dict['primary_node'] = None
+
         return _dict
 
     @classmethod
@@ -148,9 +166,7 @@ class Building(BaseModel):
 
         _obj = cls.model_validate({
             "id": obj.get("id"),
-            "installs": obj.get("installs"),
-            "network_numbers": obj.get("network_numbers"),
-            "primary_network_number": obj.get("primary_network_number"),
+            "installs": [BuildingInstallsInner.from_dict(_item) for _item in obj["installs"]] if obj.get("installs") is not None else None,
             "bin": obj.get("bin"),
             "street_address": obj.get("street_address"),
             "city": obj.get("city"),
@@ -161,7 +177,9 @@ class Building(BaseModel):
             "longitude": obj.get("longitude"),
             "altitude": obj.get("altitude"),
             "notes": obj.get("notes"),
-            "panoramas": obj.get("panoramas")
+            "panoramas": obj.get("panoramas"),
+            "primary_node": BuildingPrimaryNode.from_dict(obj["primary_node"]) if obj.get("primary_node") is not None else None,
+            "nodes": [BuildingNodesInner.from_dict(_item) for _item in obj["nodes"]] if obj.get("nodes") is not None else None
         })
         return _obj
 

@@ -26,6 +26,13 @@ class TestGeographicKMLDataApi(unittest.TestCase):
     def tearDown(self) -> None:
         pass
 
+    def test_api_v1_geography_nyc_geocode_v2_search_retrieve(self) -> None:
+        """Test case for api_v1_geography_nyc_geocode_v2_search_retrieve
+
+        Use the NYC geocoding APIs to look up an address, and return the lat/lon/alt corresponding to it or 404 if the address cannot be found within NYC
+        """
+        pass
+
     def test_api_v1_geography_whole_mesh_kml_retrieve(self) -> None:
         """Test case for api_v1_geography_whole_mesh_kml_retrieve
 

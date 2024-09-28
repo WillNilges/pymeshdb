@@ -315,7 +315,7 @@ class MembersApi:
     @validate_call
     def api_v1_members_destroy(
         self,
-        id: StrictInt,
+        id: StrictStr,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -333,7 +333,7 @@ class MembersApi:
 
 
         :param id: (required)
-        :type id: int
+        :type id: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -381,7 +381,7 @@ class MembersApi:
     @validate_call
     def api_v1_members_destroy_with_http_info(
         self,
-        id: StrictInt,
+        id: StrictStr,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -399,7 +399,7 @@ class MembersApi:
 
 
         :param id: (required)
-        :type id: int
+        :type id: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -447,7 +447,7 @@ class MembersApi:
     @validate_call
     def api_v1_members_destroy_without_preload_content(
         self,
-        id: StrictInt,
+        id: StrictStr,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -465,7 +465,7 @@ class MembersApi:
 
 
         :param id: (required)
-        :type id: int
+        :type id: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -566,6 +566,7 @@ class MembersApi:
     def api_v1_members_list(
         self,
         page: Annotated[Optional[StrictInt], Field(description="A page number within the paginated result set.")] = None,
+        page_size: Annotated[Optional[StrictInt], Field(description="Number of results to return per page.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -584,6 +585,8 @@ class MembersApi:
 
         :param page: A page number within the paginated result set.
         :type page: int
+        :param page_size: Number of results to return per page.
+        :type page_size: int
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -608,6 +611,7 @@ class MembersApi:
 
         _param = self._api_v1_members_list_serialize(
             page=page,
+            page_size=page_size,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -632,6 +636,7 @@ class MembersApi:
     def api_v1_members_list_with_http_info(
         self,
         page: Annotated[Optional[StrictInt], Field(description="A page number within the paginated result set.")] = None,
+        page_size: Annotated[Optional[StrictInt], Field(description="Number of results to return per page.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -650,6 +655,8 @@ class MembersApi:
 
         :param page: A page number within the paginated result set.
         :type page: int
+        :param page_size: Number of results to return per page.
+        :type page_size: int
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -674,6 +681,7 @@ class MembersApi:
 
         _param = self._api_v1_members_list_serialize(
             page=page,
+            page_size=page_size,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -698,6 +706,7 @@ class MembersApi:
     def api_v1_members_list_without_preload_content(
         self,
         page: Annotated[Optional[StrictInt], Field(description="A page number within the paginated result set.")] = None,
+        page_size: Annotated[Optional[StrictInt], Field(description="Number of results to return per page.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -716,6 +725,8 @@ class MembersApi:
 
         :param page: A page number within the paginated result set.
         :type page: int
+        :param page_size: Number of results to return per page.
+        :type page_size: int
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -740,6 +751,7 @@ class MembersApi:
 
         _param = self._api_v1_members_list_serialize(
             page=page,
+            page_size=page_size,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -759,6 +771,7 @@ class MembersApi:
     def _api_v1_members_list_serialize(
         self,
         page,
+        page_size,
         _request_auth,
         _content_type,
         _headers,
@@ -782,6 +795,10 @@ class MembersApi:
         if page is not None:
             
             _query_params.append(('page', page))
+            
+        if page_size is not None:
+            
+            _query_params.append(('page_size', page_size))
             
         # process the header parameters
         # process the form parameters
@@ -826,7 +843,8 @@ class MembersApi:
         email_address: Annotated[Optional[StrictStr], Field(description="Filter members by any of the email address fields using case-insensitve substring matching")] = None,
         name: Annotated[Optional[StrictStr], Field(description="Filter members by the name field using case-insensitve substring matching")] = None,
         page: Annotated[Optional[StrictInt], Field(description="A page number within the paginated result set.")] = None,
-        phone_number: Annotated[Optional[StrictStr], Field(description="Filter members by the phone_number field using case-insensitve substring matching")] = None,
+        page_size: Annotated[Optional[StrictInt], Field(description="Number of results to return per page.")] = None,
+        phone_number: Annotated[Optional[StrictStr], Field(description="Filter members by any of the phone number fields using case-insensitve substring matching")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -849,7 +867,9 @@ class MembersApi:
         :type name: str
         :param page: A page number within the paginated result set.
         :type page: int
-        :param phone_number: Filter members by the phone_number field using case-insensitve substring matching
+        :param page_size: Number of results to return per page.
+        :type page_size: int
+        :param phone_number: Filter members by any of the phone number fields using case-insensitve substring matching
         :type phone_number: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -877,6 +897,7 @@ class MembersApi:
             email_address=email_address,
             name=name,
             page=page,
+            page_size=page_size,
             phone_number=phone_number,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -904,7 +925,8 @@ class MembersApi:
         email_address: Annotated[Optional[StrictStr], Field(description="Filter members by any of the email address fields using case-insensitve substring matching")] = None,
         name: Annotated[Optional[StrictStr], Field(description="Filter members by the name field using case-insensitve substring matching")] = None,
         page: Annotated[Optional[StrictInt], Field(description="A page number within the paginated result set.")] = None,
-        phone_number: Annotated[Optional[StrictStr], Field(description="Filter members by the phone_number field using case-insensitve substring matching")] = None,
+        page_size: Annotated[Optional[StrictInt], Field(description="Number of results to return per page.")] = None,
+        phone_number: Annotated[Optional[StrictStr], Field(description="Filter members by any of the phone number fields using case-insensitve substring matching")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -927,7 +949,9 @@ class MembersApi:
         :type name: str
         :param page: A page number within the paginated result set.
         :type page: int
-        :param phone_number: Filter members by the phone_number field using case-insensitve substring matching
+        :param page_size: Number of results to return per page.
+        :type page_size: int
+        :param phone_number: Filter members by any of the phone number fields using case-insensitve substring matching
         :type phone_number: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -955,6 +979,7 @@ class MembersApi:
             email_address=email_address,
             name=name,
             page=page,
+            page_size=page_size,
             phone_number=phone_number,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -982,7 +1007,8 @@ class MembersApi:
         email_address: Annotated[Optional[StrictStr], Field(description="Filter members by any of the email address fields using case-insensitve substring matching")] = None,
         name: Annotated[Optional[StrictStr], Field(description="Filter members by the name field using case-insensitve substring matching")] = None,
         page: Annotated[Optional[StrictInt], Field(description="A page number within the paginated result set.")] = None,
-        phone_number: Annotated[Optional[StrictStr], Field(description="Filter members by the phone_number field using case-insensitve substring matching")] = None,
+        page_size: Annotated[Optional[StrictInt], Field(description="Number of results to return per page.")] = None,
+        phone_number: Annotated[Optional[StrictStr], Field(description="Filter members by any of the phone number fields using case-insensitve substring matching")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1005,7 +1031,9 @@ class MembersApi:
         :type name: str
         :param page: A page number within the paginated result set.
         :type page: int
-        :param phone_number: Filter members by the phone_number field using case-insensitve substring matching
+        :param page_size: Number of results to return per page.
+        :type page_size: int
+        :param phone_number: Filter members by any of the phone number fields using case-insensitve substring matching
         :type phone_number: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -1033,6 +1061,7 @@ class MembersApi:
             email_address=email_address,
             name=name,
             page=page,
+            page_size=page_size,
             phone_number=phone_number,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -1055,6 +1084,7 @@ class MembersApi:
         email_address,
         name,
         page,
+        page_size,
         phone_number,
         _request_auth,
         _content_type,
@@ -1087,6 +1117,10 @@ class MembersApi:
         if page is not None:
             
             _query_params.append(('page', page))
+            
+        if page_size is not None:
+            
+            _query_params.append(('page_size', page_size))
             
         if phone_number is not None:
             
@@ -1132,7 +1166,7 @@ class MembersApi:
     @validate_call
     def api_v1_members_partial_update(
         self,
-        id: StrictInt,
+        id: StrictStr,
         patched_member: Optional[PatchedMember] = None,
         _request_timeout: Union[
             None,
@@ -1151,7 +1185,7 @@ class MembersApi:
 
 
         :param id: (required)
-        :type id: int
+        :type id: str
         :param patched_member:
         :type patched_member: PatchedMember
         :param _request_timeout: timeout setting for this request. If one
@@ -1202,7 +1236,7 @@ class MembersApi:
     @validate_call
     def api_v1_members_partial_update_with_http_info(
         self,
-        id: StrictInt,
+        id: StrictStr,
         patched_member: Optional[PatchedMember] = None,
         _request_timeout: Union[
             None,
@@ -1221,7 +1255,7 @@ class MembersApi:
 
 
         :param id: (required)
-        :type id: int
+        :type id: str
         :param patched_member:
         :type patched_member: PatchedMember
         :param _request_timeout: timeout setting for this request. If one
@@ -1272,7 +1306,7 @@ class MembersApi:
     @validate_call
     def api_v1_members_partial_update_without_preload_content(
         self,
-        id: StrictInt,
+        id: StrictStr,
         patched_member: Optional[PatchedMember] = None,
         _request_timeout: Union[
             None,
@@ -1291,7 +1325,7 @@ class MembersApi:
 
 
         :param id: (required)
-        :type id: int
+        :type id: str
         :param patched_member:
         :type patched_member: PatchedMember
         :param _request_timeout: timeout setting for this request. If one
@@ -1418,7 +1452,7 @@ class MembersApi:
     @validate_call
     def api_v1_members_retrieve(
         self,
-        id: StrictInt,
+        id: StrictStr,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1436,7 +1470,7 @@ class MembersApi:
 
 
         :param id: (required)
-        :type id: int
+        :type id: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -1484,7 +1518,7 @@ class MembersApi:
     @validate_call
     def api_v1_members_retrieve_with_http_info(
         self,
-        id: StrictInt,
+        id: StrictStr,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1502,7 +1536,7 @@ class MembersApi:
 
 
         :param id: (required)
-        :type id: int
+        :type id: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -1550,7 +1584,7 @@ class MembersApi:
     @validate_call
     def api_v1_members_retrieve_without_preload_content(
         self,
-        id: StrictInt,
+        id: StrictStr,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1568,7 +1602,7 @@ class MembersApi:
 
 
         :param id: (required)
-        :type id: int
+        :type id: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -1674,7 +1708,7 @@ class MembersApi:
     @validate_call
     def api_v1_members_update(
         self,
-        id: StrictInt,
+        id: StrictStr,
         member: Member,
         _request_timeout: Union[
             None,
@@ -1693,7 +1727,7 @@ class MembersApi:
 
 
         :param id: (required)
-        :type id: int
+        :type id: str
         :param member: (required)
         :type member: Member
         :param _request_timeout: timeout setting for this request. If one
@@ -1744,7 +1778,7 @@ class MembersApi:
     @validate_call
     def api_v1_members_update_with_http_info(
         self,
-        id: StrictInt,
+        id: StrictStr,
         member: Member,
         _request_timeout: Union[
             None,
@@ -1763,7 +1797,7 @@ class MembersApi:
 
 
         :param id: (required)
-        :type id: int
+        :type id: str
         :param member: (required)
         :type member: Member
         :param _request_timeout: timeout setting for this request. If one
@@ -1814,7 +1848,7 @@ class MembersApi:
     @validate_call
     def api_v1_members_update_without_preload_content(
         self,
-        id: StrictInt,
+        id: StrictStr,
         member: Member,
         _request_timeout: Union[
             None,
@@ -1833,7 +1867,7 @@ class MembersApi:
 
 
         :param id: (required)
-        :type id: int
+        :type id: str
         :param member: (required)
         :type member: Member
         :param _request_timeout: timeout setting for this request. If one

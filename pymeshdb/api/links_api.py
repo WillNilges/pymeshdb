@@ -315,7 +315,7 @@ class LinksApi:
     @validate_call
     def api_v1_links_destroy(
         self,
-        id: StrictInt,
+        id: StrictStr,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -333,7 +333,7 @@ class LinksApi:
 
 
         :param id: (required)
-        :type id: int
+        :type id: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -381,7 +381,7 @@ class LinksApi:
     @validate_call
     def api_v1_links_destroy_with_http_info(
         self,
-        id: StrictInt,
+        id: StrictStr,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -399,7 +399,7 @@ class LinksApi:
 
 
         :param id: (required)
-        :type id: int
+        :type id: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -447,7 +447,7 @@ class LinksApi:
     @validate_call
     def api_v1_links_destroy_without_preload_content(
         self,
-        id: StrictInt,
+        id: StrictStr,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -465,7 +465,7 @@ class LinksApi:
 
 
         :param id: (required)
-        :type id: int
+        :type id: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -566,6 +566,7 @@ class LinksApi:
     def api_v1_links_list(
         self,
         page: Annotated[Optional[StrictInt], Field(description="A page number within the paginated result set.")] = None,
+        page_size: Annotated[Optional[StrictInt], Field(description="Number of results to return per page.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -584,6 +585,8 @@ class LinksApi:
 
         :param page: A page number within the paginated result set.
         :type page: int
+        :param page_size: Number of results to return per page.
+        :type page_size: int
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -608,6 +611,7 @@ class LinksApi:
 
         _param = self._api_v1_links_list_serialize(
             page=page,
+            page_size=page_size,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -632,6 +636,7 @@ class LinksApi:
     def api_v1_links_list_with_http_info(
         self,
         page: Annotated[Optional[StrictInt], Field(description="A page number within the paginated result set.")] = None,
+        page_size: Annotated[Optional[StrictInt], Field(description="Number of results to return per page.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -650,6 +655,8 @@ class LinksApi:
 
         :param page: A page number within the paginated result set.
         :type page: int
+        :param page_size: Number of results to return per page.
+        :type page_size: int
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -674,6 +681,7 @@ class LinksApi:
 
         _param = self._api_v1_links_list_serialize(
             page=page,
+            page_size=page_size,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -698,6 +706,7 @@ class LinksApi:
     def api_v1_links_list_without_preload_content(
         self,
         page: Annotated[Optional[StrictInt], Field(description="A page number within the paginated result set.")] = None,
+        page_size: Annotated[Optional[StrictInt], Field(description="Number of results to return per page.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -716,6 +725,8 @@ class LinksApi:
 
         :param page: A page number within the paginated result set.
         :type page: int
+        :param page_size: Number of results to return per page.
+        :type page_size: int
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -740,6 +751,7 @@ class LinksApi:
 
         _param = self._api_v1_links_list_serialize(
             page=page,
+            page_size=page_size,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -759,6 +771,7 @@ class LinksApi:
     def _api_v1_links_list_serialize(
         self,
         page,
+        page_size,
         _request_auth,
         _content_type,
         _headers,
@@ -782,6 +795,10 @@ class LinksApi:
         if page is not None:
             
             _query_params.append(('page', page))
+            
+        if page_size is not None:
+            
+            _query_params.append(('page_size', page_size))
             
         # process the header parameters
         # process the form parameters
@@ -825,7 +842,9 @@ class LinksApi:
         self,
         device: Annotated[Optional[StrictInt], Field(description="Filter links by the id of the devices they connect using strict equality")] = None,
         network_number: Annotated[Optional[StrictInt], Field(description="Filter links by network_number of the devices they connect using strict equality")] = None,
+        node: Optional[StrictStr] = None,
         page: Annotated[Optional[StrictInt], Field(description="A page number within the paginated result set.")] = None,
+        page_size: Annotated[Optional[StrictInt], Field(description="Number of results to return per page.")] = None,
         status: Annotated[Optional[StrictStr], Field(description="Filter links by the status field using strict equality")] = None,
         type: Annotated[Optional[StrictStr], Field(description="Filter links by the type field using strict equality")] = None,
         uisp_id: Annotated[Optional[StrictStr], Field(description="Filter links by the uisp_id field using strict equality")] = None,
@@ -849,8 +868,12 @@ class LinksApi:
         :type device: int
         :param network_number: Filter links by network_number of the devices they connect using strict equality
         :type network_number: int
+        :param node:
+        :type node: str
         :param page: A page number within the paginated result set.
         :type page: int
+        :param page_size: Number of results to return per page.
+        :type page_size: int
         :param status: Filter links by the status field using strict equality
         :type status: str
         :param type: Filter links by the type field using strict equality
@@ -882,7 +905,9 @@ class LinksApi:
         _param = self._api_v1_links_lookup_list_serialize(
             device=device,
             network_number=network_number,
+            node=node,
             page=page,
+            page_size=page_size,
             status=status,
             type=type,
             uisp_id=uisp_id,
@@ -911,7 +936,9 @@ class LinksApi:
         self,
         device: Annotated[Optional[StrictInt], Field(description="Filter links by the id of the devices they connect using strict equality")] = None,
         network_number: Annotated[Optional[StrictInt], Field(description="Filter links by network_number of the devices they connect using strict equality")] = None,
+        node: Optional[StrictStr] = None,
         page: Annotated[Optional[StrictInt], Field(description="A page number within the paginated result set.")] = None,
+        page_size: Annotated[Optional[StrictInt], Field(description="Number of results to return per page.")] = None,
         status: Annotated[Optional[StrictStr], Field(description="Filter links by the status field using strict equality")] = None,
         type: Annotated[Optional[StrictStr], Field(description="Filter links by the type field using strict equality")] = None,
         uisp_id: Annotated[Optional[StrictStr], Field(description="Filter links by the uisp_id field using strict equality")] = None,
@@ -935,8 +962,12 @@ class LinksApi:
         :type device: int
         :param network_number: Filter links by network_number of the devices they connect using strict equality
         :type network_number: int
+        :param node:
+        :type node: str
         :param page: A page number within the paginated result set.
         :type page: int
+        :param page_size: Number of results to return per page.
+        :type page_size: int
         :param status: Filter links by the status field using strict equality
         :type status: str
         :param type: Filter links by the type field using strict equality
@@ -968,7 +999,9 @@ class LinksApi:
         _param = self._api_v1_links_lookup_list_serialize(
             device=device,
             network_number=network_number,
+            node=node,
             page=page,
+            page_size=page_size,
             status=status,
             type=type,
             uisp_id=uisp_id,
@@ -997,7 +1030,9 @@ class LinksApi:
         self,
         device: Annotated[Optional[StrictInt], Field(description="Filter links by the id of the devices they connect using strict equality")] = None,
         network_number: Annotated[Optional[StrictInt], Field(description="Filter links by network_number of the devices they connect using strict equality")] = None,
+        node: Optional[StrictStr] = None,
         page: Annotated[Optional[StrictInt], Field(description="A page number within the paginated result set.")] = None,
+        page_size: Annotated[Optional[StrictInt], Field(description="Number of results to return per page.")] = None,
         status: Annotated[Optional[StrictStr], Field(description="Filter links by the status field using strict equality")] = None,
         type: Annotated[Optional[StrictStr], Field(description="Filter links by the type field using strict equality")] = None,
         uisp_id: Annotated[Optional[StrictStr], Field(description="Filter links by the uisp_id field using strict equality")] = None,
@@ -1021,8 +1056,12 @@ class LinksApi:
         :type device: int
         :param network_number: Filter links by network_number of the devices they connect using strict equality
         :type network_number: int
+        :param node:
+        :type node: str
         :param page: A page number within the paginated result set.
         :type page: int
+        :param page_size: Number of results to return per page.
+        :type page_size: int
         :param status: Filter links by the status field using strict equality
         :type status: str
         :param type: Filter links by the type field using strict equality
@@ -1054,7 +1093,9 @@ class LinksApi:
         _param = self._api_v1_links_lookup_list_serialize(
             device=device,
             network_number=network_number,
+            node=node,
             page=page,
+            page_size=page_size,
             status=status,
             type=type,
             uisp_id=uisp_id,
@@ -1078,7 +1119,9 @@ class LinksApi:
         self,
         device,
         network_number,
+        node,
         page,
+        page_size,
         status,
         type,
         uisp_id,
@@ -1110,9 +1153,17 @@ class LinksApi:
             
             _query_params.append(('network_number', network_number))
             
+        if node is not None:
+            
+            _query_params.append(('node', node))
+            
         if page is not None:
             
             _query_params.append(('page', page))
+            
+        if page_size is not None:
+            
+            _query_params.append(('page_size', page_size))
             
         if status is not None:
             
@@ -1166,7 +1217,7 @@ class LinksApi:
     @validate_call
     def api_v1_links_partial_update(
         self,
-        id: StrictInt,
+        id: StrictStr,
         patched_link: Optional[PatchedLink] = None,
         _request_timeout: Union[
             None,
@@ -1185,7 +1236,7 @@ class LinksApi:
 
 
         :param id: (required)
-        :type id: int
+        :type id: str
         :param patched_link:
         :type patched_link: PatchedLink
         :param _request_timeout: timeout setting for this request. If one
@@ -1236,7 +1287,7 @@ class LinksApi:
     @validate_call
     def api_v1_links_partial_update_with_http_info(
         self,
-        id: StrictInt,
+        id: StrictStr,
         patched_link: Optional[PatchedLink] = None,
         _request_timeout: Union[
             None,
@@ -1255,7 +1306,7 @@ class LinksApi:
 
 
         :param id: (required)
-        :type id: int
+        :type id: str
         :param patched_link:
         :type patched_link: PatchedLink
         :param _request_timeout: timeout setting for this request. If one
@@ -1306,7 +1357,7 @@ class LinksApi:
     @validate_call
     def api_v1_links_partial_update_without_preload_content(
         self,
-        id: StrictInt,
+        id: StrictStr,
         patched_link: Optional[PatchedLink] = None,
         _request_timeout: Union[
             None,
@@ -1325,7 +1376,7 @@ class LinksApi:
 
 
         :param id: (required)
-        :type id: int
+        :type id: str
         :param patched_link:
         :type patched_link: PatchedLink
         :param _request_timeout: timeout setting for this request. If one
@@ -1452,7 +1503,7 @@ class LinksApi:
     @validate_call
     def api_v1_links_retrieve(
         self,
-        id: StrictInt,
+        id: StrictStr,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1470,7 +1521,7 @@ class LinksApi:
 
 
         :param id: (required)
-        :type id: int
+        :type id: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -1518,7 +1569,7 @@ class LinksApi:
     @validate_call
     def api_v1_links_retrieve_with_http_info(
         self,
-        id: StrictInt,
+        id: StrictStr,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1536,7 +1587,7 @@ class LinksApi:
 
 
         :param id: (required)
-        :type id: int
+        :type id: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -1584,7 +1635,7 @@ class LinksApi:
     @validate_call
     def api_v1_links_retrieve_without_preload_content(
         self,
-        id: StrictInt,
+        id: StrictStr,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1602,7 +1653,7 @@ class LinksApi:
 
 
         :param id: (required)
-        :type id: int
+        :type id: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -1708,7 +1759,7 @@ class LinksApi:
     @validate_call
     def api_v1_links_update(
         self,
-        id: StrictInt,
+        id: StrictStr,
         link: Link,
         _request_timeout: Union[
             None,
@@ -1727,7 +1778,7 @@ class LinksApi:
 
 
         :param id: (required)
-        :type id: int
+        :type id: str
         :param link: (required)
         :type link: Link
         :param _request_timeout: timeout setting for this request. If one
@@ -1778,7 +1829,7 @@ class LinksApi:
     @validate_call
     def api_v1_links_update_with_http_info(
         self,
-        id: StrictInt,
+        id: StrictStr,
         link: Link,
         _request_timeout: Union[
             None,
@@ -1797,7 +1848,7 @@ class LinksApi:
 
 
         :param id: (required)
-        :type id: int
+        :type id: str
         :param link: (required)
         :type link: Link
         :param _request_timeout: timeout setting for this request. If one
@@ -1848,7 +1899,7 @@ class LinksApi:
     @validate_call
     def api_v1_links_update_without_preload_content(
         self,
-        id: StrictInt,
+        id: StrictStr,
         link: Link,
         _request_timeout: Union[
             None,
@@ -1867,7 +1918,7 @@ class LinksApi:
 
 
         :param id: (required)
-        :type id: int
+        :type id: str
         :param link: (required)
         :type link: Link
         :param _request_timeout: timeout setting for this request. If one

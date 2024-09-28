@@ -1,14 +1,15 @@
 # Install
 
+A  ModelSerializer MixIn which sets `NestedKeyObjectRelatedField` as the default field class to use for the foreign key fields
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
+**id** | **str** |  | [readonly] 
 **install_number** | **int** |  | [readonly] 
-**network_number** | **int** |  | [optional] 
 **status** | [**Status195Enum**](Status195Enum.md) | The current status of this install  * &#x60;Request Received&#x60; - Request Received * &#x60;Pending&#x60; - Pending * &#x60;Blocked&#x60; - Blocked * &#x60;Active&#x60; - Active * &#x60;Inactive&#x60; - Inactive * &#x60;Closed&#x60; - Closed * &#x60;NN Reassigned&#x60; - Nn Reassigned | 
-**ticket_id** | **int** | The ID of the OSTicket used to track communications with the member about this install | [optional] 
+**ticket_number** | **str** | The ticket number of the OSTicket used to track communications with the member about this install. Note that although this appears to be an integer, it is not. Leading zeros are important, so this should be stored as a string at all times | [optional] 
 **request_date** | **date** | The date that this install request was received | 
 **install_date** | **date** | The date this install was completed and deployed to the mesh | [optional] 
 **abandon_date** | **date** | The date this install was abandoned, unplugged, or disassembled | [optional] 
@@ -17,8 +18,9 @@ Name | Type | Description | Notes
 **referral** | **str** | The \&quot;How did you hear about us?\&quot; information provided to us when the member submitted the join form | [optional] 
 **notes** | **str** | A free-form text description of this Install, to track any additional information. For Installs imported from the spreadsheet, this starts with a formatted block of information about the import process and original spreadsheet data. However this structure can be changed by admins at any time and should not be relied on by automated systems.  | [optional] 
 **diy** | **bool** | Was this install conducted by the member themselves? If not, it was done by a volunteer installer on their behalf | [optional] 
-**building** | **int** | The building where the install is located. In the case of a structure with multiple buildings, this will be the building whose address makes sense for this install&#39;s unit. | 
-**member** | **int** | The member this install is associated with | 
+**node** | [**InstallNode**](InstallNode.md) |  | [optional] 
+**building** | [**InstallBuilding**](InstallBuilding.md) |  | 
+**member** | [**InstallMember**](InstallMember.md) |  | 
 
 ## Example
 

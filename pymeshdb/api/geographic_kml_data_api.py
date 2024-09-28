@@ -16,8 +16,10 @@ from pydantic import validate_call, Field, StrictFloat, StrictStr, StrictInt
 from typing import Any, Dict, List, Optional, Tuple, Union
 from typing_extensions import Annotated
 
-from pydantic import StrictBytes, StrictStr
+from pydantic import Field, StrictBytes, StrictInt, StrictStr
 from typing import Union
+from typing_extensions import Annotated
+from pymeshdb.models.geocode_success_response import GeocodeSuccessResponse
 
 from pymeshdb.api_client import ApiClient, RequestSerialized
 from pymeshdb.api_response import ApiResponse
@@ -35,6 +37,324 @@ class GeographicKMLDataApi:
         if api_client is None:
             api_client = ApiClient.get_default()
         self.api_client = api_client
+
+
+    @validate_call
+    def api_v1_geography_nyc_geocode_v2_search_retrieve(
+        self,
+        city: Annotated[str, Field(min_length=1, strict=True)],
+        state: Annotated[str, Field(min_length=1, strict=True)],
+        street_address: Annotated[str, Field(min_length=1, strict=True)],
+        zip: StrictInt,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> GeocodeSuccessResponse:
+        """Use the NYC geocoding APIs to look up an address, and return the lat/lon/alt corresponding to it or 404 if the address cannot be found within NYC
+
+
+        :param city: (required)
+        :type city: str
+        :param state: (required)
+        :type state: str
+        :param street_address: (required)
+        :type street_address: str
+        :param zip: (required)
+        :type zip: int
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._api_v1_geography_nyc_geocode_v2_search_retrieve_serialize(
+            city=city,
+            state=state,
+            street_address=street_address,
+            zip=zip,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '201': "GeocodeSuccessResponse",
+            '400': "ErrorResponseMissingFields",
+            '404': "ErrorResponseInvalidAddr",
+            '500': "ErrorResponseInternalFailure",
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        response_data.read()
+        return self.api_client.response_deserialize(
+            response_data=response_data,
+            response_types_map=_response_types_map,
+        ).data
+
+
+    @validate_call
+    def api_v1_geography_nyc_geocode_v2_search_retrieve_with_http_info(
+        self,
+        city: Annotated[str, Field(min_length=1, strict=True)],
+        state: Annotated[str, Field(min_length=1, strict=True)],
+        street_address: Annotated[str, Field(min_length=1, strict=True)],
+        zip: StrictInt,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> ApiResponse[GeocodeSuccessResponse]:
+        """Use the NYC geocoding APIs to look up an address, and return the lat/lon/alt corresponding to it or 404 if the address cannot be found within NYC
+
+
+        :param city: (required)
+        :type city: str
+        :param state: (required)
+        :type state: str
+        :param street_address: (required)
+        :type street_address: str
+        :param zip: (required)
+        :type zip: int
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._api_v1_geography_nyc_geocode_v2_search_retrieve_serialize(
+            city=city,
+            state=state,
+            street_address=street_address,
+            zip=zip,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '201': "GeocodeSuccessResponse",
+            '400': "ErrorResponseMissingFields",
+            '404': "ErrorResponseInvalidAddr",
+            '500': "ErrorResponseInternalFailure",
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        response_data.read()
+        return self.api_client.response_deserialize(
+            response_data=response_data,
+            response_types_map=_response_types_map,
+        )
+
+
+    @validate_call
+    def api_v1_geography_nyc_geocode_v2_search_retrieve_without_preload_content(
+        self,
+        city: Annotated[str, Field(min_length=1, strict=True)],
+        state: Annotated[str, Field(min_length=1, strict=True)],
+        street_address: Annotated[str, Field(min_length=1, strict=True)],
+        zip: StrictInt,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> RESTResponseType:
+        """Use the NYC geocoding APIs to look up an address, and return the lat/lon/alt corresponding to it or 404 if the address cannot be found within NYC
+
+
+        :param city: (required)
+        :type city: str
+        :param state: (required)
+        :type state: str
+        :param street_address: (required)
+        :type street_address: str
+        :param zip: (required)
+        :type zip: int
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._api_v1_geography_nyc_geocode_v2_search_retrieve_serialize(
+            city=city,
+            state=state,
+            street_address=street_address,
+            zip=zip,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '201': "GeocodeSuccessResponse",
+            '400': "ErrorResponseMissingFields",
+            '404': "ErrorResponseInvalidAddr",
+            '500': "ErrorResponseInternalFailure",
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        return response_data.response
+
+
+    def _api_v1_geography_nyc_geocode_v2_search_retrieve_serialize(
+        self,
+        city,
+        state,
+        street_address,
+        zip,
+        _request_auth,
+        _content_type,
+        _headers,
+        _host_index,
+    ) -> RequestSerialized:
+
+        _host = None
+
+        _collection_formats: Dict[str, str] = {
+        }
+
+        _path_params: Dict[str, str] = {}
+        _query_params: List[Tuple[str, str]] = []
+        _header_params: Dict[str, Optional[str]] = _headers or {}
+        _form_params: List[Tuple[str, str]] = []
+        _files: Dict[str, Union[str, bytes]] = {}
+        _body_params: Optional[bytes] = None
+
+        # process the path parameters
+        # process the query parameters
+        if city is not None:
+            
+            _query_params.append(('city', city))
+            
+        if state is not None:
+            
+            _query_params.append(('state', state))
+            
+        if street_address is not None:
+            
+            _query_params.append(('street_address', street_address))
+            
+        if zip is not None:
+            
+            _query_params.append(('zip', zip))
+            
+        # process the header parameters
+        # process the form parameters
+        # process the body parameter
+
+
+        # set the HTTP header `Accept`
+        _header_params['Accept'] = self.api_client.select_header_accept(
+            [
+                'application/json'
+            ]
+        )
+
+
+        # authentication setting
+        _auth_settings: List[str] = [
+            'tokenAuth', 
+            'Session ID'
+        ]
+
+        return self.api_client.param_serialize(
+            method='GET',
+            resource_path='/api/v1/geography/nyc-geocode/v2/search',
+            path_params=_path_params,
+            query_params=_query_params,
+            header_params=_header_params,
+            body=_body_params,
+            post_params=_form_params,
+            files=_files,
+            auth_settings=_auth_settings,
+            collection_formats=_collection_formats,
+            _host=_host,
+            _request_auth=_request_auth
+        )
+
+
 
 
     @validate_call

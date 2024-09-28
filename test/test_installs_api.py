@@ -38,6 +38,12 @@ class TestInstallsApi(unittest.TestCase):
         """
         pass
 
+    def test_api_v1_installs_destroy2(self) -> None:
+        """Test case for api_v1_installs_destroy2
+
+        """
+        pass
+
     def test_api_v1_installs_list(self) -> None:
         """Test case for api_v1_installs_list
 
@@ -56,14 +62,32 @@ class TestInstallsApi(unittest.TestCase):
         """
         pass
 
+    def test_api_v1_installs_partial_update2(self) -> None:
+        """Test case for api_v1_installs_partial_update2
+
+        """
+        pass
+
     def test_api_v1_installs_retrieve(self) -> None:
         """Test case for api_v1_installs_retrieve
 
         """
         pass
 
+    def test_api_v1_installs_retrieve2(self) -> None:
+        """Test case for api_v1_installs_retrieve2
+
+        """
+        pass
+
     def test_api_v1_installs_update(self) -> None:
         """Test case for api_v1_installs_update
+
+        """
+        pass
+
+    def test_api_v1_installs_update2(self) -> None:
+        """Test case for api_v1_installs_update2
 
         """
         pass

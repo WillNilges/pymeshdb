@@ -20,19 +20,21 @@ import json
 from datetime import date
 from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictInt, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
-from typing_extensions import Annotated
+from pymeshdb.models.install_building import InstallBuilding
+from pymeshdb.models.install_member import InstallMember
+from pymeshdb.models.install_node import InstallNode
 from pymeshdb.models.status195_enum import Status195Enum
 from typing import Optional, Set
 from typing_extensions import Self
 
 class PatchedInstall(BaseModel):
     """
-    PatchedInstall
+    A  ModelSerializer MixIn which sets `NestedKeyObjectRelatedField` as the default field class to use for the foreign key fields
     """ # noqa: E501
+    id: Optional[StrictStr] = None
     install_number: Optional[StrictInt] = None
-    network_number: Optional[Annotated[int, Field(le=8192, strict=True, ge=-2147483648)]] = None
     status: Optional[Status195Enum] = Field(default=None, description="The current status of this install  * `Request Received` - Request Received * `Pending` - Pending * `Blocked` - Blocked * `Active` - Active * `Inactive` - Inactive * `Closed` - Closed * `NN Reassigned` - Nn Reassigned")
-    ticket_id: Optional[Annotated[int, Field(le=2147483647, strict=True, ge=-2147483648)]] = Field(default=None, description="The ID of the OSTicket used to track communications with the member about this install")
+    ticket_number: Optional[StrictStr] = Field(default=None, description="The ticket number of the OSTicket used to track communications with the member about this install. Note that although this appears to be an integer, it is not. Leading zeros are important, so this should be stored as a string at all times")
     request_date: Optional[date] = Field(default=None, description="The date that this install request was received")
     install_date: Optional[date] = Field(default=None, description="The date this install was completed and deployed to the mesh")
     abandon_date: Optional[date] = Field(default=None, description="The date this install was abandoned, unplugged, or disassembled")
@@ -41,9 +43,10 @@ class PatchedInstall(BaseModel):
     referral: Optional[StrictStr] = Field(default=None, description="The \"How did you hear about us?\" information provided to us when the member submitted the join form")
     notes: Optional[StrictStr] = Field(default=None, description="A free-form text description of this Install, to track any additional information. For Installs imported from the spreadsheet, this starts with a formatted block of information about the import process and original spreadsheet data. However this structure can be changed by admins at any time and should not be relied on by automated systems. ")
     diy: Optional[StrictBool] = Field(default=None, description="Was this install conducted by the member themselves? If not, it was done by a volunteer installer on their behalf")
-    building: Optional[StrictInt] = Field(default=None, description="The building where the install is located. In the case of a structure with multiple buildings, this will be the building whose address makes sense for this install's unit.")
-    member: Optional[StrictInt] = Field(default=None, description="The member this install is associated with")
-    __properties: ClassVar[List[str]] = ["install_number", "network_number", "status", "ticket_id", "request_date", "install_date", "abandon_date", "unit", "roof_access", "referral", "notes", "diy", "building", "member"]
+    node: Optional[InstallNode] = None
+    building: Optional[InstallBuilding] = None
+    member: Optional[InstallMember] = None
+    __properties: ClassVar[List[str]] = ["id", "install_number", "status", "ticket_number", "request_date", "install_date", "abandon_date", "unit", "roof_access", "referral", "notes", "diy", "node", "building", "member"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -76,8 +79,10 @@ class PatchedInstall(BaseModel):
           were set at model initialization. Other fields with value `None`
           are ignored.
         * OpenAPI `readOnly` fields are excluded.
+        * OpenAPI `readOnly` fields are excluded.
         """
         excluded_fields: Set[str] = set([
+            "id",
             "install_number",
         ])
 
@@ -86,15 +91,19 @@ class PatchedInstall(BaseModel):
             exclude=excluded_fields,
             exclude_none=True,
         )
-        # set to None if network_number (nullable) is None
+        # override the default output from pydantic by calling `to_dict()` of node
+        if self.node:
+            _dict['node'] = self.node.to_dict()
+        # override the default output from pydantic by calling `to_dict()` of building
+        if self.building:
+            _dict['building'] = self.building.to_dict()
+        # override the default output from pydantic by calling `to_dict()` of member
+        if self.member:
+            _dict['member'] = self.member.to_dict()
+        # set to None if ticket_number (nullable) is None
         # and model_fields_set contains the field
-        if self.network_number is None and "network_number" in self.model_fields_set:
-            _dict['network_number'] = None
-
-        # set to None if ticket_id (nullable) is None
-        # and model_fields_set contains the field
-        if self.ticket_id is None and "ticket_id" in self.model_fields_set:
-            _dict['ticket_id'] = None
+        if self.ticket_number is None and "ticket_number" in self.model_fields_set:
+            _dict['ticket_number'] = None
 
         # set to None if install_date (nullable) is None
         # and model_fields_set contains the field
@@ -126,6 +135,11 @@ class PatchedInstall(BaseModel):
         if self.diy is None and "diy" in self.model_fields_set:
             _dict['diy'] = None
 
+        # set to None if node (nullable) is None
+        # and model_fields_set contains the field
+        if self.node is None and "node" in self.model_fields_set:
+            _dict['node'] = None
+
         return _dict
 
     @classmethod
@@ -138,10 +152,10 @@ class PatchedInstall(BaseModel):
             return cls.model_validate(obj)
 
         _obj = cls.model_validate({
+            "id": obj.get("id"),
             "install_number": obj.get("install_number"),
-            "network_number": obj.get("network_number"),
             "status": obj.get("status"),
-            "ticket_id": obj.get("ticket_id"),
+            "ticket_number": obj.get("ticket_number"),
             "request_date": obj.get("request_date"),
             "install_date": obj.get("install_date"),
             "abandon_date": obj.get("abandon_date"),
@@ -150,8 +164,9 @@ class PatchedInstall(BaseModel):
             "referral": obj.get("referral"),
             "notes": obj.get("notes"),
             "diy": obj.get("diy"),
-            "building": obj.get("building"),
-            "member": obj.get("member")
+            "node": InstallNode.from_dict(obj["node"]) if obj.get("node") is not None else None,
+            "building": InstallBuilding.from_dict(obj["building"]) if obj.get("building") is not None else None,
+            "member": InstallMember.from_dict(obj["member"]) if obj.get("member") is not None else None
         })
         return _obj
 

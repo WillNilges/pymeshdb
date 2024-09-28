@@ -315,7 +315,7 @@ class SectorsApi:
     @validate_call
     def api_v1_sectors_destroy(
         self,
-        id: StrictInt,
+        id: StrictStr,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -333,7 +333,7 @@ class SectorsApi:
 
 
         :param id: (required)
-        :type id: int
+        :type id: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -381,7 +381,7 @@ class SectorsApi:
     @validate_call
     def api_v1_sectors_destroy_with_http_info(
         self,
-        id: StrictInt,
+        id: StrictStr,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -399,7 +399,7 @@ class SectorsApi:
 
 
         :param id: (required)
-        :type id: int
+        :type id: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -447,7 +447,7 @@ class SectorsApi:
     @validate_call
     def api_v1_sectors_destroy_without_preload_content(
         self,
-        id: StrictInt,
+        id: StrictStr,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -465,7 +465,7 @@ class SectorsApi:
 
 
         :param id: (required)
-        :type id: int
+        :type id: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -566,6 +566,7 @@ class SectorsApi:
     def api_v1_sectors_list(
         self,
         page: Annotated[Optional[StrictInt], Field(description="A page number within the paginated result set.")] = None,
+        page_size: Annotated[Optional[StrictInt], Field(description="Number of results to return per page.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -584,6 +585,8 @@ class SectorsApi:
 
         :param page: A page number within the paginated result set.
         :type page: int
+        :param page_size: Number of results to return per page.
+        :type page_size: int
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -608,6 +611,7 @@ class SectorsApi:
 
         _param = self._api_v1_sectors_list_serialize(
             page=page,
+            page_size=page_size,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -632,6 +636,7 @@ class SectorsApi:
     def api_v1_sectors_list_with_http_info(
         self,
         page: Annotated[Optional[StrictInt], Field(description="A page number within the paginated result set.")] = None,
+        page_size: Annotated[Optional[StrictInt], Field(description="Number of results to return per page.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -650,6 +655,8 @@ class SectorsApi:
 
         :param page: A page number within the paginated result set.
         :type page: int
+        :param page_size: Number of results to return per page.
+        :type page_size: int
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -674,6 +681,7 @@ class SectorsApi:
 
         _param = self._api_v1_sectors_list_serialize(
             page=page,
+            page_size=page_size,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -698,6 +706,7 @@ class SectorsApi:
     def api_v1_sectors_list_without_preload_content(
         self,
         page: Annotated[Optional[StrictInt], Field(description="A page number within the paginated result set.")] = None,
+        page_size: Annotated[Optional[StrictInt], Field(description="Number of results to return per page.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -716,6 +725,8 @@ class SectorsApi:
 
         :param page: A page number within the paginated result set.
         :type page: int
+        :param page_size: Number of results to return per page.
+        :type page_size: int
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -740,6 +751,7 @@ class SectorsApi:
 
         _param = self._api_v1_sectors_list_serialize(
             page=page,
+            page_size=page_size,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -759,6 +771,7 @@ class SectorsApi:
     def _api_v1_sectors_list_serialize(
         self,
         page,
+        page_size,
         _request_auth,
         _content_type,
         _headers,
@@ -782,6 +795,10 @@ class SectorsApi:
         if page is not None:
             
             _query_params.append(('page', page))
+            
+        if page_size is not None:
+            
+            _query_params.append(('page_size', page_size))
             
         # process the header parameters
         # process the form parameters
@@ -823,13 +840,12 @@ class SectorsApi:
     @validate_call
     def api_v1_sectors_lookup_list(
         self,
-        model: Annotated[Optional[StrictStr], Field(description="Filter sectors by the model name field using strict equality")] = None,
         name: Annotated[Optional[StrictStr], Field(description="Filter sectors by the name field using case-insensitve substring matching")] = None,
         network_number: Annotated[Optional[StrictInt], Field(description="Filter sectors by network_number using strict equality")] = None,
+        node: Optional[StrictStr] = None,
         page: Annotated[Optional[StrictInt], Field(description="A page number within the paginated result set.")] = None,
-        ssid: Annotated[Optional[StrictStr], Field(description="Filter sectors by the ssid field using strict equality")] = None,
+        page_size: Annotated[Optional[StrictInt], Field(description="Number of results to return per page.")] = None,
         status: Annotated[Optional[StrictStr], Field(description="Filter sectors by the status field using strict equality")] = None,
-        type: Annotated[Optional[StrictStr], Field(description="Filter sectors by the type field using strict equality")] = None,
         uisp_id: Annotated[Optional[StrictStr], Field(description="Filter sectors by the uisp_id field using strict equality")] = None,
         _request_timeout: Union[
             None,
@@ -847,20 +863,18 @@ class SectorsApi:
         """api_v1_sectors_lookup_list
 
 
-        :param model: Filter sectors by the model name field using strict equality
-        :type model: str
         :param name: Filter sectors by the name field using case-insensitve substring matching
         :type name: str
         :param network_number: Filter sectors by network_number using strict equality
         :type network_number: int
+        :param node:
+        :type node: str
         :param page: A page number within the paginated result set.
         :type page: int
-        :param ssid: Filter sectors by the ssid field using strict equality
-        :type ssid: str
+        :param page_size: Number of results to return per page.
+        :type page_size: int
         :param status: Filter sectors by the status field using strict equality
         :type status: str
-        :param type: Filter sectors by the type field using strict equality
-        :type type: str
         :param uisp_id: Filter sectors by the uisp_id field using strict equality
         :type uisp_id: str
         :param _request_timeout: timeout setting for this request. If one
@@ -886,13 +900,12 @@ class SectorsApi:
         """ # noqa: E501
 
         _param = self._api_v1_sectors_lookup_list_serialize(
-            model=model,
             name=name,
             network_number=network_number,
+            node=node,
             page=page,
-            ssid=ssid,
+            page_size=page_size,
             status=status,
-            type=type,
             uisp_id=uisp_id,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -917,13 +930,12 @@ class SectorsApi:
     @validate_call
     def api_v1_sectors_lookup_list_with_http_info(
         self,
-        model: Annotated[Optional[StrictStr], Field(description="Filter sectors by the model name field using strict equality")] = None,
         name: Annotated[Optional[StrictStr], Field(description="Filter sectors by the name field using case-insensitve substring matching")] = None,
         network_number: Annotated[Optional[StrictInt], Field(description="Filter sectors by network_number using strict equality")] = None,
+        node: Optional[StrictStr] = None,
         page: Annotated[Optional[StrictInt], Field(description="A page number within the paginated result set.")] = None,
-        ssid: Annotated[Optional[StrictStr], Field(description="Filter sectors by the ssid field using strict equality")] = None,
+        page_size: Annotated[Optional[StrictInt], Field(description="Number of results to return per page.")] = None,
         status: Annotated[Optional[StrictStr], Field(description="Filter sectors by the status field using strict equality")] = None,
-        type: Annotated[Optional[StrictStr], Field(description="Filter sectors by the type field using strict equality")] = None,
         uisp_id: Annotated[Optional[StrictStr], Field(description="Filter sectors by the uisp_id field using strict equality")] = None,
         _request_timeout: Union[
             None,
@@ -941,20 +953,18 @@ class SectorsApi:
         """api_v1_sectors_lookup_list
 
 
-        :param model: Filter sectors by the model name field using strict equality
-        :type model: str
         :param name: Filter sectors by the name field using case-insensitve substring matching
         :type name: str
         :param network_number: Filter sectors by network_number using strict equality
         :type network_number: int
+        :param node:
+        :type node: str
         :param page: A page number within the paginated result set.
         :type page: int
-        :param ssid: Filter sectors by the ssid field using strict equality
-        :type ssid: str
+        :param page_size: Number of results to return per page.
+        :type page_size: int
         :param status: Filter sectors by the status field using strict equality
         :type status: str
-        :param type: Filter sectors by the type field using strict equality
-        :type type: str
         :param uisp_id: Filter sectors by the uisp_id field using strict equality
         :type uisp_id: str
         :param _request_timeout: timeout setting for this request. If one
@@ -980,13 +990,12 @@ class SectorsApi:
         """ # noqa: E501
 
         _param = self._api_v1_sectors_lookup_list_serialize(
-            model=model,
             name=name,
             network_number=network_number,
+            node=node,
             page=page,
-            ssid=ssid,
+            page_size=page_size,
             status=status,
-            type=type,
             uisp_id=uisp_id,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -1011,13 +1020,12 @@ class SectorsApi:
     @validate_call
     def api_v1_sectors_lookup_list_without_preload_content(
         self,
-        model: Annotated[Optional[StrictStr], Field(description="Filter sectors by the model name field using strict equality")] = None,
         name: Annotated[Optional[StrictStr], Field(description="Filter sectors by the name field using case-insensitve substring matching")] = None,
         network_number: Annotated[Optional[StrictInt], Field(description="Filter sectors by network_number using strict equality")] = None,
+        node: Optional[StrictStr] = None,
         page: Annotated[Optional[StrictInt], Field(description="A page number within the paginated result set.")] = None,
-        ssid: Annotated[Optional[StrictStr], Field(description="Filter sectors by the ssid field using strict equality")] = None,
+        page_size: Annotated[Optional[StrictInt], Field(description="Number of results to return per page.")] = None,
         status: Annotated[Optional[StrictStr], Field(description="Filter sectors by the status field using strict equality")] = None,
-        type: Annotated[Optional[StrictStr], Field(description="Filter sectors by the type field using strict equality")] = None,
         uisp_id: Annotated[Optional[StrictStr], Field(description="Filter sectors by the uisp_id field using strict equality")] = None,
         _request_timeout: Union[
             None,
@@ -1035,20 +1043,18 @@ class SectorsApi:
         """api_v1_sectors_lookup_list
 
 
-        :param model: Filter sectors by the model name field using strict equality
-        :type model: str
         :param name: Filter sectors by the name field using case-insensitve substring matching
         :type name: str
         :param network_number: Filter sectors by network_number using strict equality
         :type network_number: int
+        :param node:
+        :type node: str
         :param page: A page number within the paginated result set.
         :type page: int
-        :param ssid: Filter sectors by the ssid field using strict equality
-        :type ssid: str
+        :param page_size: Number of results to return per page.
+        :type page_size: int
         :param status: Filter sectors by the status field using strict equality
         :type status: str
-        :param type: Filter sectors by the type field using strict equality
-        :type type: str
         :param uisp_id: Filter sectors by the uisp_id field using strict equality
         :type uisp_id: str
         :param _request_timeout: timeout setting for this request. If one
@@ -1074,13 +1080,12 @@ class SectorsApi:
         """ # noqa: E501
 
         _param = self._api_v1_sectors_lookup_list_serialize(
-            model=model,
             name=name,
             network_number=network_number,
+            node=node,
             page=page,
-            ssid=ssid,
+            page_size=page_size,
             status=status,
-            type=type,
             uisp_id=uisp_id,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -1100,13 +1105,12 @@ class SectorsApi:
 
     def _api_v1_sectors_lookup_list_serialize(
         self,
-        model,
         name,
         network_number,
+        node,
         page,
-        ssid,
+        page_size,
         status,
-        type,
         uisp_id,
         _request_auth,
         _content_type,
@@ -1128,10 +1132,6 @@ class SectorsApi:
 
         # process the path parameters
         # process the query parameters
-        if model is not None:
-            
-            _query_params.append(('model', model))
-            
         if name is not None:
             
             _query_params.append(('name', name))
@@ -1140,21 +1140,21 @@ class SectorsApi:
             
             _query_params.append(('network_number', network_number))
             
+        if node is not None:
+            
+            _query_params.append(('node', node))
+            
         if page is not None:
             
             _query_params.append(('page', page))
             
-        if ssid is not None:
+        if page_size is not None:
             
-            _query_params.append(('ssid', ssid))
+            _query_params.append(('page_size', page_size))
             
         if status is not None:
             
             _query_params.append(('status', status))
-            
-        if type is not None:
-            
-            _query_params.append(('type', type))
             
         if uisp_id is not None:
             
@@ -1200,7 +1200,7 @@ class SectorsApi:
     @validate_call
     def api_v1_sectors_partial_update(
         self,
-        id: StrictInt,
+        id: StrictStr,
         patched_sector: Optional[PatchedSector] = None,
         _request_timeout: Union[
             None,
@@ -1219,7 +1219,7 @@ class SectorsApi:
 
 
         :param id: (required)
-        :type id: int
+        :type id: str
         :param patched_sector:
         :type patched_sector: PatchedSector
         :param _request_timeout: timeout setting for this request. If one
@@ -1270,7 +1270,7 @@ class SectorsApi:
     @validate_call
     def api_v1_sectors_partial_update_with_http_info(
         self,
-        id: StrictInt,
+        id: StrictStr,
         patched_sector: Optional[PatchedSector] = None,
         _request_timeout: Union[
             None,
@@ -1289,7 +1289,7 @@ class SectorsApi:
 
 
         :param id: (required)
-        :type id: int
+        :type id: str
         :param patched_sector:
         :type patched_sector: PatchedSector
         :param _request_timeout: timeout setting for this request. If one
@@ -1340,7 +1340,7 @@ class SectorsApi:
     @validate_call
     def api_v1_sectors_partial_update_without_preload_content(
         self,
-        id: StrictInt,
+        id: StrictStr,
         patched_sector: Optional[PatchedSector] = None,
         _request_timeout: Union[
             None,
@@ -1359,7 +1359,7 @@ class SectorsApi:
 
 
         :param id: (required)
-        :type id: int
+        :type id: str
         :param patched_sector:
         :type patched_sector: PatchedSector
         :param _request_timeout: timeout setting for this request. If one
@@ -1486,7 +1486,7 @@ class SectorsApi:
     @validate_call
     def api_v1_sectors_retrieve(
         self,
-        id: StrictInt,
+        id: StrictStr,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1504,7 +1504,7 @@ class SectorsApi:
 
 
         :param id: (required)
-        :type id: int
+        :type id: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -1552,7 +1552,7 @@ class SectorsApi:
     @validate_call
     def api_v1_sectors_retrieve_with_http_info(
         self,
-        id: StrictInt,
+        id: StrictStr,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1570,7 +1570,7 @@ class SectorsApi:
 
 
         :param id: (required)
-        :type id: int
+        :type id: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -1618,7 +1618,7 @@ class SectorsApi:
     @validate_call
     def api_v1_sectors_retrieve_without_preload_content(
         self,
-        id: StrictInt,
+        id: StrictStr,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1636,7 +1636,7 @@ class SectorsApi:
 
 
         :param id: (required)
-        :type id: int
+        :type id: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -1742,7 +1742,7 @@ class SectorsApi:
     @validate_call
     def api_v1_sectors_update(
         self,
-        id: StrictInt,
+        id: StrictStr,
         sector: Sector,
         _request_timeout: Union[
             None,
@@ -1761,7 +1761,7 @@ class SectorsApi:
 
 
         :param id: (required)
-        :type id: int
+        :type id: str
         :param sector: (required)
         :type sector: Sector
         :param _request_timeout: timeout setting for this request. If one
@@ -1812,7 +1812,7 @@ class SectorsApi:
     @validate_call
     def api_v1_sectors_update_with_http_info(
         self,
-        id: StrictInt,
+        id: StrictStr,
         sector: Sector,
         _request_timeout: Union[
             None,
@@ -1831,7 +1831,7 @@ class SectorsApi:
 
 
         :param id: (required)
-        :type id: int
+        :type id: str
         :param sector: (required)
         :type sector: Sector
         :param _request_timeout: timeout setting for this request. If one
@@ -1882,7 +1882,7 @@ class SectorsApi:
     @validate_call
     def api_v1_sectors_update_without_preload_content(
         self,
-        id: StrictInt,
+        id: StrictStr,
         sector: Sector,
         _request_timeout: Union[
             None,
@@ -1901,7 +1901,7 @@ class SectorsApi:
 
 
         :param id: (required)
-        :type id: int
+        :type id: str
         :param sector: (required)
         :type sector: Sector
         :param _request_timeout: timeout setting for this request. If one

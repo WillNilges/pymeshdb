@@ -48,6 +48,9 @@ class TestPaginatedQueryFormList(unittest.TestCase):
                         zip_code = '', 
                         name = '', 
                         phone_number = '', 
+                        additional_phone_numbers = [
+                            ''
+                            ], 
                         primary_email_address = '', 
                         stripe_email_address = '', 
                         additional_email_addresses = [
@@ -71,6 +74,9 @@ class TestPaginatedQueryFormList(unittest.TestCase):
                         zip_code = '', 
                         name = '', 
                         phone_number = '', 
+                        additional_phone_numbers = [
+                            ''
+                            ], 
                         primary_email_address = '', 
                         stripe_email_address = '', 
                         additional_email_addresses = [

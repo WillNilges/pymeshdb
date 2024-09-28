@@ -20,8 +20,9 @@ from pydantic import Field, StrictInt, StrictStr
 from typing import Optional
 from typing_extensions import Annotated
 from pymeshdb.models.node import Node
+from pymeshdb.models.node_edit import NodeEdit
 from pymeshdb.models.paginated_node_list import PaginatedNodeList
-from pymeshdb.models.patched_node import PatchedNode
+from pymeshdb.models.patched_node_edit import PatchedNodeEdit
 
 from pymeshdb.api_client import ApiClient, RequestSerialized
 from pymeshdb.api_response import ApiResponse
@@ -315,7 +316,7 @@ class NodesApi:
     @validate_call
     def api_v1_nodes_destroy(
         self,
-        network_number: Annotated[int, Field(le=8192, strict=True, ge=-2147483648, description="A unique value identifying this node.")],
+        id: StrictStr,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -332,8 +333,8 @@ class NodesApi:
         """api_v1_nodes_destroy
 
 
-        :param network_number: A unique value identifying this node. (required)
-        :type network_number: int
+        :param id: (required)
+        :type id: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -357,7 +358,7 @@ class NodesApi:
         """ # noqa: E501
 
         _param = self._api_v1_nodes_destroy_serialize(
-            network_number=network_number,
+            id=id,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -381,7 +382,7 @@ class NodesApi:
     @validate_call
     def api_v1_nodes_destroy_with_http_info(
         self,
-        network_number: Annotated[int, Field(le=8192, strict=True, ge=-2147483648, description="A unique value identifying this node.")],
+        id: StrictStr,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -398,8 +399,8 @@ class NodesApi:
         """api_v1_nodes_destroy
 
 
-        :param network_number: A unique value identifying this node. (required)
-        :type network_number: int
+        :param id: (required)
+        :type id: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -423,7 +424,7 @@ class NodesApi:
         """ # noqa: E501
 
         _param = self._api_v1_nodes_destroy_serialize(
-            network_number=network_number,
+            id=id,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -447,7 +448,7 @@ class NodesApi:
     @validate_call
     def api_v1_nodes_destroy_without_preload_content(
         self,
-        network_number: Annotated[int, Field(le=8192, strict=True, ge=-2147483648, description="A unique value identifying this node.")],
+        id: StrictStr,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -464,8 +465,8 @@ class NodesApi:
         """api_v1_nodes_destroy
 
 
-        :param network_number: A unique value identifying this node. (required)
-        :type network_number: int
+        :param id: (required)
+        :type id: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -489,7 +490,7 @@ class NodesApi:
         """ # noqa: E501
 
         _param = self._api_v1_nodes_destroy_serialize(
-            network_number=network_number,
+            id=id,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -507,6 +508,256 @@ class NodesApi:
 
 
     def _api_v1_nodes_destroy_serialize(
+        self,
+        id,
+        _request_auth,
+        _content_type,
+        _headers,
+        _host_index,
+    ) -> RequestSerialized:
+
+        _host = None
+
+        _collection_formats: Dict[str, str] = {
+        }
+
+        _path_params: Dict[str, str] = {}
+        _query_params: List[Tuple[str, str]] = []
+        _header_params: Dict[str, Optional[str]] = _headers or {}
+        _form_params: List[Tuple[str, str]] = []
+        _files: Dict[str, Union[str, bytes]] = {}
+        _body_params: Optional[bytes] = None
+
+        # process the path parameters
+        if id is not None:
+            _path_params['id'] = id
+        # process the query parameters
+        # process the header parameters
+        # process the form parameters
+        # process the body parameter
+
+
+
+
+        # authentication setting
+        _auth_settings: List[str] = [
+            'tokenAuth', 
+            'Session ID'
+        ]
+
+        return self.api_client.param_serialize(
+            method='DELETE',
+            resource_path='/api/v1/nodes/{id}/',
+            path_params=_path_params,
+            query_params=_query_params,
+            header_params=_header_params,
+            body=_body_params,
+            post_params=_form_params,
+            files=_files,
+            auth_settings=_auth_settings,
+            collection_formats=_collection_formats,
+            _host=_host,
+            _request_auth=_request_auth
+        )
+
+
+
+
+    @validate_call
+    def api_v1_nodes_destroy2(
+        self,
+        network_number: StrictInt,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> None:
+        """api_v1_nodes_destroy2
+
+
+        :param network_number: (required)
+        :type network_number: int
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._api_v1_nodes_destroy2_serialize(
+            network_number=network_number,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '204': None,
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        response_data.read()
+        return self.api_client.response_deserialize(
+            response_data=response_data,
+            response_types_map=_response_types_map,
+        ).data
+
+
+    @validate_call
+    def api_v1_nodes_destroy2_with_http_info(
+        self,
+        network_number: StrictInt,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> ApiResponse[None]:
+        """api_v1_nodes_destroy2
+
+
+        :param network_number: (required)
+        :type network_number: int
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._api_v1_nodes_destroy2_serialize(
+            network_number=network_number,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '204': None,
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        response_data.read()
+        return self.api_client.response_deserialize(
+            response_data=response_data,
+            response_types_map=_response_types_map,
+        )
+
+
+    @validate_call
+    def api_v1_nodes_destroy2_without_preload_content(
+        self,
+        network_number: StrictInt,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> RESTResponseType:
+        """api_v1_nodes_destroy2
+
+
+        :param network_number: (required)
+        :type network_number: int
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._api_v1_nodes_destroy2_serialize(
+            network_number=network_number,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '204': None,
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        return response_data.response
+
+
+    def _api_v1_nodes_destroy2_serialize(
         self,
         network_number,
         _request_auth,
@@ -566,6 +817,7 @@ class NodesApi:
     def api_v1_nodes_list(
         self,
         page: Annotated[Optional[StrictInt], Field(description="A page number within the paginated result set.")] = None,
+        page_size: Annotated[Optional[StrictInt], Field(description="Number of results to return per page.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -584,6 +836,8 @@ class NodesApi:
 
         :param page: A page number within the paginated result set.
         :type page: int
+        :param page_size: Number of results to return per page.
+        :type page_size: int
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -608,6 +862,7 @@ class NodesApi:
 
         _param = self._api_v1_nodes_list_serialize(
             page=page,
+            page_size=page_size,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -632,6 +887,7 @@ class NodesApi:
     def api_v1_nodes_list_with_http_info(
         self,
         page: Annotated[Optional[StrictInt], Field(description="A page number within the paginated result set.")] = None,
+        page_size: Annotated[Optional[StrictInt], Field(description="Number of results to return per page.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -650,6 +906,8 @@ class NodesApi:
 
         :param page: A page number within the paginated result set.
         :type page: int
+        :param page_size: Number of results to return per page.
+        :type page_size: int
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -674,6 +932,7 @@ class NodesApi:
 
         _param = self._api_v1_nodes_list_serialize(
             page=page,
+            page_size=page_size,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -698,6 +957,7 @@ class NodesApi:
     def api_v1_nodes_list_without_preload_content(
         self,
         page: Annotated[Optional[StrictInt], Field(description="A page number within the paginated result set.")] = None,
+        page_size: Annotated[Optional[StrictInt], Field(description="Number of results to return per page.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -716,6 +976,8 @@ class NodesApi:
 
         :param page: A page number within the paginated result set.
         :type page: int
+        :param page_size: Number of results to return per page.
+        :type page_size: int
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -740,6 +1002,7 @@ class NodesApi:
 
         _param = self._api_v1_nodes_list_serialize(
             page=page,
+            page_size=page_size,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -759,6 +1022,7 @@ class NodesApi:
     def _api_v1_nodes_list_serialize(
         self,
         page,
+        page_size,
         _request_auth,
         _content_type,
         _headers,
@@ -782,6 +1046,10 @@ class NodesApi:
         if page is not None:
             
             _query_params.append(('page', page))
+            
+        if page_size is not None:
+            
+            _query_params.append(('page_size', page_size))
             
         # process the header parameters
         # process the form parameters
@@ -827,6 +1095,7 @@ class NodesApi:
         install_number: Annotated[Optional[StrictInt], Field(description="Filter nodes by install_number using strict equality")] = None,
         name: Annotated[Optional[StrictStr], Field(description="Filter nodes by the name field using case-insensitve substring matching")] = None,
         page: Annotated[Optional[StrictInt], Field(description="A page number within the paginated result set.")] = None,
+        page_size: Annotated[Optional[StrictInt], Field(description="Number of results to return per page.")] = None,
         status: Annotated[Optional[StrictStr], Field(description="Filter nodes by the status field using strict equality")] = None,
         _request_timeout: Union[
             None,
@@ -852,6 +1121,8 @@ class NodesApi:
         :type name: str
         :param page: A page number within the paginated result set.
         :type page: int
+        :param page_size: Number of results to return per page.
+        :type page_size: int
         :param status: Filter nodes by the status field using strict equality
         :type status: str
         :param _request_timeout: timeout setting for this request. If one
@@ -881,6 +1152,7 @@ class NodesApi:
             install_number=install_number,
             name=name,
             page=page,
+            page_size=page_size,
             status=status,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -909,6 +1181,7 @@ class NodesApi:
         install_number: Annotated[Optional[StrictInt], Field(description="Filter nodes by install_number using strict equality")] = None,
         name: Annotated[Optional[StrictStr], Field(description="Filter nodes by the name field using case-insensitve substring matching")] = None,
         page: Annotated[Optional[StrictInt], Field(description="A page number within the paginated result set.")] = None,
+        page_size: Annotated[Optional[StrictInt], Field(description="Number of results to return per page.")] = None,
         status: Annotated[Optional[StrictStr], Field(description="Filter nodes by the status field using strict equality")] = None,
         _request_timeout: Union[
             None,
@@ -934,6 +1207,8 @@ class NodesApi:
         :type name: str
         :param page: A page number within the paginated result set.
         :type page: int
+        :param page_size: Number of results to return per page.
+        :type page_size: int
         :param status: Filter nodes by the status field using strict equality
         :type status: str
         :param _request_timeout: timeout setting for this request. If one
@@ -963,6 +1238,7 @@ class NodesApi:
             install_number=install_number,
             name=name,
             page=page,
+            page_size=page_size,
             status=status,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -991,6 +1267,7 @@ class NodesApi:
         install_number: Annotated[Optional[StrictInt], Field(description="Filter nodes by install_number using strict equality")] = None,
         name: Annotated[Optional[StrictStr], Field(description="Filter nodes by the name field using case-insensitve substring matching")] = None,
         page: Annotated[Optional[StrictInt], Field(description="A page number within the paginated result set.")] = None,
+        page_size: Annotated[Optional[StrictInt], Field(description="Number of results to return per page.")] = None,
         status: Annotated[Optional[StrictStr], Field(description="Filter nodes by the status field using strict equality")] = None,
         _request_timeout: Union[
             None,
@@ -1016,6 +1293,8 @@ class NodesApi:
         :type name: str
         :param page: A page number within the paginated result set.
         :type page: int
+        :param page_size: Number of results to return per page.
+        :type page_size: int
         :param status: Filter nodes by the status field using strict equality
         :type status: str
         :param _request_timeout: timeout setting for this request. If one
@@ -1045,6 +1324,7 @@ class NodesApi:
             install_number=install_number,
             name=name,
             page=page,
+            page_size=page_size,
             status=status,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -1068,6 +1348,7 @@ class NodesApi:
         install_number,
         name,
         page,
+        page_size,
         status,
         _request_auth,
         _content_type,
@@ -1104,6 +1385,10 @@ class NodesApi:
         if page is not None:
             
             _query_params.append(('page', page))
+            
+        if page_size is not None:
+            
+            _query_params.append(('page_size', page_size))
             
         if status is not None:
             
@@ -1149,8 +1434,8 @@ class NodesApi:
     @validate_call
     def api_v1_nodes_partial_update(
         self,
-        network_number: Annotated[int, Field(le=8192, strict=True, ge=-2147483648, description="A unique value identifying this node.")],
-        patched_node: Optional[PatchedNode] = None,
+        id: StrictStr,
+        patched_node_edit: Optional[PatchedNodeEdit] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1163,14 +1448,14 @@ class NodesApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> Node:
+    ) -> NodeEdit:
         """api_v1_nodes_partial_update
 
 
-        :param network_number: A unique value identifying this node. (required)
-        :type network_number: int
-        :param patched_node:
-        :type patched_node: PatchedNode
+        :param id: (required)
+        :type id: str
+        :param patched_node_edit:
+        :type patched_node_edit: PatchedNodeEdit
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -1194,8 +1479,8 @@ class NodesApi:
         """ # noqa: E501
 
         _param = self._api_v1_nodes_partial_update_serialize(
-            network_number=network_number,
-            patched_node=patched_node,
+            id=id,
+            patched_node_edit=patched_node_edit,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -1203,7 +1488,7 @@ class NodesApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "Node",
+            '200': "NodeEdit",
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -1219,8 +1504,8 @@ class NodesApi:
     @validate_call
     def api_v1_nodes_partial_update_with_http_info(
         self,
-        network_number: Annotated[int, Field(le=8192, strict=True, ge=-2147483648, description="A unique value identifying this node.")],
-        patched_node: Optional[PatchedNode] = None,
+        id: StrictStr,
+        patched_node_edit: Optional[PatchedNodeEdit] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1233,14 +1518,14 @@ class NodesApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[Node]:
+    ) -> ApiResponse[NodeEdit]:
         """api_v1_nodes_partial_update
 
 
-        :param network_number: A unique value identifying this node. (required)
-        :type network_number: int
-        :param patched_node:
-        :type patched_node: PatchedNode
+        :param id: (required)
+        :type id: str
+        :param patched_node_edit:
+        :type patched_node_edit: PatchedNodeEdit
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -1264,8 +1549,8 @@ class NodesApi:
         """ # noqa: E501
 
         _param = self._api_v1_nodes_partial_update_serialize(
-            network_number=network_number,
-            patched_node=patched_node,
+            id=id,
+            patched_node_edit=patched_node_edit,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -1273,7 +1558,7 @@ class NodesApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "Node",
+            '200': "NodeEdit",
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -1289,8 +1574,8 @@ class NodesApi:
     @validate_call
     def api_v1_nodes_partial_update_without_preload_content(
         self,
-        network_number: Annotated[int, Field(le=8192, strict=True, ge=-2147483648, description="A unique value identifying this node.")],
-        patched_node: Optional[PatchedNode] = None,
+        id: StrictStr,
+        patched_node_edit: Optional[PatchedNodeEdit] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1307,10 +1592,10 @@ class NodesApi:
         """api_v1_nodes_partial_update
 
 
-        :param network_number: A unique value identifying this node. (required)
-        :type network_number: int
-        :param patched_node:
-        :type patched_node: PatchedNode
+        :param id: (required)
+        :type id: str
+        :param patched_node_edit:
+        :type patched_node_edit: PatchedNodeEdit
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -1334,8 +1619,8 @@ class NodesApi:
         """ # noqa: E501
 
         _param = self._api_v1_nodes_partial_update_serialize(
-            network_number=network_number,
-            patched_node=patched_node,
+            id=id,
+            patched_node_edit=patched_node_edit,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -1343,7 +1628,7 @@ class NodesApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "Node",
+            '200': "NodeEdit",
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -1354,8 +1639,294 @@ class NodesApi:
 
     def _api_v1_nodes_partial_update_serialize(
         self,
+        id,
+        patched_node_edit,
+        _request_auth,
+        _content_type,
+        _headers,
+        _host_index,
+    ) -> RequestSerialized:
+
+        _host = None
+
+        _collection_formats: Dict[str, str] = {
+        }
+
+        _path_params: Dict[str, str] = {}
+        _query_params: List[Tuple[str, str]] = []
+        _header_params: Dict[str, Optional[str]] = _headers or {}
+        _form_params: List[Tuple[str, str]] = []
+        _files: Dict[str, Union[str, bytes]] = {}
+        _body_params: Optional[bytes] = None
+
+        # process the path parameters
+        if id is not None:
+            _path_params['id'] = id
+        # process the query parameters
+        # process the header parameters
+        # process the form parameters
+        # process the body parameter
+        if patched_node_edit is not None:
+            _body_params = patched_node_edit
+
+
+        # set the HTTP header `Accept`
+        _header_params['Accept'] = self.api_client.select_header_accept(
+            [
+                'application/json'
+            ]
+        )
+
+        # set the HTTP header `Content-Type`
+        if _content_type:
+            _header_params['Content-Type'] = _content_type
+        else:
+            _default_content_type = (
+                self.api_client.select_header_content_type(
+                    [
+                        'application/json', 
+                        'application/x-www-form-urlencoded', 
+                        'multipart/form-data'
+                    ]
+                )
+            )
+            if _default_content_type is not None:
+                _header_params['Content-Type'] = _default_content_type
+
+        # authentication setting
+        _auth_settings: List[str] = [
+            'tokenAuth', 
+            'Session ID'
+        ]
+
+        return self.api_client.param_serialize(
+            method='PATCH',
+            resource_path='/api/v1/nodes/{id}/',
+            path_params=_path_params,
+            query_params=_query_params,
+            header_params=_header_params,
+            body=_body_params,
+            post_params=_form_params,
+            files=_files,
+            auth_settings=_auth_settings,
+            collection_formats=_collection_formats,
+            _host=_host,
+            _request_auth=_request_auth
+        )
+
+
+
+
+    @validate_call
+    def api_v1_nodes_partial_update2(
+        self,
+        network_number: StrictInt,
+        patched_node_edit: Optional[PatchedNodeEdit] = None,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> NodeEdit:
+        """api_v1_nodes_partial_update2
+
+
+        :param network_number: (required)
+        :type network_number: int
+        :param patched_node_edit:
+        :type patched_node_edit: PatchedNodeEdit
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._api_v1_nodes_partial_update2_serialize(
+            network_number=network_number,
+            patched_node_edit=patched_node_edit,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "NodeEdit",
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        response_data.read()
+        return self.api_client.response_deserialize(
+            response_data=response_data,
+            response_types_map=_response_types_map,
+        ).data
+
+
+    @validate_call
+    def api_v1_nodes_partial_update2_with_http_info(
+        self,
+        network_number: StrictInt,
+        patched_node_edit: Optional[PatchedNodeEdit] = None,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> ApiResponse[NodeEdit]:
+        """api_v1_nodes_partial_update2
+
+
+        :param network_number: (required)
+        :type network_number: int
+        :param patched_node_edit:
+        :type patched_node_edit: PatchedNodeEdit
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._api_v1_nodes_partial_update2_serialize(
+            network_number=network_number,
+            patched_node_edit=patched_node_edit,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "NodeEdit",
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        response_data.read()
+        return self.api_client.response_deserialize(
+            response_data=response_data,
+            response_types_map=_response_types_map,
+        )
+
+
+    @validate_call
+    def api_v1_nodes_partial_update2_without_preload_content(
+        self,
+        network_number: StrictInt,
+        patched_node_edit: Optional[PatchedNodeEdit] = None,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> RESTResponseType:
+        """api_v1_nodes_partial_update2
+
+
+        :param network_number: (required)
+        :type network_number: int
+        :param patched_node_edit:
+        :type patched_node_edit: PatchedNodeEdit
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._api_v1_nodes_partial_update2_serialize(
+            network_number=network_number,
+            patched_node_edit=patched_node_edit,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "NodeEdit",
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        return response_data.response
+
+
+    def _api_v1_nodes_partial_update2_serialize(
+        self,
         network_number,
-        patched_node,
+        patched_node_edit,
         _request_auth,
         _content_type,
         _headers,
@@ -1381,8 +1952,8 @@ class NodesApi:
         # process the header parameters
         # process the form parameters
         # process the body parameter
-        if patched_node is not None:
-            _body_params = patched_node
+        if patched_node_edit is not None:
+            _body_params = patched_node_edit
 
 
         # set the HTTP header `Accept`
@@ -1435,7 +2006,7 @@ class NodesApi:
     @validate_call
     def api_v1_nodes_retrieve(
         self,
-        network_number: Annotated[int, Field(le=8192, strict=True, ge=-2147483648, description="A unique value identifying this node.")],
+        id: StrictStr,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1448,12 +2019,12 @@ class NodesApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> Node:
+    ) -> NodeEdit:
         """api_v1_nodes_retrieve
 
 
-        :param network_number: A unique value identifying this node. (required)
-        :type network_number: int
+        :param id: (required)
+        :type id: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -1477,7 +2048,7 @@ class NodesApi:
         """ # noqa: E501
 
         _param = self._api_v1_nodes_retrieve_serialize(
-            network_number=network_number,
+            id=id,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -1485,7 +2056,7 @@ class NodesApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "Node",
+            '200': "NodeEdit",
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -1501,7 +2072,7 @@ class NodesApi:
     @validate_call
     def api_v1_nodes_retrieve_with_http_info(
         self,
-        network_number: Annotated[int, Field(le=8192, strict=True, ge=-2147483648, description="A unique value identifying this node.")],
+        id: StrictStr,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1514,12 +2085,12 @@ class NodesApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[Node]:
+    ) -> ApiResponse[NodeEdit]:
         """api_v1_nodes_retrieve
 
 
-        :param network_number: A unique value identifying this node. (required)
-        :type network_number: int
+        :param id: (required)
+        :type id: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -1543,7 +2114,7 @@ class NodesApi:
         """ # noqa: E501
 
         _param = self._api_v1_nodes_retrieve_serialize(
-            network_number=network_number,
+            id=id,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -1551,7 +2122,7 @@ class NodesApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "Node",
+            '200': "NodeEdit",
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -1567,7 +2138,7 @@ class NodesApi:
     @validate_call
     def api_v1_nodes_retrieve_without_preload_content(
         self,
-        network_number: Annotated[int, Field(le=8192, strict=True, ge=-2147483648, description="A unique value identifying this node.")],
+        id: StrictStr,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1584,8 +2155,8 @@ class NodesApi:
         """api_v1_nodes_retrieve
 
 
-        :param network_number: A unique value identifying this node. (required)
-        :type network_number: int
+        :param id: (required)
+        :type id: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -1609,7 +2180,7 @@ class NodesApi:
         """ # noqa: E501
 
         _param = self._api_v1_nodes_retrieve_serialize(
-            network_number=network_number,
+            id=id,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -1617,7 +2188,7 @@ class NodesApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "Node",
+            '200': "NodeEdit",
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -1627,6 +2198,262 @@ class NodesApi:
 
 
     def _api_v1_nodes_retrieve_serialize(
+        self,
+        id,
+        _request_auth,
+        _content_type,
+        _headers,
+        _host_index,
+    ) -> RequestSerialized:
+
+        _host = None
+
+        _collection_formats: Dict[str, str] = {
+        }
+
+        _path_params: Dict[str, str] = {}
+        _query_params: List[Tuple[str, str]] = []
+        _header_params: Dict[str, Optional[str]] = _headers or {}
+        _form_params: List[Tuple[str, str]] = []
+        _files: Dict[str, Union[str, bytes]] = {}
+        _body_params: Optional[bytes] = None
+
+        # process the path parameters
+        if id is not None:
+            _path_params['id'] = id
+        # process the query parameters
+        # process the header parameters
+        # process the form parameters
+        # process the body parameter
+
+
+        # set the HTTP header `Accept`
+        _header_params['Accept'] = self.api_client.select_header_accept(
+            [
+                'application/json'
+            ]
+        )
+
+
+        # authentication setting
+        _auth_settings: List[str] = [
+            'tokenAuth', 
+            'Session ID'
+        ]
+
+        return self.api_client.param_serialize(
+            method='GET',
+            resource_path='/api/v1/nodes/{id}/',
+            path_params=_path_params,
+            query_params=_query_params,
+            header_params=_header_params,
+            body=_body_params,
+            post_params=_form_params,
+            files=_files,
+            auth_settings=_auth_settings,
+            collection_formats=_collection_formats,
+            _host=_host,
+            _request_auth=_request_auth
+        )
+
+
+
+
+    @validate_call
+    def api_v1_nodes_retrieve2(
+        self,
+        network_number: StrictInt,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> NodeEdit:
+        """api_v1_nodes_retrieve2
+
+
+        :param network_number: (required)
+        :type network_number: int
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._api_v1_nodes_retrieve2_serialize(
+            network_number=network_number,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "NodeEdit",
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        response_data.read()
+        return self.api_client.response_deserialize(
+            response_data=response_data,
+            response_types_map=_response_types_map,
+        ).data
+
+
+    @validate_call
+    def api_v1_nodes_retrieve2_with_http_info(
+        self,
+        network_number: StrictInt,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> ApiResponse[NodeEdit]:
+        """api_v1_nodes_retrieve2
+
+
+        :param network_number: (required)
+        :type network_number: int
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._api_v1_nodes_retrieve2_serialize(
+            network_number=network_number,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "NodeEdit",
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        response_data.read()
+        return self.api_client.response_deserialize(
+            response_data=response_data,
+            response_types_map=_response_types_map,
+        )
+
+
+    @validate_call
+    def api_v1_nodes_retrieve2_without_preload_content(
+        self,
+        network_number: StrictInt,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> RESTResponseType:
+        """api_v1_nodes_retrieve2
+
+
+        :param network_number: (required)
+        :type network_number: int
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._api_v1_nodes_retrieve2_serialize(
+            network_number=network_number,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "NodeEdit",
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        return response_data.response
+
+
+    def _api_v1_nodes_retrieve2_serialize(
         self,
         network_number,
         _request_auth,
@@ -1691,8 +2518,8 @@ class NodesApi:
     @validate_call
     def api_v1_nodes_update(
         self,
-        network_number: Annotated[int, Field(le=8192, strict=True, ge=-2147483648, description="A unique value identifying this node.")],
-        node: Node,
+        id: StrictStr,
+        node_edit: NodeEdit,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1705,14 +2532,14 @@ class NodesApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> Node:
+    ) -> NodeEdit:
         """api_v1_nodes_update
 
 
-        :param network_number: A unique value identifying this node. (required)
-        :type network_number: int
-        :param node: (required)
-        :type node: Node
+        :param id: (required)
+        :type id: str
+        :param node_edit: (required)
+        :type node_edit: NodeEdit
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -1736,8 +2563,8 @@ class NodesApi:
         """ # noqa: E501
 
         _param = self._api_v1_nodes_update_serialize(
-            network_number=network_number,
-            node=node,
+            id=id,
+            node_edit=node_edit,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -1745,7 +2572,7 @@ class NodesApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "Node",
+            '200': "NodeEdit",
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -1761,8 +2588,8 @@ class NodesApi:
     @validate_call
     def api_v1_nodes_update_with_http_info(
         self,
-        network_number: Annotated[int, Field(le=8192, strict=True, ge=-2147483648, description="A unique value identifying this node.")],
-        node: Node,
+        id: StrictStr,
+        node_edit: NodeEdit,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1775,14 +2602,14 @@ class NodesApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[Node]:
+    ) -> ApiResponse[NodeEdit]:
         """api_v1_nodes_update
 
 
-        :param network_number: A unique value identifying this node. (required)
-        :type network_number: int
-        :param node: (required)
-        :type node: Node
+        :param id: (required)
+        :type id: str
+        :param node_edit: (required)
+        :type node_edit: NodeEdit
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -1806,8 +2633,8 @@ class NodesApi:
         """ # noqa: E501
 
         _param = self._api_v1_nodes_update_serialize(
-            network_number=network_number,
-            node=node,
+            id=id,
+            node_edit=node_edit,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -1815,7 +2642,7 @@ class NodesApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "Node",
+            '200': "NodeEdit",
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -1831,8 +2658,8 @@ class NodesApi:
     @validate_call
     def api_v1_nodes_update_without_preload_content(
         self,
-        network_number: Annotated[int, Field(le=8192, strict=True, ge=-2147483648, description="A unique value identifying this node.")],
-        node: Node,
+        id: StrictStr,
+        node_edit: NodeEdit,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1849,10 +2676,10 @@ class NodesApi:
         """api_v1_nodes_update
 
 
-        :param network_number: A unique value identifying this node. (required)
-        :type network_number: int
-        :param node: (required)
-        :type node: Node
+        :param id: (required)
+        :type id: str
+        :param node_edit: (required)
+        :type node_edit: NodeEdit
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -1876,8 +2703,8 @@ class NodesApi:
         """ # noqa: E501
 
         _param = self._api_v1_nodes_update_serialize(
-            network_number=network_number,
-            node=node,
+            id=id,
+            node_edit=node_edit,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -1885,7 +2712,7 @@ class NodesApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "Node",
+            '200': "NodeEdit",
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -1896,8 +2723,294 @@ class NodesApi:
 
     def _api_v1_nodes_update_serialize(
         self,
+        id,
+        node_edit,
+        _request_auth,
+        _content_type,
+        _headers,
+        _host_index,
+    ) -> RequestSerialized:
+
+        _host = None
+
+        _collection_formats: Dict[str, str] = {
+        }
+
+        _path_params: Dict[str, str] = {}
+        _query_params: List[Tuple[str, str]] = []
+        _header_params: Dict[str, Optional[str]] = _headers or {}
+        _form_params: List[Tuple[str, str]] = []
+        _files: Dict[str, Union[str, bytes]] = {}
+        _body_params: Optional[bytes] = None
+
+        # process the path parameters
+        if id is not None:
+            _path_params['id'] = id
+        # process the query parameters
+        # process the header parameters
+        # process the form parameters
+        # process the body parameter
+        if node_edit is not None:
+            _body_params = node_edit
+
+
+        # set the HTTP header `Accept`
+        _header_params['Accept'] = self.api_client.select_header_accept(
+            [
+                'application/json'
+            ]
+        )
+
+        # set the HTTP header `Content-Type`
+        if _content_type:
+            _header_params['Content-Type'] = _content_type
+        else:
+            _default_content_type = (
+                self.api_client.select_header_content_type(
+                    [
+                        'application/json', 
+                        'application/x-www-form-urlencoded', 
+                        'multipart/form-data'
+                    ]
+                )
+            )
+            if _default_content_type is not None:
+                _header_params['Content-Type'] = _default_content_type
+
+        # authentication setting
+        _auth_settings: List[str] = [
+            'tokenAuth', 
+            'Session ID'
+        ]
+
+        return self.api_client.param_serialize(
+            method='PUT',
+            resource_path='/api/v1/nodes/{id}/',
+            path_params=_path_params,
+            query_params=_query_params,
+            header_params=_header_params,
+            body=_body_params,
+            post_params=_form_params,
+            files=_files,
+            auth_settings=_auth_settings,
+            collection_formats=_collection_formats,
+            _host=_host,
+            _request_auth=_request_auth
+        )
+
+
+
+
+    @validate_call
+    def api_v1_nodes_update2(
+        self,
+        network_number: StrictInt,
+        node_edit: NodeEdit,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> NodeEdit:
+        """api_v1_nodes_update2
+
+
+        :param network_number: (required)
+        :type network_number: int
+        :param node_edit: (required)
+        :type node_edit: NodeEdit
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._api_v1_nodes_update2_serialize(
+            network_number=network_number,
+            node_edit=node_edit,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "NodeEdit",
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        response_data.read()
+        return self.api_client.response_deserialize(
+            response_data=response_data,
+            response_types_map=_response_types_map,
+        ).data
+
+
+    @validate_call
+    def api_v1_nodes_update2_with_http_info(
+        self,
+        network_number: StrictInt,
+        node_edit: NodeEdit,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> ApiResponse[NodeEdit]:
+        """api_v1_nodes_update2
+
+
+        :param network_number: (required)
+        :type network_number: int
+        :param node_edit: (required)
+        :type node_edit: NodeEdit
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._api_v1_nodes_update2_serialize(
+            network_number=network_number,
+            node_edit=node_edit,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "NodeEdit",
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        response_data.read()
+        return self.api_client.response_deserialize(
+            response_data=response_data,
+            response_types_map=_response_types_map,
+        )
+
+
+    @validate_call
+    def api_v1_nodes_update2_without_preload_content(
+        self,
+        network_number: StrictInt,
+        node_edit: NodeEdit,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> RESTResponseType:
+        """api_v1_nodes_update2
+
+
+        :param network_number: (required)
+        :type network_number: int
+        :param node_edit: (required)
+        :type node_edit: NodeEdit
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._api_v1_nodes_update2_serialize(
+            network_number=network_number,
+            node_edit=node_edit,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "NodeEdit",
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        return response_data.response
+
+
+    def _api_v1_nodes_update2_serialize(
+        self,
         network_number,
-        node,
+        node_edit,
         _request_auth,
         _content_type,
         _headers,
@@ -1923,8 +3036,8 @@ class NodesApi:
         # process the header parameters
         # process the form parameters
         # process the body parameter
-        if node is not None:
-            _body_params = node
+        if node_edit is not None:
+            _body_params = node_edit
 
 
         # set the HTTP header `Accept`

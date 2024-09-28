@@ -27,11 +27,12 @@ class JoinFormSuccessResponse(BaseModel):
     JoinFormSuccessResponse
     """ # noqa: E501
     detail: StrictStr
-    building_id: StrictInt
-    member_id: StrictInt
+    building_id: StrictStr
+    member_id: StrictStr
+    install_id: StrictStr
     install_number: StrictInt
     member_exists: StrictBool
-    __properties: ClassVar[List[str]] = ["detail", "building_id", "member_id", "install_number", "member_exists"]
+    __properties: ClassVar[List[str]] = ["detail", "building_id", "member_id", "install_id", "install_number", "member_exists"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -87,6 +88,7 @@ class JoinFormSuccessResponse(BaseModel):
             "detail": obj.get("detail"),
             "building_id": obj.get("building_id"),
             "member_id": obj.get("member_id"),
+            "install_id": obj.get("install_id"),
             "install_number": obj.get("install_number"),
             "member_exists": obj.get("member_exists")
         })

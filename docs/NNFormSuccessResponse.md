@@ -6,7 +6,8 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **detail** | **str** |  | 
-**building_id** | **int** |  | 
+**building_id** | **str** |  | 
+**install_id** | **str** |  | 
 **install_number** | **int** |  | 
 **network_number** | **int** |  | 
 **created** | **bool** |  | 

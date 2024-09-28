@@ -35,7 +35,7 @@ class TestPatchedLink(unittest.TestCase):
         model = PatchedLink()
         if include_optional:
             return PatchedLink(
-                id = 56,
+                id = '',
                 status = 'Inactive',
                 type = None,
                 install_date = datetime.datetime.strptime('1975-12-30', '%Y-%m-%d').date(),
@@ -43,8 +43,10 @@ class TestPatchedLink(unittest.TestCase):
                 description = '',
                 notes = '',
                 uisp_id = '',
-                from_device = 56,
-                to_device = 56
+                from_device = pymeshdb.models.link_from_device.Link_from_device(
+                    id = '', ),
+                to_device = pymeshdb.models.link_from_device.Link_from_device(
+                    id = '', )
             )
         else:
             return PatchedLink(

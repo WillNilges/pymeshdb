@@ -138,7 +138,7 @@ configuration.api_key['Session ID'] = os.environ["API_KEY"]
 with pymeshdb.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = pymeshdb.SectorsApi(api_client)
-    id = 56 # int | 
+    id = 'id_example' # str | 
 
     try:
         api_instance.api_v1_sectors_destroy(id)
@@ -153,7 +153,7 @@ with pymeshdb.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **id** | **int**|  | 
+ **id** | **str**|  | 
 
 ### Return type
 
@@ -177,7 +177,7 @@ void (empty response body)
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **api_v1_sectors_list**
-> PaginatedSectorList api_v1_sectors_list(page=page)
+> PaginatedSectorList api_v1_sectors_list(page=page, page_size=page_size)
 
 
 
@@ -220,9 +220,10 @@ with pymeshdb.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = pymeshdb.SectorsApi(api_client)
     page = 56 # int | A page number within the paginated result set. (optional)
+    page_size = 56 # int | Number of results to return per page. (optional)
 
     try:
-        api_response = api_instance.api_v1_sectors_list(page=page)
+        api_response = api_instance.api_v1_sectors_list(page=page, page_size=page_size)
         print("The response of SectorsApi->api_v1_sectors_list:\n")
         pprint(api_response)
     except Exception as e:
@@ -237,6 +238,7 @@ with pymeshdb.ApiClient(configuration) as api_client:
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **page** | **int**| A page number within the paginated result set. | [optional] 
+ **page_size** | **int**| Number of results to return per page. | [optional] 
 
 ### Return type
 
@@ -260,7 +262,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **api_v1_sectors_lookup_list**
-> PaginatedSectorList api_v1_sectors_lookup_list(model=model, name=name, network_number=network_number, page=page, ssid=ssid, status=status, type=type, uisp_id=uisp_id)
+> PaginatedSectorList api_v1_sectors_lookup_list(name=name, network_number=network_number, node=node, page=page, page_size=page_size, status=status, uisp_id=uisp_id)
 
 
 
@@ -302,17 +304,16 @@ configuration.api_key['Session ID'] = os.environ["API_KEY"]
 with pymeshdb.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = pymeshdb.SectorsApi(api_client)
-    model = 'model_example' # str | Filter sectors by the model name field using strict equality (optional)
     name = 'name_example' # str | Filter sectors by the name field using case-insensitve substring matching (optional)
     network_number = 56 # int | Filter sectors by network_number using strict equality (optional)
+    node = 'node_example' # str |  (optional)
     page = 56 # int | A page number within the paginated result set. (optional)
-    ssid = 'ssid_example' # str | Filter sectors by the ssid field using strict equality (optional)
+    page_size = 56 # int | Number of results to return per page. (optional)
     status = 'status_example' # str | Filter sectors by the status field using strict equality (optional)
-    type = 'type_example' # str | Filter sectors by the type field using strict equality (optional)
     uisp_id = 'uisp_id_example' # str | Filter sectors by the uisp_id field using strict equality (optional)
 
     try:
-        api_response = api_instance.api_v1_sectors_lookup_list(model=model, name=name, network_number=network_number, page=page, ssid=ssid, status=status, type=type, uisp_id=uisp_id)
+        api_response = api_instance.api_v1_sectors_lookup_list(name=name, network_number=network_number, node=node, page=page, page_size=page_size, status=status, uisp_id=uisp_id)
         print("The response of SectorsApi->api_v1_sectors_lookup_list:\n")
         pprint(api_response)
     except Exception as e:
@@ -326,13 +327,12 @@ with pymeshdb.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **model** | **str**| Filter sectors by the model name field using strict equality | [optional] 
  **name** | **str**| Filter sectors by the name field using case-insensitve substring matching | [optional] 
  **network_number** | **int**| Filter sectors by network_number using strict equality | [optional] 
+ **node** | **str**|  | [optional] 
  **page** | **int**| A page number within the paginated result set. | [optional] 
- **ssid** | **str**| Filter sectors by the ssid field using strict equality | [optional] 
+ **page_size** | **int**| Number of results to return per page. | [optional] 
  **status** | **str**| Filter sectors by the status field using strict equality | [optional] 
- **type** | **str**| Filter sectors by the type field using strict equality | [optional] 
  **uisp_id** | **str**| Filter sectors by the uisp_id field using strict equality | [optional] 
 
 ### Return type
@@ -400,7 +400,7 @@ configuration.api_key['Session ID'] = os.environ["API_KEY"]
 with pymeshdb.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = pymeshdb.SectorsApi(api_client)
-    id = 56 # int | 
+    id = 'id_example' # str | 
     patched_sector = pymeshdb.PatchedSector() # PatchedSector |  (optional)
 
     try:
@@ -418,7 +418,7 @@ with pymeshdb.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **id** | **int**|  | 
+ **id** | **str**|  | 
  **patched_sector** | [**PatchedSector**](PatchedSector.md)|  | [optional] 
 
 ### Return type
@@ -485,7 +485,7 @@ configuration.api_key['Session ID'] = os.environ["API_KEY"]
 with pymeshdb.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = pymeshdb.SectorsApi(api_client)
-    id = 56 # int | 
+    id = 'id_example' # str | 
 
     try:
         api_response = api_instance.api_v1_sectors_retrieve(id)
@@ -502,7 +502,7 @@ with pymeshdb.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **id** | **int**|  | 
+ **id** | **str**|  | 
 
 ### Return type
 
@@ -568,7 +568,7 @@ configuration.api_key['Session ID'] = os.environ["API_KEY"]
 with pymeshdb.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = pymeshdb.SectorsApi(api_client)
-    id = 56 # int | 
+    id = 'id_example' # str | 
     sector = pymeshdb.Sector() # Sector | 
 
     try:
@@ -586,7 +586,7 @@ with pymeshdb.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **id** | **int**|  | 
+ **id** | **str**|  | 
  **sector** | [**Sector**](Sector.md)|  | 
 
 ### Return type

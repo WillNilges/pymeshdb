@@ -26,6 +26,13 @@ class TestWebsiteMapDataApi(unittest.TestCase):
     def tearDown(self) -> None:
         pass
 
+    def test_api_v1_mapdata_kiosks_retrieve(self) -> None:
+        """Test case for api_v1_mapdata_kiosks_retrieve
+
+        Proxy for the city of new york LinkNYC kisok location dataset. Output in a JSON format that is compatible with the website map. (Warning: This endpoint is a legacy format and may be deprecated/removed in the future)
+        """
+        pass
+
     def test_api_v1_mapdata_links_list(self) -> None:
         """Test case for api_v1_mapdata_links_list
 

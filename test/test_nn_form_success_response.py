@@ -36,7 +36,8 @@ class TestNNFormSuccessResponse(unittest.TestCase):
         if include_optional:
             return NNFormSuccessResponse(
                 detail = '',
-                building_id = 56,
+                building_id = '',
+                install_id = '',
                 install_number = 56,
                 network_number = 56,
                 created = True
@@ -44,7 +45,8 @@ class TestNNFormSuccessResponse(unittest.TestCase):
         else:
             return NNFormSuccessResponse(
                 detail = '',
-                building_id = 56,
+                building_id = '',
+                install_id = '',
                 install_number = 56,
                 network_number = 56,
                 created = True,

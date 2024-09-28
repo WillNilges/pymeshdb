@@ -20,7 +20,7 @@ from typing_extensions import Self
 
 class AddressTruthSourcesEnum(str, Enum):
     """
-    * `OSMNominatim` - OSMNominatim * `OSMNominatimZIPOnly` - OSMNominatimZIPOnly * `NYCPlanningLabs` - NYCPlanningLabs * `PeliasStringParsing` - PeliasStringParsing * `ReverseGeocodeFromCoordinates` - ReverseGeocodeFromCoordinates
+    * `OSMNominatim` - OSMNominatim * `OSMNominatimZIPOnly` - OSMNominatimZIPOnly * `NYCPlanningLabs` - NYCPlanningLabs * `PeliasStringParsing` - PeliasStringParsing * `ReverseGeocodeFromCoordinates` - ReverseGeocodeFromCoordinates * `HumanEntry` - HumanEntry
     """
 
     """
@@ -31,6 +31,7 @@ class AddressTruthSourcesEnum(str, Enum):
     NYCPLANNINGLABS = 'NYCPlanningLabs'
     PELIASSTRINGPARSING = 'PeliasStringParsing'
     REVERSEGEOCODEFROMCOORDINATES = 'ReverseGeocodeFromCoordinates'
+    HUMANENTRY = 'HumanEntry'
 
     @classmethod
     def from_json(cls, json_str: str) -> Self:

@@ -35,12 +35,17 @@ class TestPatchedMember(unittest.TestCase):
         model = PatchedMember()
         if include_optional:
             return PatchedMember(
-                id = 56,
+                id = '',
                 all_email_addresses = [
                     ''
                     ],
+                all_phone_numbers = [
+                    ''
+                    ],
                 installs = [
-                    56
+                    pymeshdb.models.building_installs_inner.Building_installs_inner(
+                        id = '', 
+                        install_number = 56, )
                     ],
                 name = '',
                 primary_email_address = '',
@@ -49,6 +54,9 @@ class TestPatchedMember(unittest.TestCase):
                     ''
                     ],
                 phone_number = '',
+                additional_phone_numbers = [
+                    ''
+                    ],
                 slack_handle = '',
                 notes = ''
             )

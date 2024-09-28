@@ -35,13 +35,14 @@ class QueryForm(BaseModel):
     zip_code: StrictStr
     name: StrictStr
     phone_number: StrictStr
+    additional_phone_numbers: List[StrictStr]
     primary_email_address: StrictStr
     stripe_email_address: StrictStr
     additional_email_addresses: List[StrictStr]
     notes: StrictStr
     network_number: Optional[StrictInt]
     status: Status195Enum = Field(description="The current status of this install  * `Request Received` - Request Received * `Pending` - Pending * `Blocked` - Blocked * `Active` - Active * `Inactive` - Inactive * `Closed` - Closed * `NN Reassigned` - Nn Reassigned")
-    __properties: ClassVar[List[str]] = ["install_number", "street_address", "unit", "city", "state", "zip_code", "name", "phone_number", "primary_email_address", "stripe_email_address", "additional_email_addresses", "notes", "network_number", "status"]
+    __properties: ClassVar[List[str]] = ["install_number", "street_address", "unit", "city", "state", "zip_code", "name", "phone_number", "additional_phone_numbers", "primary_email_address", "stripe_email_address", "additional_email_addresses", "notes", "network_number", "status"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -116,6 +117,7 @@ class QueryForm(BaseModel):
             "zip_code": obj.get("zip_code"),
             "name": obj.get("name"),
             "phone_number": obj.get("phone_number"),
+            "additional_phone_numbers": obj.get("additional_phone_numbers"),
             "primary_email_address": obj.get("primary_email_address"),
             "stripe_email_address": obj.get("stripe_email_address"),
             "additional_email_addresses": obj.get("additional_email_addresses"),

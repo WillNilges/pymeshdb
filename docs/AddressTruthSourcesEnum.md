@@ -1,6 +1,6 @@
 # AddressTruthSourcesEnum
 
-* `OSMNominatim` - OSMNominatim * `OSMNominatimZIPOnly` - OSMNominatimZIPOnly * `NYCPlanningLabs` - NYCPlanningLabs * `PeliasStringParsing` - PeliasStringParsing * `ReverseGeocodeFromCoordinates` - ReverseGeocodeFromCoordinates
+* `OSMNominatim` - OSMNominatim * `OSMNominatimZIPOnly` - OSMNominatimZIPOnly * `NYCPlanningLabs` - NYCPlanningLabs * `PeliasStringParsing` - PeliasStringParsing * `ReverseGeocodeFromCoordinates` - ReverseGeocodeFromCoordinates * `HumanEntry` - HumanEntry
 
 ## Properties
 

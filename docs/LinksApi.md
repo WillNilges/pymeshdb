@@ -138,7 +138,7 @@ configuration.api_key['Session ID'] = os.environ["API_KEY"]
 with pymeshdb.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = pymeshdb.LinksApi(api_client)
-    id = 56 # int | 
+    id = 'id_example' # str | 
 
     try:
         api_instance.api_v1_links_destroy(id)
@@ -153,7 +153,7 @@ with pymeshdb.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **id** | **int**|  | 
+ **id** | **str**|  | 
 
 ### Return type
 
@@ -177,7 +177,7 @@ void (empty response body)
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **api_v1_links_list**
-> PaginatedLinkList api_v1_links_list(page=page)
+> PaginatedLinkList api_v1_links_list(page=page, page_size=page_size)
 
 
 
@@ -220,9 +220,10 @@ with pymeshdb.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = pymeshdb.LinksApi(api_client)
     page = 56 # int | A page number within the paginated result set. (optional)
+    page_size = 56 # int | Number of results to return per page. (optional)
 
     try:
-        api_response = api_instance.api_v1_links_list(page=page)
+        api_response = api_instance.api_v1_links_list(page=page, page_size=page_size)
         print("The response of LinksApi->api_v1_links_list:\n")
         pprint(api_response)
     except Exception as e:
@@ -237,6 +238,7 @@ with pymeshdb.ApiClient(configuration) as api_client:
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **page** | **int**| A page number within the paginated result set. | [optional] 
+ **page_size** | **int**| Number of results to return per page. | [optional] 
 
 ### Return type
 
@@ -260,7 +262,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **api_v1_links_lookup_list**
-> PaginatedLinkList api_v1_links_lookup_list(device=device, network_number=network_number, page=page, status=status, type=type, uisp_id=uisp_id)
+> PaginatedLinkList api_v1_links_lookup_list(device=device, network_number=network_number, node=node, page=page, page_size=page_size, status=status, type=type, uisp_id=uisp_id)
 
 
 
@@ -304,13 +306,15 @@ with pymeshdb.ApiClient(configuration) as api_client:
     api_instance = pymeshdb.LinksApi(api_client)
     device = 56 # int | Filter links by the id of the devices they connect using strict equality (optional)
     network_number = 56 # int | Filter links by network_number of the devices they connect using strict equality (optional)
+    node = 'node_example' # str |  (optional)
     page = 56 # int | A page number within the paginated result set. (optional)
+    page_size = 56 # int | Number of results to return per page. (optional)
     status = 'status_example' # str | Filter links by the status field using strict equality (optional)
     type = 'type_example' # str | Filter links by the type field using strict equality (optional)
     uisp_id = 'uisp_id_example' # str | Filter links by the uisp_id field using strict equality (optional)
 
     try:
-        api_response = api_instance.api_v1_links_lookup_list(device=device, network_number=network_number, page=page, status=status, type=type, uisp_id=uisp_id)
+        api_response = api_instance.api_v1_links_lookup_list(device=device, network_number=network_number, node=node, page=page, page_size=page_size, status=status, type=type, uisp_id=uisp_id)
         print("The response of LinksApi->api_v1_links_lookup_list:\n")
         pprint(api_response)
     except Exception as e:
@@ -326,7 +330,9 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **device** | **int**| Filter links by the id of the devices they connect using strict equality | [optional] 
  **network_number** | **int**| Filter links by network_number of the devices they connect using strict equality | [optional] 
+ **node** | **str**|  | [optional] 
  **page** | **int**| A page number within the paginated result set. | [optional] 
+ **page_size** | **int**| Number of results to return per page. | [optional] 
  **status** | **str**| Filter links by the status field using strict equality | [optional] 
  **type** | **str**| Filter links by the type field using strict equality | [optional] 
  **uisp_id** | **str**| Filter links by the uisp_id field using strict equality | [optional] 
@@ -396,7 +402,7 @@ configuration.api_key['Session ID'] = os.environ["API_KEY"]
 with pymeshdb.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = pymeshdb.LinksApi(api_client)
-    id = 56 # int | 
+    id = 'id_example' # str | 
     patched_link = pymeshdb.PatchedLink() # PatchedLink |  (optional)
 
     try:
@@ -414,7 +420,7 @@ with pymeshdb.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **id** | **int**|  | 
+ **id** | **str**|  | 
  **patched_link** | [**PatchedLink**](PatchedLink.md)|  | [optional] 
 
 ### Return type
@@ -481,7 +487,7 @@ configuration.api_key['Session ID'] = os.environ["API_KEY"]
 with pymeshdb.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = pymeshdb.LinksApi(api_client)
-    id = 56 # int | 
+    id = 'id_example' # str | 
 
     try:
         api_response = api_instance.api_v1_links_retrieve(id)
@@ -498,7 +504,7 @@ with pymeshdb.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **id** | **int**|  | 
+ **id** | **str**|  | 
 
 ### Return type
 
@@ -564,7 +570,7 @@ configuration.api_key['Session ID'] = os.environ["API_KEY"]
 with pymeshdb.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = pymeshdb.LinksApi(api_client)
-    id = 56 # int | 
+    id = 'id_example' # str | 
     link = pymeshdb.Link() # Link | 
 
     try:
@@ -582,7 +588,7 @@ with pymeshdb.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **id** | **int**|  | 
+ **id** | **str**|  | 
  **link** | [**Link**](Link.md)|  | 
 
 ### Return type

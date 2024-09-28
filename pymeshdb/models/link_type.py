@@ -27,7 +27,7 @@ LINKTYPE_ONE_OF_SCHEMAS = ["BlankEnum", "LinkTypeEnum"]
 
 class LinkType(BaseModel):
     """
-    The technology used for this link 5Ghz, 60Ghz, fiber, etc.  * `Standard` - Standard * `VPN` - Vpn * `MMWave` - Mmwave * `Fiber` - Fiber
+    The technology used for this link 5Ghz, 60Ghz, fiber, etc.  * `5 GHz` - Five Ghz * `24 GHz` - Twentyfour Ghz * `60 GHz` - Sixty Ghz * `70-80 GHz` - Seventy Eighty Ghz * `VPN` - Vpn * `Fiber` - Fiber * `Ethernet` - Ethernet
     """
     # data type: LinkTypeEnum
     oneof_schema_1_validator: Optional[LinkTypeEnum] = None

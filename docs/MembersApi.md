@@ -138,7 +138,7 @@ configuration.api_key['Session ID'] = os.environ["API_KEY"]
 with pymeshdb.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = pymeshdb.MembersApi(api_client)
-    id = 56 # int | 
+    id = 'id_example' # str | 
 
     try:
         api_instance.api_v1_members_destroy(id)
@@ -153,7 +153,7 @@ with pymeshdb.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **id** | **int**|  | 
+ **id** | **str**|  | 
 
 ### Return type
 
@@ -177,7 +177,7 @@ void (empty response body)
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **api_v1_members_list**
-> PaginatedMemberList api_v1_members_list(page=page)
+> PaginatedMemberList api_v1_members_list(page=page, page_size=page_size)
 
 
 
@@ -220,9 +220,10 @@ with pymeshdb.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = pymeshdb.MembersApi(api_client)
     page = 56 # int | A page number within the paginated result set. (optional)
+    page_size = 56 # int | Number of results to return per page. (optional)
 
     try:
-        api_response = api_instance.api_v1_members_list(page=page)
+        api_response = api_instance.api_v1_members_list(page=page, page_size=page_size)
         print("The response of MembersApi->api_v1_members_list:\n")
         pprint(api_response)
     except Exception as e:
@@ -237,6 +238,7 @@ with pymeshdb.ApiClient(configuration) as api_client:
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **page** | **int**| A page number within the paginated result set. | [optional] 
+ **page_size** | **int**| Number of results to return per page. | [optional] 
 
 ### Return type
 
@@ -260,7 +262,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **api_v1_members_lookup_list**
-> PaginatedMemberList api_v1_members_lookup_list(email_address=email_address, name=name, page=page, phone_number=phone_number)
+> PaginatedMemberList api_v1_members_lookup_list(email_address=email_address, name=name, page=page, page_size=page_size, phone_number=phone_number)
 
 
 
@@ -305,10 +307,11 @@ with pymeshdb.ApiClient(configuration) as api_client:
     email_address = 'email_address_example' # str | Filter members by any of the email address fields using case-insensitve substring matching (optional)
     name = 'name_example' # str | Filter members by the name field using case-insensitve substring matching (optional)
     page = 56 # int | A page number within the paginated result set. (optional)
-    phone_number = 'phone_number_example' # str | Filter members by the phone_number field using case-insensitve substring matching (optional)
+    page_size = 56 # int | Number of results to return per page. (optional)
+    phone_number = 'phone_number_example' # str | Filter members by any of the phone number fields using case-insensitve substring matching (optional)
 
     try:
-        api_response = api_instance.api_v1_members_lookup_list(email_address=email_address, name=name, page=page, phone_number=phone_number)
+        api_response = api_instance.api_v1_members_lookup_list(email_address=email_address, name=name, page=page, page_size=page_size, phone_number=phone_number)
         print("The response of MembersApi->api_v1_members_lookup_list:\n")
         pprint(api_response)
     except Exception as e:
@@ -325,7 +328,8 @@ Name | Type | Description  | Notes
  **email_address** | **str**| Filter members by any of the email address fields using case-insensitve substring matching | [optional] 
  **name** | **str**| Filter members by the name field using case-insensitve substring matching | [optional] 
  **page** | **int**| A page number within the paginated result set. | [optional] 
- **phone_number** | **str**| Filter members by the phone_number field using case-insensitve substring matching | [optional] 
+ **page_size** | **int**| Number of results to return per page. | [optional] 
+ **phone_number** | **str**| Filter members by any of the phone number fields using case-insensitve substring matching | [optional] 
 
 ### Return type
 
@@ -392,7 +396,7 @@ configuration.api_key['Session ID'] = os.environ["API_KEY"]
 with pymeshdb.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = pymeshdb.MembersApi(api_client)
-    id = 56 # int | 
+    id = 'id_example' # str | 
     patched_member = pymeshdb.PatchedMember() # PatchedMember |  (optional)
 
     try:
@@ -410,7 +414,7 @@ with pymeshdb.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **id** | **int**|  | 
+ **id** | **str**|  | 
  **patched_member** | [**PatchedMember**](PatchedMember.md)|  | [optional] 
 
 ### Return type
@@ -477,7 +481,7 @@ configuration.api_key['Session ID'] = os.environ["API_KEY"]
 with pymeshdb.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = pymeshdb.MembersApi(api_client)
-    id = 56 # int | 
+    id = 'id_example' # str | 
 
     try:
         api_response = api_instance.api_v1_members_retrieve(id)
@@ -494,7 +498,7 @@ with pymeshdb.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **id** | **int**|  | 
+ **id** | **str**|  | 
 
 ### Return type
 
@@ -560,7 +564,7 @@ configuration.api_key['Session ID'] = os.environ["API_KEY"]
 with pymeshdb.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = pymeshdb.MembersApi(api_client)
-    id = 56 # int | 
+    id = 'id_example' # str | 
     member = pymeshdb.Member() # Member | 
 
     try:
@@ -578,7 +582,7 @@ with pymeshdb.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **id** | **int**|  | 
+ **id** | **str**|  | 
  **member** | [**Member**](Member.md)|  | 
 
 ### Return type

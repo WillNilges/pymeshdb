@@ -40,12 +40,17 @@ class TestPaginatedMemberList(unittest.TestCase):
                 previous = 'http://api.example.org/accounts/?page=2',
                 results = [
                     pymeshdb.models.member.Member(
-                        id = 56, 
+                        id = '', 
                         all_email_addresses = [
                             ''
                             ], 
+                        all_phone_numbers = [
+                            ''
+                            ], 
                         installs = [
-                            56
+                            pymeshdb.models.building_installs_inner.Building_installs_inner(
+                                id = '', 
+                                install_number = 56, )
                             ], 
                         name = '', 
                         primary_email_address = '', 
@@ -54,6 +59,9 @@ class TestPaginatedMemberList(unittest.TestCase):
                             ''
                             ], 
                         phone_number = '', 
+                        additional_phone_numbers = [
+                            ''
+                            ], 
                         slack_handle = '', 
                         notes = '', )
                     ]
@@ -63,12 +71,17 @@ class TestPaginatedMemberList(unittest.TestCase):
                 count = 123,
                 results = [
                     pymeshdb.models.member.Member(
-                        id = 56, 
+                        id = '', 
                         all_email_addresses = [
                             ''
                             ], 
+                        all_phone_numbers = [
+                            ''
+                            ], 
                         installs = [
-                            56
+                            pymeshdb.models.building_installs_inner.Building_installs_inner(
+                                id = '', 
+                                install_number = 56, )
                             ], 
                         name = '', 
                         primary_email_address = '', 
@@ -77,6 +90,9 @@ class TestPaginatedMemberList(unittest.TestCase):
                             ''
                             ], 
                         phone_number = '', 
+                        additional_phone_numbers = [
+                            ''
+                            ], 
                         slack_handle = '', 
                         notes = '', )
                     ],
