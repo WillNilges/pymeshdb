@@ -16,8 +16,6 @@ Method | HTTP request | Description
 # **api_v1_members_create**
 > Member api_v1_members_create(member)
 
-
-
 ### Example
 
 * Api Key Authentication (tokenAuth):
@@ -99,8 +97,6 @@ Name | Type | Description  | Notes
 # **api_v1_members_destroy**
 > api_v1_members_destroy(id)
 
-
-
 ### Example
 
 * Api Key Authentication (tokenAuth):
@@ -178,8 +174,6 @@ void (empty response body)
 
 # **api_v1_members_list**
 > PaginatedMemberList api_v1_members_list(page=page, page_size=page_size)
-
-
 
 ### Example
 
@@ -263,8 +257,6 @@ Name | Type | Description  | Notes
 
 # **api_v1_members_lookup_list**
 > PaginatedMemberList api_v1_members_lookup_list(email_address=email_address, name=name, page=page, page_size=page_size, phone_number=phone_number)
-
-
 
 ### Example
 
@@ -355,8 +347,6 @@ Name | Type | Description  | Notes
 # **api_v1_members_partial_update**
 > Member api_v1_members_partial_update(id, patched_member=patched_member)
 
-
-
 ### Example
 
 * Api Key Authentication (tokenAuth):
@@ -441,8 +431,6 @@ Name | Type | Description  | Notes
 # **api_v1_members_retrieve**
 > Member api_v1_members_retrieve(id)
 
-
-
 ### Example
 
 * Api Key Authentication (tokenAuth):
@@ -523,8 +511,6 @@ Name | Type | Description  | Notes
 
 # **api_v1_members_update**
 > Member api_v1_members_update(id, member)
-
-
 
 ### Example
 

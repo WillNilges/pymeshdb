@@ -16,8 +16,6 @@ Method | HTTP request | Description
 # **api_v1_links_create**
 > Link api_v1_links_create(link)
 
-
-
 ### Example
 
 * Api Key Authentication (tokenAuth):
@@ -99,8 +97,6 @@ Name | Type | Description  | Notes
 # **api_v1_links_destroy**
 > api_v1_links_destroy(id)
 
-
-
 ### Example
 
 * Api Key Authentication (tokenAuth):
@@ -178,8 +174,6 @@ void (empty response body)
 
 # **api_v1_links_list**
 > PaginatedLinkList api_v1_links_list(page=page, page_size=page_size)
-
-
 
 ### Example
 
@@ -263,8 +257,6 @@ Name | Type | Description  | Notes
 
 # **api_v1_links_lookup_list**
 > PaginatedLinkList api_v1_links_lookup_list(device=device, network_number=network_number, node=node, page=page, page_size=page_size, status=status, type=type, uisp_id=uisp_id)
-
-
 
 ### Example
 
@@ -361,8 +353,6 @@ Name | Type | Description  | Notes
 # **api_v1_links_partial_update**
 > Link api_v1_links_partial_update(id, patched_link=patched_link)
 
-
-
 ### Example
 
 * Api Key Authentication (tokenAuth):
@@ -447,8 +437,6 @@ Name | Type | Description  | Notes
 # **api_v1_links_retrieve**
 > Link api_v1_links_retrieve(id)
 
-
-
 ### Example
 
 * Api Key Authentication (tokenAuth):
@@ -529,8 +517,6 @@ Name | Type | Description  | Notes
 
 # **api_v1_links_update**
 > Link api_v1_links_update(id, link)
-
-
 
 ### Example
 

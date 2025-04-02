@@ -16,8 +16,6 @@ Method | HTTP request | Description
 # **api_v1_loses_create**
 > LOS api_v1_loses_create(los)
 
-
-
 ### Example
 
 * Api Key Authentication (tokenAuth):
@@ -99,8 +97,6 @@ Name | Type | Description  | Notes
 # **api_v1_loses_destroy**
 > api_v1_loses_destroy(id)
 
-
-
 ### Example
 
 * Api Key Authentication (tokenAuth):
@@ -178,8 +174,6 @@ void (empty response body)
 
 # **api_v1_loses_list**
 > PaginatedLOSList api_v1_loses_list(page=page, page_size=page_size)
-
-
 
 ### Example
 
@@ -263,8 +257,6 @@ Name | Type | Description  | Notes
 
 # **api_v1_loses_lookup_list**
 > PaginatedLOSList api_v1_loses_lookup_list(analysis_date=analysis_date, building=building, install_number=install_number, network_number=network_number, node=node, page=page, page_size=page_size, source=source)
-
-
 
 ### Example
 
@@ -361,8 +353,6 @@ Name | Type | Description  | Notes
 # **api_v1_loses_partial_update**
 > LOS api_v1_loses_partial_update(id, patched_los=patched_los)
 
-
-
 ### Example
 
 * Api Key Authentication (tokenAuth):
@@ -447,8 +437,6 @@ Name | Type | Description  | Notes
 # **api_v1_loses_retrieve**
 > LOS api_v1_loses_retrieve(id)
 
-
-
 ### Example
 
 * Api Key Authentication (tokenAuth):
@@ -529,8 +517,6 @@ Name | Type | Description  | Notes
 
 # **api_v1_loses_update**
 > LOS api_v1_loses_update(id, los)
-
-
 
 ### Example
 

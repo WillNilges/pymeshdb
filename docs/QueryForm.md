@@ -20,7 +20,8 @@ Name | Type | Description | Notes
 **additional_email_addresses** | **List[str]** |  | 
 **notes** | **str** |  | [readonly] 
 **network_number** | **int** |  | 
-**status** | [**Status195Enum**](Status195Enum.md) | The current status of this install  * &#x60;Request Received&#x60; - Request Received * &#x60;Pending&#x60; - Pending * &#x60;Blocked&#x60; - Blocked * &#x60;Active&#x60; - Active * &#x60;Inactive&#x60; - Inactive * &#x60;Closed&#x60; - Closed * &#x60;NN Reassigned&#x60; - Nn Reassigned | 
+**network_number_status** | **str** |  | 
+**status** | [**Status4ffEnum**](Status4ffEnum.md) | The current status of this install  * &#x60;Request Received&#x60; - Request Received * &#x60;Pending&#x60; - Pending * &#x60;Blocked&#x60; - Blocked * &#x60;Active&#x60; - Active * &#x60;Inactive&#x60; - Inactive * &#x60;Closed&#x60; - Closed * &#x60;NN Reassigned&#x60; - NN Reassigned | 
 
 ## Example
 

@@ -7,10 +7,11 @@ A  ModelSerializer MixIn which sets `NestedKeyObjectRelatedField` as the default
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **id** | **str** |  | [optional] [readonly] 
+**request_date** | **datetime** |  | [optional] 
+**install_fee_billing_datum** | [**InstallInstallFeeBillingDatum**](InstallInstallFeeBillingDatum.md) |  | [optional] 
 **install_number** | **int** |  | [optional] [readonly] 
-**status** | [**Status195Enum**](Status195Enum.md) | The current status of this install  * &#x60;Request Received&#x60; - Request Received * &#x60;Pending&#x60; - Pending * &#x60;Blocked&#x60; - Blocked * &#x60;Active&#x60; - Active * &#x60;Inactive&#x60; - Inactive * &#x60;Closed&#x60; - Closed * &#x60;NN Reassigned&#x60; - Nn Reassigned | [optional] 
+**status** | [**Status4ffEnum**](Status4ffEnum.md) | The current status of this install  * &#x60;Request Received&#x60; - Request Received * &#x60;Pending&#x60; - Pending * &#x60;Blocked&#x60; - Blocked * &#x60;Active&#x60; - Active * &#x60;Inactive&#x60; - Inactive * &#x60;Closed&#x60; - Closed * &#x60;NN Reassigned&#x60; - NN Reassigned | [optional] 
 **ticket_number** | **str** | The ticket number of the OSTicket used to track communications with the member about this install. Note that although this appears to be an integer, it is not. Leading zeros are important, so this should be stored as a string at all times | [optional] 
-**request_date** | **date** | The date that this install request was received | [optional] 
 **install_date** | **date** | The date this install was completed and deployed to the mesh | [optional] 
 **abandon_date** | **date** | The date this install was abandoned, unplugged, or disassembled | [optional] 
 **unit** | **str** | Line 2 of this install&#39;s mailing address | [optional] 
@@ -21,6 +22,7 @@ Name | Type | Description | Notes
 **node** | [**InstallNode**](InstallNode.md) |  | [optional] 
 **building** | [**InstallBuilding**](InstallBuilding.md) |  | [optional] 
 **member** | [**InstallMember**](InstallMember.md) |  | [optional] 
+**additional_members** | [**List[InstallAdditionalMembersInner]**](InstallAdditionalMembersInner.md) | Any additional members associated with this install. E.g. roommates, parents, caretakers etc. Anyone that might contact us on behalf of this install belongs here | [optional] 
 
 ## Example
 

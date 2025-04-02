@@ -16,8 +16,6 @@ Method | HTTP request | Description
 # **api_v1_sectors_create**
 > Sector api_v1_sectors_create(sector)
 
-
-
 ### Example
 
 * Api Key Authentication (tokenAuth):
@@ -99,8 +97,6 @@ Name | Type | Description  | Notes
 # **api_v1_sectors_destroy**
 > api_v1_sectors_destroy(id)
 
-
-
 ### Example
 
 * Api Key Authentication (tokenAuth):
@@ -178,8 +174,6 @@ void (empty response body)
 
 # **api_v1_sectors_list**
 > PaginatedSectorList api_v1_sectors_list(page=page, page_size=page_size)
-
-
 
 ### Example
 
@@ -263,8 +257,6 @@ Name | Type | Description  | Notes
 
 # **api_v1_sectors_lookup_list**
 > PaginatedSectorList api_v1_sectors_lookup_list(name=name, network_number=network_number, node=node, page=page, page_size=page_size, status=status, uisp_id=uisp_id)
-
-
 
 ### Example
 
@@ -359,8 +351,6 @@ Name | Type | Description  | Notes
 # **api_v1_sectors_partial_update**
 > Sector api_v1_sectors_partial_update(id, patched_sector=patched_sector)
 
-
-
 ### Example
 
 * Api Key Authentication (tokenAuth):
@@ -445,8 +435,6 @@ Name | Type | Description  | Notes
 # **api_v1_sectors_retrieve**
 > Sector api_v1_sectors_retrieve(id)
 
-
-
 ### Example
 
 * Api Key Authentication (tokenAuth):
@@ -527,8 +515,6 @@ Name | Type | Description  | Notes
 
 # **api_v1_sectors_update**
 > Sector api_v1_sectors_update(id, sector)
-
-
 
 ### Example
 

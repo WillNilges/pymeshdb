@@ -13,7 +13,7 @@ Name | Type | Description | Notes
 **network_number** | **int** |  | [readonly] 
 **name** | **str** | The colloquial name of this node used among mesh volunteers, if applicable | [optional] 
 **status** | [**Status2a6Enum**](Status2a6Enum.md) | The current status of this Node  * &#x60;Inactive&#x60; - Inactive * &#x60;Active&#x60; - Active * &#x60;Planned&#x60; - Planned | 
-**type** | [**TypeB10Enum**](TypeB10Enum.md) | The type of node this is, controls the icon used on the network map  * &#x60;Standard&#x60; - Standard * &#x60;Hub&#x60; - Hub * &#x60;Supernode&#x60; - Supernode * &#x60;POP&#x60; - Pop * &#x60;AP&#x60; - Ap * &#x60;Remote&#x60; - Remote | [optional] 
+**type** | [**Type1bfEnum**](Type1bfEnum.md) | The type of node this is, controls the icon used on the network map  * &#x60;Standard&#x60; - Standard * &#x60;Hub&#x60; - Hub * &#x60;Supernode&#x60; - Supernode * &#x60;POP&#x60; - POP * &#x60;AP&#x60; - AP * &#x60;Remote&#x60; - Remote | [optional] 
 **latitude** | **float** | Approximate Node latitude in decimal degrees (this will match one of the attached Building objects in most cases, but has been manually moved around in some cases to more accurately reflect node location) | 
 **longitude** | **float** | Approximate Node longitude in decimal degrees (this will match one of the attached Building objects in most cases, but has been manually moved around in some cases to more accurately reflect node location) | 
 **altitude** | **float** | Approximate Node altitude in \&quot;absolute\&quot; meters above mean sea level (this will match one of the attached Building objects in most cases, but has been manually moved around in some cases to more accurately reflect node location) | [optional] 

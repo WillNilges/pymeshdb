@@ -82,7 +82,8 @@ No authorization required
 
 Assign a network number to a given Install object. Used by the NN Assignment form
 
-Takes an install number, and assigns the install a network number, deduping using the other buildings in our database.
+Takes an install number, and assigns the install a network number,
+deduping using the other buildings in our database.
 
 ### Example
 

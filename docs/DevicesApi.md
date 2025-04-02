@@ -16,8 +16,6 @@ Method | HTTP request | Description
 # **api_v1_devices_create**
 > Device api_v1_devices_create(device)
 
-
-
 ### Example
 
 * Api Key Authentication (tokenAuth):
@@ -99,8 +97,6 @@ Name | Type | Description  | Notes
 # **api_v1_devices_destroy**
 > api_v1_devices_destroy(id)
 
-
-
 ### Example
 
 * Api Key Authentication (tokenAuth):
@@ -178,8 +174,6 @@ void (empty response body)
 
 # **api_v1_devices_list**
 > PaginatedDeviceList api_v1_devices_list(page=page, page_size=page_size)
-
-
 
 ### Example
 
@@ -263,8 +257,6 @@ Name | Type | Description  | Notes
 
 # **api_v1_devices_lookup_list**
 > PaginatedDeviceList api_v1_devices_lookup_list(name=name, network_number=network_number, node=node, page=page, page_size=page_size, status=status, uisp_id=uisp_id)
-
-
 
 ### Example
 
@@ -359,8 +351,6 @@ Name | Type | Description  | Notes
 # **api_v1_devices_partial_update**
 > Device api_v1_devices_partial_update(id, patched_device=patched_device)
 
-
-
 ### Example
 
 * Api Key Authentication (tokenAuth):
@@ -445,8 +435,6 @@ Name | Type | Description  | Notes
 # **api_v1_devices_retrieve**
 > Device api_v1_devices_retrieve(id)
 
-
-
 ### Example
 
 * Api Key Authentication (tokenAuth):
@@ -527,8 +515,6 @@ Name | Type | Description  | Notes
 
 # **api_v1_devices_update**
 > Device api_v1_devices_update(id, device)
-
-
 
 ### Example
 

@@ -11,6 +11,7 @@ Name | Type | Description | Notes
 **install_id** | **str** |  | 
 **install_number** | **int** |  | 
 **member_exists** | **bool** |  | 
+**changed_info** | **Dict[str, object]** |  | 
 
 ## Example
 

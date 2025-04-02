@@ -1,6 +1,6 @@
 # LinkType
 
-The technology used for this link 5Ghz, 60Ghz, fiber, etc.  * `5 GHz` - Five Ghz * `24 GHz` - Twentyfour Ghz * `60 GHz` - Sixty Ghz * `70-80 GHz` - Seventy Eighty Ghz * `VPN` - Vpn * `Fiber` - Fiber * `Ethernet` - Ethernet
+The technology used for this link 5Ghz, 60Ghz, fiber, etc.  * `5 GHz` - 5 GHz * `24 GHz` - 24 GHz * `60 GHz` - 60 GHz * `70-80 GHz` - 70-80 GHz * `VPN` - VPN * `Fiber` - Fiber * `Ethernet` - Ethernet
 
 ## Properties
 

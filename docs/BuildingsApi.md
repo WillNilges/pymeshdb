@@ -16,8 +16,6 @@ Method | HTTP request | Description
 # **api_v1_buildings_create**
 > Building api_v1_buildings_create(building)
 
-
-
 ### Example
 
 * Api Key Authentication (tokenAuth):
@@ -99,8 +97,6 @@ Name | Type | Description  | Notes
 # **api_v1_buildings_destroy**
 > api_v1_buildings_destroy(id)
 
-
-
 ### Example
 
 * Api Key Authentication (tokenAuth):
@@ -178,8 +174,6 @@ void (empty response body)
 
 # **api_v1_buildings_list**
 > PaginatedBuildingList api_v1_buildings_list(page=page, page_size=page_size)
-
-
 
 ### Example
 
@@ -263,8 +257,6 @@ Name | Type | Description  | Notes
 
 # **api_v1_buildings_lookup_list**
 > PaginatedBuildingList api_v1_buildings_lookup_list(bin=bin, city=city, install_number=install_number, network_number=network_number, node=node, page=page, page_size=page_size, primary_network_number=primary_network_number, primary_node=primary_node, state=state, street_address=street_address, zip_code=zip_code)
-
-
 
 ### Example
 
@@ -369,8 +361,6 @@ Name | Type | Description  | Notes
 # **api_v1_buildings_partial_update**
 > Building api_v1_buildings_partial_update(id, patched_building=patched_building)
 
-
-
 ### Example
 
 * Api Key Authentication (tokenAuth):
@@ -455,8 +445,6 @@ Name | Type | Description  | Notes
 # **api_v1_buildings_retrieve**
 > Building api_v1_buildings_retrieve(id)
 
-
-
 ### Example
 
 * Api Key Authentication (tokenAuth):
@@ -537,8 +525,6 @@ Name | Type | Description  | Notes
 
 # **api_v1_buildings_update**
 > Building api_v1_buildings_update(id, building)
-
-
 
 ### Example
 

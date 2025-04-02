@@ -12,7 +12,9 @@ Method | HTTP request | Description
 
 Check API status
 
-This endpoint can be used by clients to determine the health status of this API. This API always returns 200 status codes, accepts no input, and has no side effects. It always returns the string \"We're meshin'.\"
+This endpoint can be used by clients to determine the health status of this API. This API always
+returns 200 status codes, accepts no input, and has no side effects. It always returns the
+string "We're meshin'."
 
 ### Example
 

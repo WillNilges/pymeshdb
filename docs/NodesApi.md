@@ -20,8 +20,6 @@ Method | HTTP request | Description
 # **api_v1_nodes_create**
 > Node api_v1_nodes_create(node)
 
-
-
 ### Example
 
 * Api Key Authentication (tokenAuth):
@@ -103,8 +101,6 @@ Name | Type | Description  | Notes
 # **api_v1_nodes_destroy**
 > api_v1_nodes_destroy(id)
 
-
-
 ### Example
 
 * Api Key Authentication (tokenAuth):
@@ -183,8 +179,6 @@ void (empty response body)
 # **api_v1_nodes_destroy2**
 > api_v1_nodes_destroy2(network_number)
 
-
-
 ### Example
 
 * Api Key Authentication (tokenAuth):
@@ -262,8 +256,6 @@ void (empty response body)
 
 # **api_v1_nodes_list**
 > PaginatedNodeList api_v1_nodes_list(page=page, page_size=page_size)
-
-
 
 ### Example
 
@@ -347,8 +339,6 @@ Name | Type | Description  | Notes
 
 # **api_v1_nodes_lookup_list**
 > PaginatedNodeList api_v1_nodes_lookup_list(building=building, install_number=install_number, name=name, page=page, page_size=page_size, status=status)
-
-
 
 ### Example
 
@@ -441,8 +431,6 @@ Name | Type | Description  | Notes
 # **api_v1_nodes_partial_update**
 > NodeEdit api_v1_nodes_partial_update(id, patched_node_edit=patched_node_edit)
 
-
-
 ### Example
 
 * Api Key Authentication (tokenAuth):
@@ -526,8 +514,6 @@ Name | Type | Description  | Notes
 
 # **api_v1_nodes_partial_update2**
 > NodeEdit api_v1_nodes_partial_update2(network_number, patched_node_edit=patched_node_edit)
-
-
 
 ### Example
 
@@ -613,8 +599,6 @@ Name | Type | Description  | Notes
 # **api_v1_nodes_retrieve**
 > NodeEdit api_v1_nodes_retrieve(id)
 
-
-
 ### Example
 
 * Api Key Authentication (tokenAuth):
@@ -696,8 +680,6 @@ Name | Type | Description  | Notes
 # **api_v1_nodes_retrieve2**
 > NodeEdit api_v1_nodes_retrieve2(network_number)
 
-
-
 ### Example
 
 * Api Key Authentication (tokenAuth):
@@ -778,8 +760,6 @@ Name | Type | Description  | Notes
 
 # **api_v1_nodes_update**
 > NodeEdit api_v1_nodes_update(id, node_edit)
-
-
 
 ### Example
 
@@ -863,8 +843,6 @@ Name | Type | Description  | Notes
 
 # **api_v1_nodes_update2**
 > NodeEdit api_v1_nodes_update2(network_number, node_edit)
-
-
 
 ### Example
 

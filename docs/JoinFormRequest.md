@@ -7,16 +7,17 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **first_name** | **str** |  | 
 **last_name** | **str** |  | 
-**email** | **str** |  | 
-**phone** | **str** |  | 
+**email_address** | **str** |  | 
+**phone_number** | **str** |  | 
 **street_address** | **str** |  | 
 **city** | **str** |  | 
 **state** | **str** |  | 
-**zip** | **int** |  | 
+**zip_code** | **str** |  | 
 **apartment** | **str** |  | 
 **roof_access** | **bool** |  | 
 **referral** | **str** |  | 
 **ncl** | **bool** |  | 
+**trust_me_bro** | **bool** |  | 
 
 ## Example
 

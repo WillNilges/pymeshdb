@@ -20,8 +20,6 @@ Method | HTTP request | Description
 # **api_v1_installs_create**
 > Install api_v1_installs_create(install)
 
-
-
 ### Example
 
 * Api Key Authentication (tokenAuth):
@@ -103,8 +101,6 @@ Name | Type | Description  | Notes
 # **api_v1_installs_destroy**
 > api_v1_installs_destroy(id)
 
-
-
 ### Example
 
 * Api Key Authentication (tokenAuth):
@@ -183,8 +179,6 @@ void (empty response body)
 # **api_v1_installs_destroy2**
 > api_v1_installs_destroy2(install_number)
 
-
-
 ### Example
 
 * Api Key Authentication (tokenAuth):
@@ -262,8 +256,6 @@ void (empty response body)
 
 # **api_v1_installs_list**
 > PaginatedInstallList api_v1_installs_list(page=page, page_size=page_size)
-
-
 
 ### Example
 
@@ -347,8 +339,6 @@ Name | Type | Description  | Notes
 
 # **api_v1_installs_lookup_list**
 > PaginatedInstallList api_v1_installs_lookup_list(building=building, member=member, network_number=network_number, node=node, page=page, page_size=page_size, status=status)
-
-
 
 ### Example
 
@@ -443,8 +433,6 @@ Name | Type | Description  | Notes
 # **api_v1_installs_partial_update**
 > Install api_v1_installs_partial_update(id, patched_install=patched_install)
 
-
-
 ### Example
 
 * Api Key Authentication (tokenAuth):
@@ -528,8 +516,6 @@ Name | Type | Description  | Notes
 
 # **api_v1_installs_partial_update2**
 > Install api_v1_installs_partial_update2(install_number, patched_install=patched_install)
-
-
 
 ### Example
 
@@ -615,8 +601,6 @@ Name | Type | Description  | Notes
 # **api_v1_installs_retrieve**
 > Install api_v1_installs_retrieve(id)
 
-
-
 ### Example
 
 * Api Key Authentication (tokenAuth):
@@ -698,8 +682,6 @@ Name | Type | Description  | Notes
 # **api_v1_installs_retrieve2**
 > Install api_v1_installs_retrieve2(install_number)
 
-
-
 ### Example
 
 * Api Key Authentication (tokenAuth):
@@ -780,8 +762,6 @@ Name | Type | Description  | Notes
 
 # **api_v1_installs_update**
 > Install api_v1_installs_update(id, install)
-
-
 
 ### Example
 
@@ -865,8 +845,6 @@ Name | Type | Description  | Notes
 
 # **api_v1_installs_update2**
 > Install api_v1_installs_update2(install_number, install)
-
-
 
 ### Example
 

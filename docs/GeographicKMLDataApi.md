@@ -54,7 +54,7 @@ with pymeshdb.ApiClient(configuration) as api_client:
     city = 'city_example' # str | 
     state = 'state_example' # str | 
     street_address = 'street_address_example' # str | 
-    zip = 56 # int | 
+    zip = 'zip_example' # str | 
 
     try:
         # Use the NYC geocoding APIs to look up an address, and return the lat/lon/alt corresponding to it or 404 if the address cannot be found within NYC
@@ -75,7 +75,7 @@ Name | Type | Description  | Notes
  **city** | **str**|  | 
  **state** | **str**|  | 
  **street_address** | **str**|  | 
- **zip** | **int**|  | 
+ **zip** | **str**|  | 
 
 ### Return type
 

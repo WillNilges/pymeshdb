@@ -2,10 +2,19 @@
 
 * `OSMNominatim` - OSMNominatim * `OSMNominatimZIPOnly` - OSMNominatimZIPOnly * `NYCPlanningLabs` - NYCPlanningLabs * `PeliasStringParsing` - PeliasStringParsing * `ReverseGeocodeFromCoordinates` - ReverseGeocodeFromCoordinates * `HumanEntry` - HumanEntry
 
-## Properties
+## Enum
 
-Name | Type | Description | Notes
------------- | ------------- | ------------- | -------------
+* `OSMNOMINATIM` (value: `'OSMNominatim'`)
+
+* `OSMNOMINATIMZIPONLY` (value: `'OSMNominatimZIPOnly'`)
+
+* `NYCPLANNINGLABS` (value: `'NYCPlanningLabs'`)
+
+* `PELIASSTRINGPARSING` (value: `'PeliasStringParsing'`)
+
+* `REVERSEGEOCODEFROMCOORDINATES` (value: `'ReverseGeocodeFromCoordinates'`)
+
+* `HUMANENTRY` (value: `'HumanEntry'`)
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 
