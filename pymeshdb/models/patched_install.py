@@ -114,6 +114,11 @@ class PatchedInstall(BaseModel):
                 if _item_additional_members:
                     _items.append(_item_additional_members.to_dict())
             _dict['additional_members'] = _items
+        # set to None if install_fee_billing_datum (nullable) is None
+        # and model_fields_set contains the field
+        if self.install_fee_billing_datum is None and "install_fee_billing_datum" in self.model_fields_set:
+            _dict['install_fee_billing_datum'] = None
+
         # set to None if ticket_number (nullable) is None
         # and model_fields_set contains the field
         if self.ticket_number is None and "ticket_number" in self.model_fields_set:

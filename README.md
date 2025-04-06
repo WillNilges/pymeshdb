@@ -168,6 +168,7 @@ Class | Method | HTTP request | Description
 *SectorsApi* | [**api_v1_sectors_partial_update**](docs/SectorsApi.md#api_v1_sectors_partial_update) | **PATCH** /api/v1/sectors/{id}/ | 
 *SectorsApi* | [**api_v1_sectors_retrieve**](docs/SectorsApi.md#api_v1_sectors_retrieve) | **GET** /api/v1/sectors/{id}/ | 
 *SectorsApi* | [**api_v1_sectors_update**](docs/SectorsApi.md#api_v1_sectors_update) | **PUT** /api/v1/sectors/{id}/ | 
+*UISPImportApi* | [**api_v1_uisp_import_nn_create**](docs/UISPImportApi.md#api_v1_uisp_import_nn_create) | **POST** /api/v1/uisp-import/nn/{network_number}/ | 
 *UserFormsApi* | [**api_v1_join_create**](docs/UserFormsApi.md#api_v1_join_create) | **POST** /api/v1/join/ | Register a new request for a potential mesh Install. Used by the join form posted on the nycmesh.net website
 *UserFormsApi* | [**api_v1_nn_assign_create**](docs/UserFormsApi.md#api_v1_nn_assign_create) | **POST** /api/v1/nn-assign/ | Assign a network number to a given Install object. Used by the NN Assignment form
 *WebsiteMapDataApi* | [**api_v1_mapdata_kiosks_retrieve**](docs/WebsiteMapDataApi.md#api_v1_mapdata_kiosks_retrieve) | **GET** /api/v1/mapdata/kiosks/ | Proxy for the city of new york LinkNYC kisok location dataset. Output in a JSON format that is compatible with the website map. (Warning: This endpoint is a legacy format and may be deprecated/removed in the future)

@@ -35,7 +35,7 @@ class Install(BaseModel):
     """ # noqa: E501
     id: StrictStr
     request_date: datetime
-    install_fee_billing_datum: InstallInstallFeeBillingDatum
+    install_fee_billing_datum: Optional[InstallInstallFeeBillingDatum]
     install_number: StrictInt
     status: Status4ffEnum = Field(description="The current status of this install  * `Request Received` - Request Received * `Pending` - Pending * `Blocked` - Blocked * `Active` - Active * `Inactive` - Inactive * `Closed` - Closed * `NN Reassigned` - NN Reassigned")
     ticket_number: Optional[StrictStr] = Field(default=None, description="The ticket number of the OSTicket used to track communications with the member about this install. Note that although this appears to be an integer, it is not. Leading zeros are important, so this should be stored as a string at all times")
@@ -114,6 +114,11 @@ class Install(BaseModel):
                 if _item_additional_members:
                     _items.append(_item_additional_members.to_dict())
             _dict['additional_members'] = _items
+        # set to None if install_fee_billing_datum (nullable) is None
+        # and model_fields_set contains the field
+        if self.install_fee_billing_datum is None and "install_fee_billing_datum" in self.model_fields_set:
+            _dict['install_fee_billing_datum'] = None
+
         # set to None if ticket_number (nullable) is None
         # and model_fields_set contains the field
         if self.ticket_number is None and "ticket_number" in self.model_fields_set:

@@ -15,6 +15,7 @@ from pymeshdb.api.links_api import LinksApi
 from pymeshdb.api.members_api import MembersApi
 from pymeshdb.api.nodes_api import NodesApi
 from pymeshdb.api.sectors_api import SectorsApi
+from pymeshdb.api.uisp_import_api import UISPImportApi
 from pymeshdb.api.user_forms_api import UserFormsApi
 from pymeshdb.api.website_map_data_api import WebsiteMapDataApi
 
